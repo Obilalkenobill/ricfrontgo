@@ -22,7 +22,7 @@ export class DetailsProjetComponent implements OnInit {
   projet!:Projet;
   bull_vote!:any;
   Vote!: Vote;
-  VoteBase!:Vote;
+  VoteBase!:any;
   a_vote:boolean=true;
 is_verified!:number;
 is_current_user!:boolean;

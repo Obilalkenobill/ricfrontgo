@@ -4,7 +4,7 @@
       <h5 class="card-title" *ngIf="projet!=null">{{projet.titre}}</h5>
       <p class="card-text" *ngIf="projet!=null">{{projet.descriptif}}</p>
       <button type="button" class="btn btn-secondary" *ngIf="is_verified && !a_vote" (click)="vote(null)">Votez null</button> 
-      <ng-container *ngIf="a_vote && VoteBase!=null && VoteBase.bull_vote==null  "><div class="alert alert-secondary" role="alert">
+      <ng-container *ngIf="a_vote && VoteBase!=null && VoteBase[0].bull_vote==null  "><div class="alert alert-secondary" role="alert">
         Vous avez voté NULL.
       </div></ng-container>
       <div class="alert alert-secondary" role="alert" *ngIf="projet!=null">
@@ -12,7 +12,7 @@
       </div>
       <br>
       <button type="button" class="btn btn-danger" *ngIf="is_verified && !a_vote" (click)="vote(0)">Votez Contre</button>
-      <ng-container *ngIf="a_vote && VoteBase!=null && VoteBase.bull_vote==0 "><div class="alert alert-danger" role="alert">
+      <ng-container *ngIf="a_vote && VoteBase!=null && VoteBase[0].bull_vote==0 "><div class="alert alert-danger" role="alert">
         Vous avez voté CONTRE
       </div></ng-container>
       <div class="alert alert-danger" role="alert" *ngIf="projet!=null">
@@ -20,7 +20,7 @@
       </div>
       <br>
       <button type="button" class="btn btn-success" *ngIf="is_verified && !a_vote" (click)="vote(1)">Votez Pour</button>
-      <ng-container *ngIf="a_vote && VoteBase!=null && VoteBase.bull_vote==1"><div class="alert alert-success" role="alert">
+      <ng-container *ngIf="a_vote && VoteBase!=null && VoteBase[0].bull_vote==1"><div class="alert alert-success" role="alert">
         Vous avez voté POUR
       </div></ng-container>
       <div class="alert alert-success" role="alert" *ngIf="projet!=null">
