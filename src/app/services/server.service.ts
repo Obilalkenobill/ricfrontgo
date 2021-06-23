@@ -70,7 +70,6 @@ export class ServerService {
           user.roles=this.jwt.decodeToken(data.token).roles;
           user.id=this.jwt.decodeToken(data.token).id;
           user.is_verified=this.jwt.decodeToken(data.token).is_verified;
-          console.log(user);
           sessionStorage.setItem('user', JSON.stringify(user));
           let user1 = sessionStorage.getItem('user');
           console.log(JSON.parse(user1? user1 : "null").username);
