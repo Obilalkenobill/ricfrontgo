@@ -39,7 +39,7 @@
           </div>
           <div class="list-group">
             <div *ngFor="let comment of comments" class="list-group-item border">
-              <h4 class="list-group-item-heading">{{comment.personne_id.login}}</h4>
+              <h4 class="list-group-item-heading">{{comment.login}}</h4>
               <p class="list-group-item-text">{{comment.commentaire}}</p>
               <p>{{comment.creation_date}}</p>
             </div>

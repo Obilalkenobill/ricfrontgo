@@ -24,8 +24,7 @@ export class UsersViewComponent implements OnInit {
   'is_active',
   'creation_date',
   'is_verified',
-  'nn', 
-  'roles',
+  'nn',
   'actions'];
   dataSource!: MatTableDataSource<User>;
   public usersList!: User[];

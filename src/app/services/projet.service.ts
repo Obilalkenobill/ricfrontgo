@@ -85,7 +85,7 @@ export class ProjetService {
     return this.server.get<Commentaire>('projet/comment/byProjetID/'+ id).pipe(
       map(res =>{
         console.log(res) ;
-        return res.commentaires[0];
+        return res.commentaires;
       }),
       catchError(err => 
         {

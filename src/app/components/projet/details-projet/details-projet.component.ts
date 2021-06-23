@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { throwToolbarMixedModesError } from '@angular/material/toolbar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { isEmpty } from 'rxjs/operators';
 import { Commentaire } from 'src/app/Models/commentaire.model';
 import { Follow } from 'src/app/Models/follow.model';
 import { Projet } from 'src/app/Models/projet.model';
@@ -27,10 +28,10 @@ is_verified!:number;
 is_current_user!:boolean;
 is_admin!:boolean;
 userID_Curr!:any;
-user_follow:any=true;
+user_follow!:any;
 commentsForm!:FormGroup;
 commentCtl!:FormControl;
-comments!:Commentaire[]|null;
+comments:Commentaire[]=[];
 comment!:any;
   constructor(
     private projetService : ProjetService, 
@@ -65,7 +66,7 @@ comment!:any;
   {
 
     let formVal = this.commentsForm.value;
-    formVal.personne_id=this.auth.getCurrentUser().id;
+    formVal.personne_id_id=this.auth.getCurrentUser().id;
     formVal.projet_id=this.projet.id;
     console.log(formVal);
       const newCommentaire = new Commentaire(formVal);
@@ -76,8 +77,6 @@ comment!:any;
       });
   }
 is_current_User(){
-  console.log(this.projet?.personne_id_id);
-  console.log(this.auth.getCurrentUser().id);
   return this.auth.getCurrentUser().id==this.projet?.personne_id_id;
 }
 
@@ -156,8 +155,11 @@ reload(){
       }
     })
     const projet_id=this.route.snapshot.params["id"];
-  this.projetService.getCommentByProjetID(projet_id).subscribe(m=>{
-    this.comments=m;
+  this.projetService.getCommentByProjetID(projet_id).subscribe((m:any)=>{
+  
+ this.comments=m;
+ 
+
     console.log(this.comments);
   })
   }
