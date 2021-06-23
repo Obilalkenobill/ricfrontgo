@@ -11,7 +11,7 @@ import { catchError, flatMap, map } from 'rxjs/operators';
 })
 export class ServerService {
 
-  private BASE_URL: string = 'https://localhost:8000/api/';
+  private BASE_URL: string = 'https://gestion2votefront.herokuapp.com/api/';
   /**
      * Instance privée de ce helper qui nous aidera à vérifier si
      * un token est expiré ou non.
