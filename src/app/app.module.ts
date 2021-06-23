@@ -114,7 +114,7 @@ export function tokenGetter(){
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains:["gestion2votefront.herokuapp.com"]
+        allowedDomains:["gestion2vote.herokuapp.com"]
       }
     })
   ],
