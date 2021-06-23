@@ -12,7 +12,7 @@ export class Projet
     date_adm!:Date;
     date_rej!:Date;
     creation_date!:Date;
-    personne_id:User;
+    personne_id_id!:number;
     
     constructor(data: any)
     {
@@ -25,9 +25,6 @@ export class Projet
         this.date_adm=data.date_adm;
         this.date_rej=data.date_rej;
         this.creation_date=data.creation_date;
-        const newUser = new User({
-            id: data.personne_id,
-                });
-        this.personne_id=newUser;
+        this.personne_id_id=data.personne_id_id;
     }
 }

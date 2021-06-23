@@ -33,10 +33,10 @@ export class AuthService {
     }
     sessionStorage.setItem('user', JSON.stringify(user));
   }
-  IsUserProjet(projetId:any,UserId:any){
+  public IsUserProjet(projetId:any,UserId:any){
     return this.projetService.getOneByID(projetId).subscribe(m=>{
       console.log(m)
-      if(m?.personne_id.id==UserId)
+      if(m?.personne_id_id==UserId)
       {
         return true;
       }
