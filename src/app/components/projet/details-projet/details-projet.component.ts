@@ -76,7 +76,9 @@ comment!:any;
       });
   }
 is_current_User(){
-  return this.auth.getCurrentUser().id==this.projet?.personne_id.id.id;
+  console.log(this.projet?.personne_id_id);
+  console.log(this.auth.getCurrentUser().id);
+  return this.auth.getCurrentUser().id==this.projet?.personne_id_id;
 }
 
 is_Admin(){
@@ -86,7 +88,7 @@ follow(projet_id:any,userID_Curr:any){
   const newFollow = new Follow({
     personne_id: userID_Curr,
     projet_id: projet_id,
-    personne_proj_id:this.projet?.personne_id.id.id
+    personne_proj_id:this.projet?.personne_id_id
   });
   const follow:Follow=(newFollow);
 
@@ -101,7 +103,7 @@ unfollow(projet_id:any,userID_Curr:any){
   const newFollow = new Follow({
     personne_id: userID_Curr,
     projet_id: projet_id,
-    personne_proj_id:this.projet?.personne_id.id.id
+    personne_proj_id:this.projet?.personne_id_id
   });
   const follow:Follow=(newFollow);
 
