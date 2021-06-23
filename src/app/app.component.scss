@@ -36,15 +36,16 @@ i{
 .blancko{
     color:lightgrey
 }
+.center_div{
+    margin-bottom: 10%;
+}
 @media screen and (max-width: 760px) {
     #nav{
         margin-right:50%;
         margin-left:40%;
     }
 }
-.center_div{
-    margin-bottom: 10%;
-}
+
 @media screen and (min-width: 760px) {
     #nav {
         display: block;

@@ -36,7 +36,7 @@ export class CreateProjetComponent implements OnInit {
     this.projetForm = this.formBuilder.group({
       titre: this.titreCtl,
       descriptif: this.descriptifCtl,
-      personne_id:this.route.snapshot.params["id"]
+      personne_id_id:this.route.snapshot.params["id"]
     });
   }
 
@@ -50,7 +50,5 @@ export class CreateProjetComponent implements OnInit {
       this.projetService.addProjet(newProjet).subscribe(m => {
         this.router.navigate(['/projets-view'])
       });
-   
-
   }
 }
