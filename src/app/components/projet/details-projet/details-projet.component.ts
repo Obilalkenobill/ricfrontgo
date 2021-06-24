@@ -11,6 +11,8 @@ import { AdminGuard } from 'src/app/services/auth-guard.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ProjetService } from 'src/app/services/projet.service';
 import { VoteService } from 'src/app/services/vote.service';
+import { MatDialog } from '@angular/material/dialog';
+import { MatCommentEditComponent } from '../comment-edit/comment-edit.component';
 
 @Component({
   selector: 'app-details-projet',
@@ -30,9 +32,13 @@ is_admin!:boolean;
 userID_Curr!:any;
 user_follow!:any;
 commentsForm!:FormGroup;
+// commentsForm2!:FormGroup;
 commentCtl!:FormControl;
+// commentCtl2!:FormControl;
 comments:Commentaire[]=[];
+commentsWOREF:Commentaire[]=[];
 comment!:any;
+commentOFCom!:any;
   constructor(
     private projetService : ProjetService, 
     private route: ActivatedRoute, 
@@ -40,7 +46,8 @@ comment!:any;
     private voteServ: VoteService, 
     private adminAuth: AdminGuard,
      private router: Router,
-     private formBuilder: FormBuilder
+     private formBuilder: FormBuilder,
+     public dialog: MatDialog
      ) { 
     
     }
@@ -76,6 +83,21 @@ comment!:any;
         this.comment='';
       });
   }
+
+  onSubmit2(idReferent:any){
+    let formVal = this.commentsForm.value;
+    formVal.personne_id_id=this.auth.getCurrentUser().id;
+    formVal.projet_id=this.projet.id;
+    formVal.commentaire_referent_id_id=idReferent;
+    console.log(formVal);
+      const newCommentaire = new Commentaire(formVal);
+      console.log(newCommentaire);
+      this.projetService.addCommentaire(newCommentaire).subscribe(m => {
+        this.reload();
+        this.commentOFCom='';
+      });
+    }
+
 is_current_User(){
   return this.auth.getCurrentUser().id==this.projet?.personne_id_id;
 }
@@ -158,14 +180,32 @@ reload(){
   this.projetService.getCommentByProjetID(projet_id).subscribe((m:any)=>{
   
  this.comments=m;
- 
-
+ this.commentsWOREF=[];
+ this.comments.forEach(element => {
+   if(element.commentaire_referent_id_id === undefined){
+    this.commentsWOREF.push(element);
+   }
+ });
     console.log(this.comments);
   })
   }
 }
 
-
+editComment(comment:Commentaire)
+{
+  
+const dlg = this.dialog.open(MatCommentEditComponent, {data:comment});
+dlg.beforeClosed().subscribe(res=>{
+  if(res){
+    const newCommment=new Commentaire(res);
+    this.projetService.updateComment(newCommment).subscribe(
+      (m:any)=>{
+        this.reload();
+      }
+    )
+  }
+})
+}
 
 vote (vote:any){
     const newVote = new Vote({

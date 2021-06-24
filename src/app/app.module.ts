@@ -62,6 +62,7 @@ import { DetailsProjetComponent } from './components/projet/details-projet/detai
 import { OwnProjectComponent } from './components/projet/own-project/own-project.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProjetFollowComponent } from './components/projet-follow/projet-follow.component';
+import { MatCommentEditComponent } from './components/projet/comment-edit/comment-edit.component';
 
 
 
@@ -87,7 +88,8 @@ export function tokenGetter(){
     DetailsProjetComponent,
     OwnProjectComponent,
     HomeComponent,
-    ProjetFollowComponent
+    ProjetFollowComponent,
+    MatCommentEditComponent
   ],
   imports: [
     BrowserModule,
@@ -119,6 +121,7 @@ export function tokenGetter(){
     })
   ],
   providers: [AuthService,ServerService,UsersService, UsersCommonService,AuthGuard,AdminGuard,RoleService],
+  entryComponents:[MatCommentEditComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

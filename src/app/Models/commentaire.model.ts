@@ -11,6 +11,7 @@ export class Commentaire
     personne_id!:User;
     projet_id!:Projet;
     login!:string;
+    commentaire_referent_id_id!:number;
     
     constructor(data: any)
     {
@@ -19,6 +20,7 @@ export class Commentaire
         this.creation_date=data.creation_date;
         this.personne_id=data.personne_id_id;
         this.projet_id=data.projet_id;
-        this.login=data.login
+        this.login=data.login;
+        this.commentaire_referent_id_id=data.commentaire_referent_id_id;
     }
 }

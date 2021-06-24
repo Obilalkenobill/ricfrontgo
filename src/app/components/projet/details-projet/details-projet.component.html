@@ -38,10 +38,25 @@
             </form>
           </div>
           <div class="list-group">
-            <div *ngFor="let comment of comments" class="list-group-item border">
-              <h4 class="list-group-item-heading">{{comment.login}}</h4>
-              <p class="list-group-item-text">{{comment.commentaire}}</p>
-              <p>{{comment.creation_date}}</p>
+            <div *ngFor="let comment of commentsWOREF" class="list-group-item border">
+              <h4 class="list-group-item-heading" >{{comment.login}}</h4>
+              <p class="list-group-item-text"  >{{comment.commentaire}}</p>
+              <p>{{comment.creation_date}}</p><p class="edit" (click)="editComment(comment)">Édit</p>
+              <div class="d-flex flex-row add-comment-section mt-4 mb-4">
+                <form (ngSubmit)="onSubmit2(comment.id)" [formGroup]="commentsForm">
+                <input [(ngModel)]="commentOFCom" [formControl]="commentCtl" name="comment" type="text" class="form-control mr-3" placeholder="Response">
+                <button class="btn btn-primary" type="submit" [disabled]="commentsForm.invalid">Response</button>
+                </form>
+              </div>
+            
+                <ng-container *ngFor="let commentt of comments" class="list-group-item border">
+                  <ng-container *ngIf="commentt.commentaire_referent_id_id==comment.id">
+                  <h4 class="list-group-item-heading" >{{commentt.login}}</h4>
+                  <p class="list-group-item-text"  >{{commentt.commentaire}}</p>
+                  <p>{{commentt.creation_date}}</p><p class="edit" (click)="editComment(commentt)">Édit</p>
+                  </ng-container>
+                </ng-container>
+                   
             </div>
           </div>
         </div>

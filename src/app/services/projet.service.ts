@@ -149,53 +149,15 @@ export class ProjetService {
         })
     );
   }
-
-  // public getOneByID(id: any): Observable<Role | null> 
-  // {
-  //   return this.server.get<Role>('role/'+ id).pipe(
-  //     map(res => res.length > 0 ? new Role(res[0]) : null),
-  //     catchError(err => 
-  //       {
-  //         console.error(err);
-  //         return [];
-  //       })
-  //   );
-  // }
-
-  // public getRoleUserByID (rolePers:RolePers):  Observable<RolePers>  
-  //   {
-  //     return this.server.post<RolePers>('roleUserById', rolePers).pipe(
-  //       map(res => {
-  //         console.log(res);
-  //         return res
-  //       }),
-  //       catchError(err => 
-  //         {
-  //           console.error(err);
-  //           return [];
-  //         })
-  //     );
-  //   }
-  //   public deleteRolePers(rolePers: RolePers): Observable<RolePers[]>
-  //   {
-  //     return this.server.post<RolePers>('delete/role', rolePers).pipe(
-  //       map(res => res.map((m: any) => new RolePers(m))),
-  //       catchError(err => 
-  //         {
-  //           console.error(err);
-  //           return [];
-  //         })
-  //     );
-  //   }
-  //   public deleteRolePersRole(rolePers: RolePers): Observable<RolePers[]>
-  //   {
-  //     return this.server.post<RolePers>('delete/role/role', rolePers).pipe(
-  //       map(res => res.map((m: any) => new RolePers(m))),
-  //       catchError(err => 
-  //         {
-  //           console.error(err);
-  //           return [];
-  //         })
-  //     );
-  //   }
+ public updateComment(comment:Commentaire): Observable<Commentaire[]> 
+ {
+   return this.server.put<Commentaire>('projet/patch/comment', comment).pipe(
+     map(res =>{console.log(res);return res}),
+     catchError(err => 
+       {
+         console.error(err);
+         return [];
+       })
+   );
+ }
 }
