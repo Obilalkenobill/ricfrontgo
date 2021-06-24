@@ -26,9 +26,9 @@
       <div class="alert alert-success" role="alert" *ngIf="projet!=null">
         Nombre de vote pour : {{projet.nbr_vote_pour}}
       </div>
-      <button *ngIf="is_Admin() || is_current_User()" type="button" class="btn btn-warning" (click)="deleteProj(projet.id)">Delete Projet</button>
-      <button *ngIf="!user_follow" type="button" class="btn btn-info" (click)="follow(projet.id,userID_Curr)">Follow</button>
-      <button *ngIf="user_follow" type="button" class="btn btn-info" (click)="unfollow(projet.id,userID_Curr)">UnFollow</button>
+      <button *ngIf="is_Admin() || is_current_User()" type="button" class="btn btn-warning" (click)="deleteProj(projet.id)"><i class="glyphicon glyphicon-trash"></i></button>
+      <button *ngIf="!user_follow" type="button" class="btn btn-info" (click)="follow(projet.id,userID_Curr)"><i class="glyphicon glyphicon-search"></i></button>
+      <button *ngIf="user_follow" type="button" class="btn btn-info" (click)="unfollow(projet.id,userID_Curr)"><i class="glyphicon glyphicon-zoom-out"></i></button>
 
         <div class="coment-bottom bg-white p-2 px-4">
           <div class="d-flex flex-row add-comment-section mt-4 mb-4">

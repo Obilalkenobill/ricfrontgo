@@ -23,7 +23,7 @@
     <a class="nav-link" routerLink="auth">Login</a></li>
   <li  class="nav_button" *ngIf="checkAuth()" ><a class="nav-link" (click)="logout()">Logout</a></li>
   <li class="nav_button" *ngIf="checkAuth()"><a class="nav-link" routerLink="projets-view" >Projets</a></li>
-  <li class="nav_button" *ngIf="checkAuth() && !is_verified()"><a class="nav-link" (click)="userId()">Valider compte</a></li>
+  <li class="nav_button" *ngIf="checkAuth() && !is_verified()"><a class="nav-link" (click)="userId()"><i class="glyphicon glyphicon-upload"></i></a></li>
   <li class="nav_button" *ngIf="isAdmin()"><a class="nav-link" routerLink="users-view">Users</a></li>
   <li class="nav_button" *ngIf="isAdmin()"><a class="nav-link" routerLink="view-roles">Roles</a></li>
   
