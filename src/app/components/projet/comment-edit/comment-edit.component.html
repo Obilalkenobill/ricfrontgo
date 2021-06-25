@@ -4,8 +4,8 @@
         <mat-tab label="Édit Comment">
             <div class="form">
                 <mat-form-field>
-                    <input matInput type="textarea" id="commentaire" class="form-control"
-                        [formControl]="commentCtl">
+                    <textarea matInput id="commentaire" rows="6" id="textAreaExample2" class="form-control"
+                    [formControl]="commentCtl"></textarea>
                     <mat-error class="field-error" *ngIf="commentCtl.hasError('required')"> require </mat-error>
                 </mat-form-field>
             </div>

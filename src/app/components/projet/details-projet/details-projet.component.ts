@@ -74,7 +74,7 @@ commentOFCom!:any;
 
     let formVal = this.commentsForm.value;
     formVal.personne_id_id=this.auth.getCurrentUser().id;
-    formVal.projet_id=this.projet.id;
+    formVal.projet_id_id=this.projet.id;
     console.log(formVal);
       const newCommentaire = new Commentaire(formVal);
       console.log(newCommentaire);
@@ -87,7 +87,7 @@ commentOFCom!:any;
   onSubmit2(idReferent:any){
     let formVal = this.commentsForm.value;
     formVal.personne_id_id=this.auth.getCurrentUser().id;
-    formVal.projet_id=this.projet.id;
+    formVal.projet_id_id=this.projet.id;
     formVal.commentaire_referent_id_id=idReferent;
     console.log(formVal);
       const newCommentaire = new Commentaire(formVal);
@@ -100,6 +100,9 @@ commentOFCom!:any;
 
 is_current_User(){
   return this.auth.getCurrentUser().id==this.projet?.personne_id_id;
+}
+is_current_UserCom(ComUserId:any){
+  return this.auth.getCurrentUser().id==ComUserId;
 }
 
 is_Admin(){
