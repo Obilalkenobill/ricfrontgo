@@ -39,7 +39,7 @@ user!: User;
           if(m)
           {   
             this.user = m;
-            console.log(this.user.role_pers);
+   
           }
         });
     };
@@ -56,7 +56,7 @@ user!: User;
   AddRoleSUser(event: any, user_id: any ){
     const role_id= event.target.value;
     
-    console.log(role_id);
+   
 
     const newRole = new RolePers({
       personne_id: user_id,
@@ -64,7 +64,7 @@ user!: User;
     });
 
     const rolePers:RolePers=(newRole);
-    console.log(rolePers);
+   
     if(role_id!=""){
       this.roleService.getRoleUserByID(rolePers).subscribe((data:any)=>{
         if(data.length>0){
@@ -87,15 +87,14 @@ user!: User;
 
   deleteRolePers(event: any, user_id: any ){
     const role_id= event.target.value;
-    
-    console.log(role_id);
+  
 
     const newRole = new RolePers({
       personne_id: user_id,
       role_id: role_id,
     });
     const rolePers:RolePers=(newRole);
-    console.log(rolePers);
+
     if(role_id!=""){
       this.roleService.getOneByID(role_id).subscribe(data=>{
         if (confirm("Are sur to delete role : "+data?.label+", to User :"+this.user.login)) {

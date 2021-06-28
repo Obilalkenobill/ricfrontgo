@@ -17,7 +17,7 @@ export class UsersCommonService {
       map(res => res.length > 0 ? new User(res[0]) : null),
       catchError(err => 
         {
-          console.error(err);
+           
           return [];
         })
     );
@@ -29,7 +29,7 @@ export class UsersCommonService {
       map(res => res.length > 0 ? new User(res[0]) : null),
       catchError(err => 
         {
-          console.error(err);
+           
           return [];
         })
     );
@@ -42,7 +42,7 @@ export class UsersCommonService {
       map(res => res.length > 0 ? new User(res[0]) : null),
       catchError(err => 
         {
-          console.error(err);
+           
           return [];
         })
     );
@@ -54,7 +54,7 @@ export class UsersCommonService {
       map(res => res),
       catchError(err => 
         {
-          console.error(err);
+           
           return [];
         })
     );

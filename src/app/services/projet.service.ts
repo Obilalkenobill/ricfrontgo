@@ -18,7 +18,7 @@ export class ProjetService {
       map(res => res),
       catchError(err => 
         {
-          console.error(err);
+           
           return [];
         })
     );
@@ -26,10 +26,10 @@ export class ProjetService {
   public addFollow(follow: Follow):  Observable<Follow[]> 
   {
     return this.server.post<Follow>('projet/create/follow', follow).pipe(
-      map(res => {console.log(res);return res}),
+      map(res => {;return res}),
       catchError(err => 
         {
-          console.error(err);
+           
           return [];
         })
     );
@@ -37,10 +37,10 @@ export class ProjetService {
   public addCommentaire(comment: Commentaire):  Observable<Commentaire[]> 
   {
     return this.server.post<Commentaire>('projet/create/comment', comment).pipe(
-      map(res => {console.log(res);return res}),
+      map(res => {;return res}),
       catchError(err => 
         {
-          console.error(err);
+           
           return [];
         })
     );
@@ -48,10 +48,10 @@ export class ProjetService {
   public unFollow(follow: Follow):  Observable<Follow[]> 
   {
     return this.server.post<Follow>('projet/delete/follow', follow).pipe(
-      map(res => {console.log(res);return res}),
+      map(res => {return res}),
       catchError(err => 
         {
-          console.error(err);
+           
           return [];
         })
     );
@@ -60,10 +60,10 @@ export class ProjetService {
   public isFollow(follow: Follow):  Observable<Follow[]> 
   {
     return this.server.post<Follow>('projet/get/follow', follow).pipe(
-      map(res =>{console.log(res);return res}),
+      map(res =>{return res}),
       catchError(err => 
         {
-          console.error(err);
+           
           return [];
         })
     );
@@ -74,7 +74,7 @@ export class ProjetService {
       map(res => res.length > 0 ? new Projet(res[0]) : null),
       catchError(err => 
         {
-          console.error(err);
+           
           return [];
         })
     );
@@ -84,12 +84,11 @@ export class ProjetService {
   {
     return this.server.get<Commentaire>('projet/comment/byProjetID/'+ id).pipe(
       map(res =>{
-        console.log(res) ;
         return res.commentaires;
       }),
       catchError(err => 
         {
-          console.error(err);
+           
           return [];
         })
     );
@@ -98,12 +97,11 @@ export class ProjetService {
   {
     return this.server.get<Projet>('projet/byUser/'+ id).pipe(
       map(res =>{
-        console.log(res) ;
         return res;
       }),
       catchError(err => 
         {
-          console.error(err);
+           
           return [];
         })
     );
@@ -113,12 +111,11 @@ export class ProjetService {
   {
     return this.server.get<Projet>('projet/byFollower/'+ id).pipe(
       map(res =>{
-        console.log(res) ;
         return res;
       }),
       catchError(err => 
         {
-          console.error(err);
+           
           return [];
         })
     );
@@ -128,12 +125,11 @@ export class ProjetService {
     return this.server.get<Projet[]>('projet/readAll').pipe(
       
       map(res =>{
-        console.log(res.projets) ;
         return res.projets.map((m: Projet) => new Projet(m));
       }),
       catchError(err => 
         {
-          console.error(err);
+           
           return [];
         })
     );
@@ -144,7 +140,7 @@ export class ProjetService {
       map(res => res.map((m: any) => new Projet(m))),
       catchError(err => 
         {
-          console.error(err);
+           
           return [];
         })
     );
@@ -152,10 +148,10 @@ export class ProjetService {
  public updateComment(comment:Commentaire): Observable<Commentaire[]> 
  {
    return this.server.put<Commentaire>('projet/patch/comment', comment).pipe(
-     map(res =>{console.log(res);return res}),
+     map(res =>{return res}),
      catchError(err => 
        {
-         console.error(err);
+          
          return [];
        })
    );

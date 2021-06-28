@@ -35,7 +35,6 @@ export class AuthService {
   }
   public IsUserProjet(projetId:any,UserId:any){
     return this.projetService.getOneByID(projetId).subscribe(m=>{
-      console.log(m)
       if(m?.personne_id_id==UserId)
       {
         return true;

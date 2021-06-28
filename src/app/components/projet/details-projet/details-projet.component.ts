@@ -64,7 +64,6 @@ commentOFCom!:any;
 
     this.commentCtl = this.formBuilder.control('', [Validators.required],);
 
-    console.log(this.projet);
     this.commentsForm = this.formBuilder.group({
       commentaire: this.commentCtl
     });
@@ -75,9 +74,9 @@ commentOFCom!:any;
     let formVal = this.commentsForm.value;
     formVal.personne_id_id=this.auth.getCurrentUser().id;
     formVal.projet_id_id=this.projet.id;
-    console.log(formVal);
+  
       const newCommentaire = new Commentaire(formVal);
-      console.log(newCommentaire);
+    
       this.projetService.addCommentaire(newCommentaire).subscribe(m => {
         this.reload();
         this.comment='';
@@ -89,9 +88,9 @@ commentOFCom!:any;
     formVal.personne_id_id=this.auth.getCurrentUser().id;
     formVal.projet_id_id=this.projet.id;
     formVal.commentaire_referent_id_id=idReferent;
-    console.log(formVal);
+ 
       const newCommentaire = new Commentaire(formVal);
-      console.log(newCommentaire);
+     
       this.projetService.addCommentaire(newCommentaire).subscribe(m => {
         this.reload();
         this.commentOFCom='';
@@ -141,9 +140,9 @@ reload(){
   if( this.route.snapshot.params["id"]){
     this.projetID=this.route.snapshot.params["id"];
     this.projetService.getOneByID(this.projetID).subscribe((m:any)=>{
-      console.log(m);
+    
       this.projet=m;
-      console.log(this.projet.nbr_vote_pour);
+   
     });
     const newVote = new Vote({
       personne_id: this.auth.getCurrentUser().id,
@@ -152,25 +151,24 @@ reload(){
     const vote:Vote=(newVote);
     this.voteServ.getVoteUserByID(newVote).subscribe(m=>{
       if(m){
-        console.log(m);
+ 
       this.VoteBase=m;
       this.a_vote=true;
     }
     else{
       this.a_vote=false;
-      console.log(m);
+     
     }
     });
-    console.log(this.a_vote);
+  
 
     const newFollow = new Follow({
       personne_id: this.auth.getCurrentUser().id,
       projet_id: this.route.snapshot.params["id"],
     });
     const follow:Follow=(newFollow);
-  console.log(follow);
     this.projetService.isFollow(follow).subscribe(m=>{
-      console.log(m)
+      
       if(m){
         this.user_follow=true;
   
@@ -189,7 +187,7 @@ reload(){
     this.commentsWOREF.push(element);
    }
  });
-    console.log(this.comments);
+    
   })
   }
 }
@@ -218,7 +216,6 @@ vote (vote:any){
       bull_vote:vote
     });
     const voteCurr:Vote=(newVote);
-    console.log(voteCurr);
     let bull_vote;
     if(voteCurr.bull_vote==null){
       bull_vote="Null"

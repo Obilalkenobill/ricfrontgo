@@ -38,7 +38,6 @@ export class AuthComponent implements OnInit {
     const newUser = new User(formVal);
     this.server.login(newUser).subscribe(m =>
       {
-        console.log(m);
         this.authserv.isLoggedIn=m;
         if(m)
         {

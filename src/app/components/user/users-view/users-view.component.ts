@@ -45,7 +45,6 @@ export class UsersViewComponent implements OnInit {
   {
     this.userService.getAll().subscribe(users => 
     {
-      console.log(users);
       this.usersList = users;
       this.updateDataSource();
     });

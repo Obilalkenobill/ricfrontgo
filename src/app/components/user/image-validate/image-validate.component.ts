@@ -25,7 +25,7 @@ imgURLVersoCarte!:any;
 
   ngOnInit(): void {
     this.UserId=this.route.snapshot.params["id"];
-    console.log(this.route.snapshot.params["id"]);
+
     this.onUploadRefresh();
   }
 
@@ -66,7 +66,6 @@ onUploadRefresh(){
         if(m)
         {   
           this.user = m;
-          console.log(m);
           this.imgURLPhotoVerif=this.sanitizer.bypassSecurityTrustUrl("data:"+this.user.mimeTypephotoverif+";base64,"+this.user.photoverif);
           this.imgURLRectoCarte=this.sanitizer.bypassSecurityTrustUrl("data:"+this.user.mimeTyperectocarteid+";base64,"+this.user.rectocarteid);
           this.imgURLVersoCarte=this.sanitizer.bypassSecurityTrustUrl("data:"+this.user.mimeTypeversocarteid+";base64,"+this.user.versocarteid);

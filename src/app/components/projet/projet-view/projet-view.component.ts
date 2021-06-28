@@ -50,7 +50,7 @@ export class ProjetViewComponent implements OnInit {
   {
     this.projetService.getAll().subscribe(projets => 
     {
-      console.log(projets);
+   
       this.projetList = projets;
       this.updateDataSource();
     });

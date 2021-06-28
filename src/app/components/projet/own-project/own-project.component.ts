@@ -49,7 +49,7 @@ export class OwnProjectComponent implements OnInit {
 this.UserId=this.authService.getCurrentUser().id;
       this.projetService.getProjetByUserId(this.UserId).subscribe((projets:any) => 
       {
-        console.log(projets);
+      
         this.projetList = projets[0];
         this.updateDataSource();
       });

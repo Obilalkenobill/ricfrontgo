@@ -17,12 +17,11 @@ export class UsersService {
     return this.server.get<User[]>('personne').pipe(
       
       map(res =>{
-        console.log(res) ;
         return res.Personnes.map((m: any) => new User(m));
       },
       catchError(err => 
         {
-          console.error(err);
+           
           return [];
         })
     ));
@@ -34,7 +33,7 @@ export class UsersService {
       map(res => res.length > 0 ? new User(res[0]) : null),
       catchError(err => 
         {
-          console.error(err);
+           
           return [];
         })
     );
@@ -46,7 +45,7 @@ export class UsersService {
       map(res => res.length > 0 ? new User(res[0]) : null),
       catchError(err => 
         {
-          console.error(err);
+           
           return [];
         })
     );
@@ -58,7 +57,7 @@ export class UsersService {
       map(res => res.length > 0 ? new User(res[0]) : null),
       catchError(err => 
         {
-          console.error(err);
+           
           return [];
         })
     );
@@ -70,7 +69,7 @@ export class UsersService {
       map(res => res.map((m: any) => new User(m))),
       catchError(err => 
         {
-          console.error(err);
+           
           return [];
         })
     );
@@ -81,7 +80,7 @@ export class UsersService {
       map(res => res),
       catchError(err => 
         {
-          console.error(err);
+           
           return [];
         })
     );
@@ -93,7 +92,7 @@ export class UsersService {
       map(res => res.length > 0 ? new User(res[0]) : null),
       catchError(err => 
         {
-          console.error(err);
+           
           return [];
         })
     );
@@ -105,7 +104,7 @@ export class UsersService {
       map(res => res.map((m: any) => new User(m))),
       catchError(err => 
         {
-          console.error(err);
+           
           let err1!:any[];
           err1[1]=err;
           return err1;
@@ -118,7 +117,7 @@ export class UsersService {
       map(res => res.length > 0 ? new User(res[0]) : null),
       catchError(err => 
         {
-          console.error(err);
+           
           return [];
         })
     );

@@ -18,7 +18,7 @@ export class RoleService {
       map(res => res),
       catchError(err => 
         {
-          console.error(err);
+           
           return [];
         })
     );
@@ -31,7 +31,7 @@ export class RoleService {
       }),
       catchError(err => 
         {
-          console.error(err);
+           
           return [];
         })
     );
@@ -42,12 +42,11 @@ export class RoleService {
     return this.server.get<Role[]>('roles').pipe(
       
       map(res =>{
-        console.log(res) ;
         return res.roles.map((m: Role) => new Role(m));
       }),
       catchError(err => 
         {
-          console.error(err);
+           
           return [];
         })
     );
@@ -59,7 +58,7 @@ export class RoleService {
       map(res => res.length > 0 ? new Role(res[0]) : null),
       catchError(err => 
         {
-          console.error(err);
+           
           return [];
         })
     );
@@ -69,12 +68,11 @@ export class RoleService {
     {
       return this.server.post<RolePers>('roleUserById', rolePers).pipe(
         map(res => {
-          console.log(res);
           return res
         }),
         catchError(err => 
           {
-            console.error(err);
+             
             return [];
           })
       );
@@ -85,7 +83,7 @@ export class RoleService {
         map(res => res),
         catchError(err => 
           {
-            console.error(err);
+             
             return [];
           })
       );
@@ -96,7 +94,7 @@ export class RoleService {
         map(res => res),
         catchError(err => 
           {
-            console.error(err);
+             
             return [];
           })
       );

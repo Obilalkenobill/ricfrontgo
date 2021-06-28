@@ -17,7 +17,7 @@ export class VoteService {
       map(res => res),
       catchError(err => 
         {
-          console.error(err);
+           
           return [];
         })
     );
@@ -26,12 +26,10 @@ export class VoteService {
   {
     return this.server.post<Vote>('vote/voteByProjUser', vote).pipe(
       map(res => {
-        console.log(res);
         return res
       }),
       catchError(err => 
         {
-          console.error(err);
           return [];
         })
     );

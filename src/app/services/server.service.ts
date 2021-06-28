@@ -61,7 +61,7 @@ export class ServerService {
   {
     const headers = new HttpHeaders()
    .set('content-type', 'application/json')
-    console.error("TEST");
+
     return this.http.post<any>(this.BASE_URL + 'login_check', user, {'headers':headers}).pipe(
       map((data: any) => {
         if(data.token)
@@ -72,9 +72,7 @@ export class ServerService {
           user.is_verified=this.jwt.decodeToken(data.token).is_verified;
           sessionStorage.setItem('user', JSON.stringify(user));
           let user1 = sessionStorage.getItem('user');
-          console.log(JSON.parse(user1? user1 : "null").username);
           sessionStorage.setItem('id_token', token);
-          console.error('TOKEN_RENEWED');
           return true;
         }
         return false;
@@ -106,7 +104,6 @@ export class ServerService {
             const token = data.token;
             // sessionStorage.setItem('user', JSON.stringify(user));
             sessionStorage.setItem('id_token', token);
-            console.error('TOKEN_RENEWED');
           }
           return func();
         }), catchError((res: any) =>

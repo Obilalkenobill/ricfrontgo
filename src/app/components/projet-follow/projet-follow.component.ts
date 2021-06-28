@@ -49,9 +49,8 @@ export class ProjetFollowComponent implements OnInit {
 this.UserId=this.authService.getCurrentUser().id;
       this.projetService.getProjetByFollowerID(this.UserId).subscribe((projets:any) => 
       {
-        console.log(projets);
+        
         this.projetList = projets[0];
-        console.log(this.projetList)
         this.updateDataSource();
       });
     }

@@ -46,7 +46,6 @@ export class CreateProjetComponent implements OnInit {
     const formVal = this.projetForm.value;
 
       const newProjet = new Projet(formVal);
-      console.log(newProjet);
       this.projetService.addProjet(newProjet).subscribe(m => {
         this.router.navigate(['/projets-view'])
       });

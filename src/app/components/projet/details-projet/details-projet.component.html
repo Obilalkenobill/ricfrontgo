@@ -33,9 +33,10 @@
         <div class="coment-bottom bg-white p-2 px-4">
           <div class="d-flex flex-row add-comment-section mt-4 mb-4">
             <form (ngSubmit)="onSubmit()" [formGroup]="commentsForm">
-            <input [(ngModel)]="comment" [formControl]="commentCtl" name="comment" type="text" class="form-control mr-3" placeholder="Add comment">
-            <button class="btn btn-primary" type="submit" [disabled]="commentsForm.invalid">Comment</button>
-            </form>
+            <div class="inptbtn"> <input [(ngModel)]="comment" [formControl]="commentCtl" name="comment" type="text" class="form-control mr-3" placeholder="Add comment">
+            <button class="btn btn-primary" type="submit" [disabled]="commentsForm.invalid"><i class="glyphicon glyphicon-comment"></i></button>
+          </div>  
+          </form>
           </div>
           <div class="list-group">
             <div *ngFor="let comment of commentsWOREF" class="list-group-item border">
@@ -44,9 +45,11 @@
               <p>{{comment.creation_date}}</p><p *ngIf="is_Admin() || is_current_UserCom(comment.personne_id_id)" class="edit" (click)="editComment(comment)">Édit</p>
               <div class="d-flex flex-row add-comment-section mt-4 mb-4">
                 <form (ngSubmit)="onSubmit2(comment.id)" [formGroup]="commentsForm">
-                <input [(ngModel)]="commentOFCom" [formControl]="commentCtl" name="comment" type="text" class="form-control mr-3" placeholder="Response">
-                <button class="btn btn-primary" type="submit" [disabled]="commentsForm.invalid">Response</button>
-                </form>
+                <div class="inptbtn"> 
+                  <input [(ngModel)]="commentOFCom" [formControl]="commentCtl" name="comment" type="text" class="form-control mr-3" placeholder="Response">
+                <button class="btn btn-primary" type="submit" [disabled]="commentsForm.invalid"><i class="glyphicon glyphicon-comment"></i></button>
+              </div>  
+              </form>
               </div>
             
                 <ng-container *ngFor="let commentt of comments" class="list-group-item border">
