@@ -17,7 +17,7 @@ import { ProjetService } from 'src/app/services/projet.service';
 export class ProjetViewComponent implements OnInit {
 
 
-  displayedColumns: string[] = [ 
+  displayedColumns: string[] = [
   'titre',
   'descriptif',
   'nbr_vote_pour',  
