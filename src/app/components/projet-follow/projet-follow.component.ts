@@ -50,6 +50,7 @@ this.UserId=this.authService.getCurrentUser().id;
       {
         
         this.projetList = projets[0];
+        console.log(this.projetList);
         this.updateDataSource();
       });
     }
