@@ -63,6 +63,7 @@ import { OwnProjectComponent } from './components/projet/own-project/own-project
 import { HomeComponent } from './components/home/home.component';
 import { ProjetFollowComponent } from './components/projet-follow/projet-follow.component';
 import { MatCommentEditComponent } from './components/projet/comment-edit/comment-edit.component';
+import { CharteComponent } from './components/charte/charte.component';
 
 
 
@@ -89,7 +90,8 @@ export function tokenGetter(){
     OwnProjectComponent,
     HomeComponent,
     ProjetFollowComponent,
-    MatCommentEditComponent
+    MatCommentEditComponent,
+    CharteComponent
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthComponent } from './components/auth/auth.component';
+import { CharteComponent } from './components/charte/charte.component';
 import { FourhofourComponent } from './components/fourhofour/fourhofour.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProjetFollowComponent } from './components/projet-follow/projet-follow.component';
@@ -36,6 +37,7 @@ const routes: Routes = [
   { path: 'create-projet/:id',canActivate: [AuthGuard], component: CreateProjetComponent},
   { path: 'own-projet',canActivate: [AuthGuard], component: OwnProjectComponent},
   { path: 'not-found', component: FourhofourComponent },
+  { path: 'charte', component: CharteComponent},
   { path: '**', redirectTo: 'not-found' }
 ]
 
