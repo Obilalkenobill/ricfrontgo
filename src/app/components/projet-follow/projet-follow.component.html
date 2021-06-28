@@ -1,16 +1,11 @@
 <button class="btn btn-primary grey" (click)=redirectCreateProjet()> Émettre un Projet </button>
-<button class="btn btn-primary orange" [routerLink]='["/own-projet"]'> Vos Projets </button>
+<button class="btn btn-primary orange" [routerLink]='["/own-projet"]'> <i class="glyphicon glyphicon-user"></i> </button>
 <button class="btn btn-primary jaune" [routerLink]='["/*"]'><i class="glyphicon glyphicon-search"></i></button>
 <div class="row">
     <div class="col-sm-12">
         <div class="mat-elevation-z2">
             <table mat-table [dataSource]='dataSource' matSort matSortActive="id" matSortDirection="asc" 
                 matSortDisableClear width="100%">
-                
-                <ng-container matColumnDef="projet_id_id">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> id </th>
-                    <td mat-cell *matCellDef="let row"> {{ row.projet_id_id }} </td>
-                </ng-container>
                 <ng-container matColumnDef="titre">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> titre </th>
                     <td style="width:13rem;height:6rem;max-height:6rem" mat-cell *matCellDef="let row"> {{ row.titre }}</td>
