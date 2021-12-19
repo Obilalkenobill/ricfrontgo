@@ -30,7 +30,7 @@ export class UsersService {
   public getOneByID(id: any): Observable<User | null> 
   {
     return this.server.get<User>('users/id/'+ id).pipe(
-      map(res => res.length > 0 ? new User(res[0]) : null),
+      map(res => res.length > 0 ? new User(res[0][0]) : null),
       catchError(err => 
         {
            
@@ -42,7 +42,7 @@ export class UsersService {
   public getOneByName(name: string): Observable<User | null> 
   {
     return this.server.get<User>('users/name/'+ name).pipe(
-      map(res => res.length > 0 ? new User(res[0]) : null),
+      map(res => res),
       catchError(err => 
         {
            
@@ -54,7 +54,7 @@ export class UsersService {
   public getOneByEmail(email: string): Observable<User | null> 
   {
     return this.server.get<User>('users/email/'+ email).pipe(
-      map(res => res.length > 0 ? new User(res[0]) : null),
+      map(res => res),
       catchError(err => 
         {
            
@@ -114,7 +114,7 @@ export class UsersService {
 
   public validate(id:number){
     return this.server.put('users/validate/'+ id).pipe(
-      map(res => res.length > 0 ? new User(res[0]) : null),
+      map(res => res),
       catchError(err => 
         {
            

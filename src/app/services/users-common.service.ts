@@ -14,7 +14,7 @@ export class UsersCommonService {
   public getOneByName(name: string): Observable<User | null> 
   {
     return this.server.get<User>('users/name/'+ name,false).pipe(
-      map(res => res.length > 0 ? new User(res[0]) : null),
+      map(res => res),
       catchError(err => 
         {
            
@@ -26,7 +26,7 @@ export class UsersCommonService {
   public getOneByEmail(email: string): Observable<User | null> 
   {
     return this.server.get<User>('users/email/'+ email, false).pipe(
-      map(res => res.length > 0 ? new User(res[0]) : null),
+      map(res => res),
       catchError(err => 
         {
            
@@ -39,7 +39,7 @@ export class UsersCommonService {
   public getOneByNN(nn: number): Observable<User | null> 
   {
     return this.server.get<User>('users/nn/'+ nn, false).pipe(
-      map(res => res.length > 0 ? new User(res[0]) : null),
+      map(res => res),
       catchError(err => 
         {
            
