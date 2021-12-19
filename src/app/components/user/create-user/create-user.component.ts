@@ -73,9 +73,9 @@ export class CreateUserComponent implements OnInit {
             resolve(null);
           } else
           {
-            this.userComServ.getOneByName(username).subscribe(user =>
+            this.userComServ.getOneByName(username).subscribe((userisit :any) =>
               {
-                resolve(user ? { usernameExist: true } : null);
+                resolve(userisit[0] ? { usernameExist: true } : null);
               })
           }
         }, 300)
@@ -96,9 +96,9 @@ export class CreateUserComponent implements OnInit {
             resolve(null);
           } else
           {
-            this.userComServ.getOneByNN(nn).subscribe((user: any) =>
+            this.userComServ.getOneByNN(nn).subscribe((userisit: any) =>
               {
-                resolve(user ? { NNAlreadyUsed: true } : null);
+                resolve(userisit[0] ? { NNAlreadyUsed: true } : null);
               })
           }
         }, 300)
@@ -120,9 +120,9 @@ export class CreateUserComponent implements OnInit {
             resolve(null);
           } else
           {
-            this.userComServ.getOneByEmail(email).subscribe((user: any) =>
+            this.userComServ.getOneByEmail(email).subscribe((userisit: any) =>
               {
-                resolve(user ? { emailAlreadyUsed: true } : null);
+                resolve(userisit[0] ? { emailAlreadyUsed: true } : null);
               })
           }
         }, 300)
