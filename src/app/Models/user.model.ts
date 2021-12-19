@@ -42,11 +42,11 @@ export class User
         this.is_active=data.is_active;
         this.is_verified=data.is_verified;
         this.photoverif=data.photoverif;
-        this.mimeTypephotoverif=data.mimeTypephotoverif;
+        this.mimeTypephotoverif=data.mime_typephotoverif;
         this.rectocarteid=data.rectocarteid;
-        this.mimeTyperectocarteid=data.mimeTyperectocarteid;
+        this.mimeTyperectocarteid=data.mime_typerectocarteid;
         this.versocarteid=data.versocarteid;
-        this.mimeTypeversocarteid=data.mimeTypeversocarteid;
+        this.mimeTypeversocarteid=data.mime_typeversocarteid;
         this.filephotoverif=data.filephotoverif;
         this.filerectocarteid=data.filerectocarteid;
         this.fileversocarteid=data.fileversocarteid;
