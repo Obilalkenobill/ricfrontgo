@@ -17,7 +17,7 @@ user!:User;
 imgURLPhotoVerif!:any;
 imgURLRectoCarte!:any;
 imgURLVersoCarte!:any;
-userCurr:any;
+
 userCurrId:any;
   constructor(
     private authService: AuthService,
@@ -29,7 +29,7 @@ userCurrId:any;
   }
 
   ngOnInit(): void {
-    this.userCurr=this.authService.getCurrentUser();
+
     let token=sessionStorage.getItem('id_token');
     if (typeof token == 'string') {this.UserId=this.jwt.decodeToken(token).id;}
     this.onUploadRefresh();
@@ -67,7 +67,7 @@ userCurrId:any;
 onUploadRefresh(){
   if(this.route.snapshot.params["id"])
   {
-    this.userService.getOneByID(this.route.snapshot.params["id"]).subscribe(m =>
+    this.userService.getOneByID(this.UserId).subscribe(m =>
       {
         if(m)
         {
