@@ -52,7 +52,6 @@ export class ProjetFollowComponent implements OnInit {
       {
 
         this.projetList = projets[0];
-        console.log(this.projetList);
         this.updateDataSource();
       });
     }
