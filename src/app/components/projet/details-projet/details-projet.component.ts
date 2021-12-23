@@ -13,6 +13,7 @@ import { ProjetService } from 'src/app/services/projet.service';
 import { VoteService } from 'src/app/services/vote.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatCommentEditComponent } from '../comment-edit/comment-edit.component';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-details-projet',
@@ -40,22 +41,23 @@ commentsWOREF:Commentaire[]=[];
 comment!:any;
 commentOFCom!:any;
   constructor(
-    private projetService : ProjetService, 
-    private route: ActivatedRoute, 
+    private projetService : ProjetService,
+    private route: ActivatedRoute,
     private auth : AuthService,
-    private voteServ: VoteService, 
+    private voteServ: VoteService,
     private adminAuth: AdminGuard,
      private router: Router,
      private formBuilder: FormBuilder,
-     public dialog: MatDialog
-     ) { 
-    
+     public dialog: MatDialog,private jwt: JwtHelperService
+     ) {
+
     }
 
   ngOnInit(): void {
   this.is_verified = this.auth.getCurrentUser().is_verified ;
   this.reload();
-  this.userID_Curr=this.auth.getCurrentUser().id;
+  let token=sessionStorage.getItem('id_token');
+  if (typeof token == 'string') {this.userID_Curr=this.jwt.decodeToken(token).id;}
   this.initForm();
   }
 
@@ -74,9 +76,9 @@ commentOFCom!:any;
     let formVal = this.commentsForm.value;
     formVal.personne_id_id=this.auth.getCurrentUser().id;
     formVal.projet_id_id=this.projet.id;
-  
+
       const newCommentaire = new Commentaire(formVal);
-    
+
       this.projetService.addCommentaire(newCommentaire).subscribe(m => {
         this.reload();
         this.comment='';
@@ -88,9 +90,9 @@ commentOFCom!:any;
     formVal.personne_id_id=this.auth.getCurrentUser().id;
     formVal.projet_id_id=this.projet.id;
     formVal.commentaire_referent_id_id=idReferent;
- 
+
       const newCommentaire = new Commentaire(formVal);
-     
+
       this.projetService.addCommentaire(newCommentaire).subscribe(m => {
         this.reload();
         this.commentOFCom='';
@@ -98,10 +100,10 @@ commentOFCom!:any;
     }
 
 is_current_User(){
-  return this.auth.getCurrentUser().id==this.projet?.personne_id_id;
+  return this.userID_Curr==this.projet?.personne_id_id;
 }
 is_current_UserCom(ComUserId:any){
-  return this.auth.getCurrentUser().id==ComUserId;
+  return this.userID_Curr==ComUserId;
 }
 
 is_Admin(){
@@ -140,9 +142,9 @@ reload(){
   if( this.route.snapshot.params["id"]){
     this.projetID=this.route.snapshot.params["id"];
     this.projetService.getOneByID(this.projetID).subscribe((m:any)=>{
-    
+
       this.projet=m;
-   
+
     });
     const newVote = new Vote({
       personne_id: this.auth.getCurrentUser().id,
@@ -151,16 +153,16 @@ reload(){
     const vote:Vote=(newVote);
     this.voteServ.getVoteUserByID(newVote).subscribe(m=>{
       if(m){
- 
+
       this.VoteBase=m;
       this.a_vote=true;
     }
     else{
       this.a_vote=false;
-     
+
     }
     });
-  
+
 
     const newFollow = new Follow({
       personne_id: this.auth.getCurrentUser().id,
@@ -168,10 +170,10 @@ reload(){
     });
     const follow:Follow=(newFollow);
     this.projetService.isFollow(follow).subscribe(m=>{
-      
+
       if(m){
         this.user_follow=true;
-  
+
       }
       else{
         this.user_follow=false;
@@ -179,7 +181,7 @@ reload(){
     })
     const projet_id=this.route.snapshot.params["id"];
   this.projetService.getCommentByProjetID(projet_id).subscribe((m:any)=>{
-  
+
  this.comments=m;
  this.commentsWOREF=[];
  this.comments.forEach(element => {
@@ -187,14 +189,14 @@ reload(){
     this.commentsWOREF.push(element);
    }
  });
-    
+
   })
   }
 }
 
 editComment(comment:Commentaire)
 {
-  
+
 const dlg = this.dialog.open(MatCommentEditComponent, {data:comment});
 dlg.beforeClosed().subscribe(res=>{
   if(res){
@@ -230,9 +232,9 @@ vote (vote:any){
       this.voteServ.addVote(voteCurr).subscribe(m=>{
       this.a_vote=true;
       this.reload();
-     // window.location.reload(); 
+     // window.location.reload();
     })
-      
+
     }
   }
 
