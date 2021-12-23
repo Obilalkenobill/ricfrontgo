@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { Projet } from 'src/app/Models/projet.model';
 import { ProjetService } from 'src/app/services/projet.service';
 
@@ -16,9 +17,11 @@ export class CreateProjetComponent implements OnInit {
   descriptifCtl!: FormControl;
   projet!: Projet;
 
+  UserId!:any;
+
   constructor(private projetService: ProjetService,
     private route: ActivatedRoute,
-    private formBuilder: FormBuilder, private router: Router)   {
+    private formBuilder: FormBuilder, private router: Router,private jwt: JwtHelperService)   {
     this.initForm();
   }
 
@@ -31,12 +34,13 @@ export class CreateProjetComponent implements OnInit {
 
     this.titreCtl = this.formBuilder.control('', [Validators.required],);
     this.descriptifCtl = this.formBuilder.control('', [Validators.required] );
-
+    let token=sessionStorage.getItem('id_token');
+    if (typeof token == 'string') {this.UserId=this.jwt.decodeToken(token).id;}
 
     this.projetForm = this.formBuilder.group({
       titre: this.titreCtl,
       descriptif: this.descriptifCtl,
-      personne_id_id:this.route.snapshot.params["id"]
+      personne_id_id:this.UserId
     });
   }
 
