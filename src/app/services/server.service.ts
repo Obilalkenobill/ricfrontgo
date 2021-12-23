@@ -67,11 +67,6 @@ export class ServerService {
         if(data.token)
         {
           const token = data.token;
-          user.roles=this.jwt.decodeToken(data.token).roles;
-          user.id=this.jwt.decodeToken(data.token).id;
-          user.is_verified=this.jwt.decodeToken(data.token).is_verified;
-          sessionStorage.setItem('user', JSON.stringify(user));
-          let user1 = sessionStorage.getItem('user');
           sessionStorage.setItem('id_token', token);
           return true;
         }
