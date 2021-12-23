@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '../Models/userLogin.model';
@@ -13,7 +14,7 @@ export class AuthService {
   isLoggedIn: any;
   redirectUrl: string;
 
-  constructor(private http: ServerService, private router: Router, private projetService: ProjetService) 
+  constructor(private http: ServerService, private router: Router, private projetService: ProjetService, private jwt: JwtHelperService)
   {
     this.isLoggedIn = sessionStorage.getItem('id_token') != null;
     this.redirectUrl = '/';
@@ -21,7 +22,22 @@ export class AuthService {
 
   public getCurrentUser(): User
   {
-    return JSON.parse(sessionStorage.getItem('user') || '{}');
+      let token=sessionStorage.getItem('id_token');
+      let user!:User;
+      let roles!:any;
+      let id!:any;
+      let is_verified!:number;
+      if(typeof token == 'string'){
+      roles = this.jwt.decodeToken(token)?.roles;
+        id = this.jwt.decodeToken(token)?.id;
+        is_verified = this.jwt.decodeToken(token)?.is_verified;
+      }
+if(user !=undefined){
+        user.roles = roles
+        user.id = id;
+        user.is_verified = is_verified;
+  }
+  return user;
   }
 
   public updateCurrentUser(user: User)
@@ -47,7 +63,7 @@ export class AuthService {
   public login(user: User): Observable<boolean>
   {
     return this.http.login(user).pipe(
-      map(res => 
+      map(res =>
         {
           this.isLoggedIn = res;
           return res;
@@ -55,7 +71,7 @@ export class AuthService {
     );
   }
 
-  public logout(): void 
+  public logout(): void
   {
     this.isLoggedIn = false;
     this.http.logout();
