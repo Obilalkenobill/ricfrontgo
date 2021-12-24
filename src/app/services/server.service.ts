@@ -4,7 +4,7 @@ import { User } from '../Models/userLogin.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { catchError, flatMap, map } from 'rxjs/operators';
-
+import { EncrDecrService } from './EncrDecrSevice';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +16,8 @@ export class ServerService {
      * Instance privée de ce helper qui nous aidera à vérifier si
      * un token est expiré ou non.
      */
-
-  constructor(private http: HttpClient, private jwt: JwtHelperService)
+  constructor(private http: HttpClient, private jwt: JwtHelperService,
+    private EncrDecr: EncrDecrService)
   {
   }
 
@@ -67,6 +67,14 @@ export class ServerService {
         if(data.token)
         {
           const token = data.token;
+          user.password=this.EncrDecr.set('gs,D]5W8Exct=7^6Hm3Dq#nrP',user.password);
+          user.roles=this.jwt.decodeToken(data.token).roles;
+          user.id=this.jwt.decodeToken(data.token).id;
+          user.is_verified=this.jwt.decodeToken(data.token).is_verified;
+          user.roles=this.EncrDecr.set('gs,D]5W8Exct=7^6Hm3Dq#nrP',user.roles);
+          user.id=this.EncrDecr.set('gs,D]5W8Exct=7^6Hm3Dq#nrP',user.id);
+          user.is_verified=this.EncrDecr.set('gs,D]5W8Exct=7^6Hm3Dq#nrP',user.is_verified);
+          sessionStorage.setItem('user', JSON.stringify(user));
           sessionStorage.setItem('id_token', token);
           return true;
         }
@@ -91,7 +99,8 @@ export class ServerService {
     const token = sessionStorage.getItem('id_token');
     // Si le token n'existe pas ou s'il est expiré ...
     if (!token || this.jwt.isTokenExpired(token)) {
-      const user = JSON.parse(sessionStorage.getItem('user') || '');
+      let user = JSON.parse(sessionStorage.getItem('user') || '');
+      user.password = this.EncrDecr.get('gs,D]5W8Exct=7^6Hm3Dq#nrP',user.password);
       return this.http.post<any>(this.BASE_URL + 'login_check', user).pipe(
         flatMap((data: any) => {
           if(data.token)
