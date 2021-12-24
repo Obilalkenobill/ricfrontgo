@@ -1,8 +1,8 @@
 export class User
 {
-id!:number;
+id!:any;
 username!:string;
 password!:string;
 roles!:any;
-is_verified!:number;
+is_verified!:any;
 }
