@@ -37,20 +37,20 @@
             ],
             "scripts": ["node_modules/jquery/dist/jquery.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "../node_modules/crypto-js/crypto-js.js"]
+              "node_modules/crypto-js/crypto-js.js"]
           },
           "configurations": {
             "production": {
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "3mb",
+                  "maximumError": "3mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "4kb",
+                  "maximumError": "8kb"
                 }
               ],
               "fileReplacements": [
@@ -109,7 +109,7 @@
             ],
             "scripts": ["node_modules/jquery/dist/jquery.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "../node_modules/crypto-js/crypto-js.js"]
+              "node_modules/crypto-js/crypto-js.js"]
           }
         }
       }
