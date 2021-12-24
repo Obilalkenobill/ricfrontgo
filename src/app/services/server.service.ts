@@ -25,8 +25,12 @@ headers!:any;
   public get<T>(url: string, secure: boolean = true): Observable<any>
   {
     if(secure){
-      const headers = new HttpHeaders()
-      .set('content-type', 'application/json');
+      let token=sessionStorage.getItem('id_token');
+      let headers = new HttpHeaders();
+if (typeof token === 'string'){
+     headers = new HttpHeaders()
+      .set('content-type', 'application/json').set('Authorization', 'Bearer ' + token );
+    }
     return this.call(() =>this.http.get(this.BASE_URL + url, {'headers':headers}));
    }
    else
@@ -38,8 +42,12 @@ headers!:any;
   public post<T>(url: string, body: T, secure:boolean=true): Observable<any>
   {
     if(secure){
-      const headers = new HttpHeaders()
-      .set('content-type', 'application/json');
+      let token=sessionStorage.getItem('id_token');
+      let headers = new HttpHeaders();
+if (typeof token === 'string'){
+     headers = new HttpHeaders()
+      .set('content-type', 'application/json').set('Authorization', 'Bearer ' + token );
+    }
     return this.call(() =>this.http.post(this.BASE_URL + url, body,  {'headers':headers}));
    }
    else{
@@ -49,8 +57,12 @@ headers!:any;
 
   public put<T>(url: string,body?: T): Observable<any>
   {
-    const headers = new HttpHeaders()
-    .set('content-type', 'application/json');
+    let token=sessionStorage.getItem('id_token');
+    let headers = new HttpHeaders();
+if (typeof token === 'string'){
+   headers = new HttpHeaders()
+    .set('content-type', 'application/json').set('Authorization', 'Bearer ' + token );
+  }
     return this.call(() =>this.http.put(this.BASE_URL + url, body,  {'headers':headers}));
   }
 
@@ -60,8 +72,12 @@ headers!:any;
   }
   public deletebis<T>(url: string): Observable<any>
   {
-    const headers = new HttpHeaders()
-    .set('content-type', 'application/json');
+    let token=sessionStorage.getItem('id_token');
+    let headers = new HttpHeaders();
+if (typeof token === 'string'){
+   headers = new HttpHeaders()
+    .set('content-type', 'application/json').set('Authorization', 'Bearer ' + token );
+  }
     return this.call(() => this.http.delete(this.BASE_URL + url, {'headers':headers}));
   }
 
