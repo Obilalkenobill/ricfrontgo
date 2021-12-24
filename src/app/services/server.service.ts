@@ -16,7 +16,7 @@ export class ServerService {
      * Instance privée de ce helper qui nous aidera à vérifier si
      * un token est expiré ou non.
      */
- headers!:any;
+headers!:any;
   constructor(private http: HttpClient, private jwt: JwtHelperService,
     private EncrDecr: EncrDecrService)
   {
@@ -77,7 +77,7 @@ export class ServerService {
           user.is_verified=this.EncrDecr.set('gs,D]5W8Exct=7^6Hm3Dq#nrP',user.is_verified);
           sessionStorage.setItem('user', JSON.stringify(user));
           sessionStorage.setItem('id_token', token);
-          this.headers = new HttpHeaders({'Authorization': 'Bearer ' + token});
+          this.headers = new HttpHeaders({'Authorization': 'Bearer ' + token},'content-type', 'application/json');
           return true;
         }
         return false;
@@ -110,7 +110,7 @@ export class ServerService {
             const token = data.token;
             // sessionStorage.setItem('user', JSON.stringify(user));
             sessionStorage.setItem('id_token', token);
-            this.headers = new HttpHeaders({'Authorization': 'Bearer ' + token});
+            this.headers = new HttpHeaders({'Authorization': 'Bearer ' + token},'content-type', 'application/json');
           }
           return func();
         }), catchError((res: any) =>
@@ -130,3 +130,4 @@ public logout(): void
   sessionStorage.removeItem('id_token');
 }
 }
+
