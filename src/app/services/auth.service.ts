@@ -23,7 +23,7 @@ export class AuthService {
   public getCurrentUser(): User
   {
       let token=sessionStorage.getItem('id_token');
-      let user!:User;
+
       let roles!:any;
       let id!:any;
       let is_verified!:number;
@@ -32,11 +32,14 @@ export class AuthService {
         id = this.jwt.decodeToken(token)?.id;
         is_verified = this.jwt.decodeToken(token)?.is_verified;
       }
-if(user !=undefined){
-        user.roles = roles
-        user.id = id;
-        user.is_verified = is_verified;
-  }
+
+      const user = new User({
+        roles : roles,
+        id : id,
+        is_verified : is_verified
+      });
+      const follow:User=(user);
+  console.log(user);
   return user;
   }
 
