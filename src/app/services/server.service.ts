@@ -16,6 +16,7 @@ export class ServerService {
      * Instance privée de ce helper qui nous aidera à vérifier si
      * un token est expiré ou non.
      */
+ headers!:any;
   constructor(private http: HttpClient, private jwt: JwtHelperService,
     private EncrDecr: EncrDecrService)
   {
@@ -24,7 +25,7 @@ export class ServerService {
   public get<T>(url: string, secure: boolean = true): Observable<any>
   {
     if(secure){
-    return this.call(() =>this.http.get(this.BASE_URL + url));
+    return this.call(() =>this.http.get(this.BASE_URL + url, {headers: this.headers}));
    }
    else
    {
@@ -35,7 +36,7 @@ export class ServerService {
   public post<T>(url: string, body: T, secure:boolean=true): Observable<any>
   {
     if(secure){
-    return this.call(() =>this.http.post(this.BASE_URL + url, body));
+    return this.call(() =>this.http.post(this.BASE_URL + url, body, {headers: this.headers}));
    }
    else{
     return this.http.post(this.BASE_URL + url, body);
@@ -44,7 +45,7 @@ export class ServerService {
 
   public put<T>(url: string,body?: T): Observable<any>
   {
-    return this.call(() =>this.http.put(this.BASE_URL + url, body));
+    return this.call(() =>this.http.put(this.BASE_URL + url, body, {headers: this.headers}));
   }
 
   public delete<T>(url: string, body: T): Observable<any>
@@ -53,7 +54,7 @@ export class ServerService {
   }
   public deletebis<T>(url: string): Observable<any>
   {
-    return this.call(() => this.http.delete(this.BASE_URL + url));
+    return this.call(() => this.http.delete(this.BASE_URL + url, {headers: this.headers}));
   }
 
 
@@ -76,6 +77,7 @@ export class ServerService {
           user.is_verified=this.EncrDecr.set('gs,D]5W8Exct=7^6Hm3Dq#nrP',user.is_verified);
           sessionStorage.setItem('user', JSON.stringify(user));
           sessionStorage.setItem('id_token', token);
+          this.headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
           return true;
         }
         return false;
@@ -108,6 +110,7 @@ export class ServerService {
             const token = data.token;
             // sessionStorage.setItem('user', JSON.stringify(user));
             sessionStorage.setItem('id_token', token);
+            this.headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
           }
           return func();
         }), catchError((res: any) =>
