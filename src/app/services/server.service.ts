@@ -77,7 +77,7 @@ export class ServerService {
           user.is_verified=this.EncrDecr.set('gs,D]5W8Exct=7^6Hm3Dq#nrP',user.is_verified);
           sessionStorage.setItem('user', JSON.stringify(user));
           sessionStorage.setItem('id_token', token);
-          this.headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
+          this.headers = new HttpHeaders({'Authorization': 'Bearer ' + token});
           return true;
         }
         return false;
@@ -110,7 +110,7 @@ export class ServerService {
             const token = data.token;
             // sessionStorage.setItem('user', JSON.stringify(user));
             sessionStorage.setItem('id_token', token);
-            this.headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
+            this.headers = new HttpHeaders({'Authorization': 'Bearer ' + token});
           }
           return func();
         }), catchError((res: any) =>
