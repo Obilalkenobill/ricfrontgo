@@ -46,6 +46,7 @@ import { UsersService } from './services/users.service';
 import { UsersCommonService } from './services/users-common.service';
 import { AdminGuard, AuthGuard } from './services/auth-guard.service';
 
+
 import { FourhofourComponent } from './components/fourhofour/fourhofour.component';
 
 import { RoleService } from './services/role.service';
@@ -64,6 +65,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ProjetFollowComponent } from './components/projet-follow/projet-follow.component';
 import { MatCommentEditComponent } from './components/projet/comment-edit/comment-edit.component';
 import { CharteComponent } from './components/charte/charte.component';
+import { EncrDecrService } from './services/EncrDecrSevice';
 
 
 
@@ -96,21 +98,21 @@ export function tokenGetter(){
   imports: [
     BrowserModule,
     MatSelectModule,
-    AppRoutingModule,    
+    AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    MatButtonModule, 
-    MatCheckboxModule, 
-    MatFormFieldModule, 
-    MatInputModule, 
+    MatButtonModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatInputModule,
     MatListModule,
-    MatTableModule, 
-    MatPaginatorModule, 
-    MatSortModule, 
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
     MatIconModule,
-    MatSlideToggleModule, 
-    MatDialogModule, 
-    MatSnackBarModule, 
+    MatSlideToggleModule,
+    MatDialogModule,
+    MatSnackBarModule,
     MatRadioModule,
     MatTabsModule,
     BrowserAnimationsModule,
@@ -118,11 +120,11 @@ export function tokenGetter(){
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains:["gestion2vote.herokuapp.com"]
+        allowedDomains:["localhost:8000"]
       }
     })
   ],
-  providers: [AuthService,ServerService,UsersService, UsersCommonService,AuthGuard,AdminGuard,RoleService],
+  providers: [EncrDecrService,AuthService,ServerService,UsersService, UsersCommonService,AuthGuard,AdminGuard,RoleService],
   entryComponents:[MatCommentEditComponent],
   bootstrap: [AppComponent]
 })
