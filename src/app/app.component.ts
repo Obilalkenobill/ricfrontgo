@@ -23,7 +23,10 @@ ngOnInit(): void {
 public userId()
 {
   this.userCurr=this.authService.getCurrentUser();
-    this.userCurrId=this.userCurr.id;
+  
+  if(this.userCurr !=undefined){
+    this.userCurrId=this.userCurr.id; 
+  }
   this.router.navigate(['/img-validate/'+this.userCurrId])
 }
 
