@@ -25,7 +25,9 @@ headers!:any;
   public get<T>(url: string, secure: boolean = true): Observable<any>
   {
     if(secure){
-    return this.call(() =>this.http.get(this.BASE_URL + url, {headers: this.headers}));
+      const headers = new HttpHeaders()
+      .set('content-type', 'application/json');
+    return this.call(() =>this.http.get(this.BASE_URL + url, {'headers':headers}));
    }
    else
    {
@@ -36,7 +38,9 @@ headers!:any;
   public post<T>(url: string, body: T, secure:boolean=true): Observable<any>
   {
     if(secure){
-    return this.call(() =>this.http.post(this.BASE_URL + url, body, {headers: this.headers}));
+      const headers = new HttpHeaders()
+      .set('content-type', 'application/json');
+    return this.call(() =>this.http.post(this.BASE_URL + url, body,  {'headers':headers}));
    }
    else{
     return this.http.post(this.BASE_URL + url, body);
@@ -45,7 +49,9 @@ headers!:any;
 
   public put<T>(url: string,body?: T): Observable<any>
   {
-    return this.call(() =>this.http.put(this.BASE_URL + url, body, {headers: this.headers}));
+    const headers = new HttpHeaders()
+    .set('content-type', 'application/json');
+    return this.call(() =>this.http.put(this.BASE_URL + url, body,  {'headers':headers}));
   }
 
   public delete<T>(url: string, body: T): Observable<any>
@@ -54,7 +60,9 @@ headers!:any;
   }
   public deletebis<T>(url: string): Observable<any>
   {
-    return this.call(() => this.http.delete(this.BASE_URL + url, {headers: this.headers}));
+    const headers = new HttpHeaders()
+    .set('content-type', 'application/json');
+    return this.call(() => this.http.delete(this.BASE_URL + url, {'headers':headers}));
   }
 
 
@@ -77,7 +85,6 @@ headers!:any;
           user.is_verified=this.EncrDecr.set('gs,D]5W8Exct=7^6Hm3Dq#nrP',user.is_verified);
           sessionStorage.setItem('user', JSON.stringify(user));
           sessionStorage.setItem('id_token', token);
-          this.headers = new HttpHeaders({'Authorization': 'Bearer ' + token},'content-type', 'application/json');
           return true;
         }
         return false;
@@ -103,14 +110,15 @@ headers!:any;
     if (!token || this.jwt.isTokenExpired(token)) {
       let user = JSON.parse(sessionStorage.getItem('user') || '');
       user.password = this.EncrDecr.get('gs,D]5W8Exct=7^6Hm3Dq#nrP',user.password);
-      return this.http.post<any>(this.BASE_URL + 'login_check', user).pipe(
+      const headers = new HttpHeaders()
+      .set('content-type', 'application/json')
+      return this.http.post<any>(this.BASE_URL + 'login_check', user, {'headers':headers}).pipe(
         flatMap((data: any) => {
           if(data.token)
           {
             const token = data.token;
             // sessionStorage.setItem('user', JSON.stringify(user));
             sessionStorage.setItem('id_token', token);
-            this.headers = new HttpHeaders({'Authorization': 'Bearer ' + token},'content-type', 'application/json');
           }
           return func();
         }), catchError((res: any) =>
@@ -130,4 +138,3 @@ public logout(): void
   sessionStorage.removeItem('id_token');
 }
 }
-
