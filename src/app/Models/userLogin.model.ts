@@ -5,4 +5,12 @@ username!:string;
 password!:string;
 roles!:any;
 is_verified!:any;
+constructor(data: any)
+{
+  this.id = data.id;
+        this.username = data.username;
+        this.password = data.password;
+        this.roles=data.roles;
+        this.is_verified=data.is_verified;
+}
 }
