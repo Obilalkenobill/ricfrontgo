@@ -12,7 +12,7 @@ import { UsersService } from 'src/app/services/users.service';
   styleUrls: ['./image-validate.component.scss']
 })
 export class ImageValidateComponent implements OnInit {
-UserId!:number;
+UserId!:any;
 user!:User;
 imgURLPhotoVerif!:any;
 imgURLRectoCarte!:any;
