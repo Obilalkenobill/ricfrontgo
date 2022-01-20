@@ -151,7 +151,7 @@ export class CreateUserComponent implements OnInit {
       formVal.id = 0;
       const newUser = new User(formVal);
       this.userComServ.addUser(newUser).subscribe(m => {});
-
+confirm("Veuillez vérifier votre compte en ajoutant votre photo de vérification et le recto/verso de votre carte d'identité");
     this.router.navigate(['/auth']);
   }
 }
