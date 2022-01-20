@@ -55,6 +55,22 @@ if (typeof token === 'string'){
    }
 }
 
+public postbis<T>(url: string, body: T, secure:boolean=true): Observable<any>
+{
+  if(secure){
+    let token=sessionStorage.getItem('id_token');
+    let headers = new HttpHeaders();
+if (typeof token === 'string'){
+   headers = new HttpHeaders()
+    .set('Authorization', 'Bearer ' + token ).set( 'method' , 'POST');
+  }
+  return this.call(() =>this.http.post(this.BASE_URL + url, body,  {'headers':headers}));
+ }
+ else{
+  return this.http.post(this.BASE_URL + url, body);
+ }
+}
+
   public put<T>(url: string,body?: T): Observable<any>
   {
     let token=sessionStorage.getItem('id_token');
