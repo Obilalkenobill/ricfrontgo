@@ -40,7 +40,6 @@ export class AuthService {
         username : sessionStorage.getItem('username')
       });
       const user:User=(newUser);
-      });
   return user;
   }
 
