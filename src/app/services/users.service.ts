@@ -74,9 +74,9 @@ export class UsersService {
         })
     );
   }
-  public validateUser(data: any, id:number):  Observable<User[]> 
+  public validateUser(data: any):  Observable<User[]> 
   {
-    return this.server.postbis<any>('personne/imageverif/'+id, data).pipe(
+    return this.server.postbis<any>('personne/imageverif', data).pipe(
       map(res => res),
       catchError(err => 
         {
