@@ -41,6 +41,7 @@ userCurrId:any;
     const formData = new FormData();
 
     formData.append("filephotoverif",file);
+     formData.append("UserId",this.UserId);
     this.userService.validateUser(formData).subscribe(m => { this.onUploadRefresh();});
 
     //window.location.reload();
@@ -50,6 +51,7 @@ userCurrId:any;
     const formData = new FormData();
 
     formData.append("filerectocarteid",file);
+     formData.append("UserId",this.UserId);
     this.userService.validateUser(formData).subscribe(m => {this.onUploadRefresh();});
 
     //window.location.reload();
@@ -59,6 +61,7 @@ userCurrId:any;
     const formData = new FormData();
 
     formData.append("fileversocarteid",file);
+     formData.append("UserId",this.UserId);
     this.userService.validateUser(formData).subscribe(m => {this.onUploadRefresh();});
 
     //window.location.reload();
