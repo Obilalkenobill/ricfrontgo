@@ -36,10 +36,11 @@ export class AuthService {
       const user = new User({
         roles : roles,
         id : id,
-        is_verified : is_verified
+        is_verified : is_verified,
+        username : sessionStorage.getItem('username')
       });
-      const follow:User=(user);
-  console.log(user);
+      const user:User=(newUser);
+      });
   return user;
   }
 
