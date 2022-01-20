@@ -33,7 +33,7 @@ export class AuthService {
         is_verified = this.jwt.decodeToken(token)?.is_verified;
       }
 
-      const user = new User({
+      const newUser = new User({
         roles : roles,
         id : id,
         is_verified : is_verified,
