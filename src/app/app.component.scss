@@ -4,9 +4,9 @@
 
 }
 .footer{
-    background-image: linear-gradient(white, black);
+    background-image: linear-gradient(white,black);
     width:100%;
-    height:10%;
+    height:13%;
     position:fixed;
     bottom:0px;
     right:0px;
@@ -41,5 +41,29 @@ i{
   .navbar{
     width:130% !important;
   }
+  .footer{
+    background-image: linear-gradient(white,black);
+    width:100%;
+    height:17%;
+    position:fixed;
+    bottom:0px;
+    right:0px;
+    text-align: center;
+}
+}
+
+@media screen and (max-height: 270px) and (max-width:190px) {
+  .navbar{
+    width:130% !important;
+  }
+  .footer{
+    background-image: linear-gradient(white,black);
+    width:100%;
+    height:60%;
+    position:fixed;
+    bottom:0px;
+    right:0px;
+    text-align: center;
+}
 }
 
