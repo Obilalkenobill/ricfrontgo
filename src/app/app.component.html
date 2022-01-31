@@ -6,35 +6,37 @@
     <!-- BRAND -->
     <div class="navbar-header">
     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#alignment-example" aria-expanded="false">
-      <span class="sr-only">Toggle navigation</span>
-<span class="icon-bar"></span>
-<span class="icon-bar"></span>
-<span class="icon-bar"></span>
+      <a><span class="spanR">R.</span><span class="spanI">I.</span><span class="spanC">C.</span></a>
     </button>
-    <a href="home"><span class="spanR">R.</span><span class="spanI">I.</span><span class="spanC">C.</span></a>
+
     </div>
 
     <!-- COLLAPSIBLE NAVBAR -->
     <div class="collapse navbar-collapse" id="alignment-example">
 
     <!-- Links -->
+    <div class="cont">
     <ul class="nav navbar-nav">
-    <li  *ngIf="!checkAuth()">
-      <a class="nav-link" routerLink="register">Create account</a>
+    <li class="space" *ngIf="!checkAuth()">
+      <a class="nav-link" routerLink="register">S'inscrire</a>
+      </li>
+      <li class="space" *ngIf="!checkAuth()">
       <a class="nav-link" routerLink="auth">Login</a></li>
-    <li   *ngIf="checkAuth()" ><a class="nav-link" (click)="logout()">Logout</a></li>
-    <li  *ngIf="checkAuth()"><a class="nav-link" routerLink="projets-view" >Projets</a></li>
-    <li  *ngIf="checkAuth() && !is_verified()"><a class="nav-link" (click)="userId()"><i class="glyphicon glyphicon-upload"></i></a></li>
-    <li  *ngIf="isAdmin()"><a class="nav-link" routerLink="users-view">Users</a></li>
-    <li  *ngIf="isAdmin()"><a class="nav-link" routerLink="view-roles">Roles</a></li>
-    <li  ><a class="nav-link" routerLink="charte">Charte</a></li>
+    <li class="space"  *ngIf="checkAuth()" ><a class="nav-link" (click)="logout()">Logout</a></li>
+    <li class="space" *ngIf="checkAuth()"><a class="nav-link" routerLink="projets-view" >Projets</a></li>
+    <li class="space" *ngIf="checkAuth() && !is_verified()"><a class="nav-link" (click)="userId()"><i class="glyphicon glyphicon-upload"></i></a></li>
+    <li class="space" *ngIf="isAdmin()"><a class="nav-link" routerLink="users-view">Users</a></li>
+    <li class="space" *ngIf="isAdmin()"><a class="nav-link" routerLink="view-roles">Roles</a></li>
+    <li class="space" ><a class="nav-link" routerLink="charte">Charte</a></li>
     </ul>
+
+
+    </div>
     </div>
 
     </div>
     </nav>
   </div>
-
 
   <div class='container-fluid center_div'>
     <ul class="list-group">
@@ -44,8 +46,7 @@
 
   <footer>
     <div class="footer">
-    <i class="glyphicon glyphicon-ok"></i>
-    <br>
+    <i routerLink="home" class="glyphicon glyphicon-ok"></i>
     <span class="blancko"> Site du referendum à initiative Citoyen. Tout droit résèrvé au peuple. </span>
     </div>
   </footer>
