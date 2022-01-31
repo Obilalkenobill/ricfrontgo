@@ -1,37 +1,75 @@
 
+
 .nav_button:hover{
     background-color: rgb(133, 133, 133);
 
 }
+
 .footer{
     background-image: linear-gradient(white,black);
     width:100%;
-    height:13%;
+    height:17%;
     position:fixed;
     bottom:0px;
     right:0px;
     text-align: center;
+    font-family: 'Source Serif 4', sans-serif;
+    font-size:2rem;
+    padding-top:2%;
+
+// left: 0;
 }
 .glyphicon-ok{
-  color:grey;
+  color:#E4E4E4;
+}
+.glyphicon-ok:hover{
+  cursor : pointer;
+}
+.glyphicon-upload:hover{
+  cursor : pointer;
 }
 i{
-    color:lightgrey;
+    color:black;
 }
 .blancko{
-    color:lightgrey
+    color:white;
+    height:100%;
+    width:100%;
 }
 .center_div{
     margin-bottom: 10%;
+    padding-bottom: 15%;
 }
-
-
 .spanR{
     color:black;
     text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
 }
+.navbar-header{
+  display: flex;
+
+}
+.collapsed{
+  background-image: linear-gradient(white,black);
+}
 .spanI{
     color:yellow;
+}
+
+.navbar{
+  background-image: linear-gradient(grey,white);
+  border:none;
+}
+
+
+.nav-link{
+  color:black !important;
+  font-family: 'Source Serif 4', sans-serif;
+  font-size: 150%;
+  border-bottom: 1px solid lightgrey;
+  cursor : pointer;
+}
+.nav-link:hover{
+  border-bottom: 1px solid gold;
 }
 .spanC{
     color:red;
@@ -39,34 +77,66 @@ i{
 .navContFluid{
   align-content: center;
 }
+body {
+  min-height: 100vh;
+}
+.nav{
+  width:86% !important;
+}
+.padd{
+padding-top:10%;
+}
+.nav{
+  display:flex;
+  flex-direction: row;
+  width:100%;
+  margin-left:15%;
+  margin-right:auto;
+  }
+.space{
+margin-left:5%;
+}
+  .nav-link{
+    color:black !important;
+    font-family: 'Source Serif 4', sans-serif;
+    font-size: 150%;
+    border-bottom: 1px solid gold;
+    // border-right: 1px solid gold;
 
+    //  margin:-10%;
+  }
+  li:not(:first-child):not(:last-child) {
+
+}
 @media screen and (max-width: 550px) {
   .navbar{
-    width:130% !important;
+    width:100% !important;
   }
   .footer{
     background-image: linear-gradient(white,black);
     width:100%;
-    height:13%;
-    position:fixed;
-    bottom:0px;
-    right:0px;
+    height:15%;
+    // position:fixed;
+    // bottom:0px;
+    // right:0px;
     text-align: center;
+    font-size:1.8rem;
 }
 }
-
 @media screen and (max-height: 270px) and (max-width:190px) {
   .navbar{
-    width:130% !important;
+    width:100% !important;
   }
   .footer{
     background-image: linear-gradient(white,black);
     width:100%;
     height:60%;
-    position:fixed;
-    bottom:0px;
-    right:0px;
+    // position:fixed;
+    // bottom:0px;
+    // right:0px;
     text-align: center;
+    padding-top:5%;
+    font-size:2.8rem;
 }
 }
 
