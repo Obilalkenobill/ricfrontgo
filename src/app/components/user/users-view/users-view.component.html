@@ -8,10 +8,6 @@
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> id </th>
                     <td mat-cell *matCellDef="let row"> {{ row.id }} </td>
                 </ng-container>
-                <ng-container matColumnDef="login">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> login </th>
-                    <td mat-cell *matCellDef="let row"> {{ row.login }}</td>
-                </ng-container>
                 <ng-container matColumnDef="email">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> email </th>
                     <td mat-cell *matCellDef="let row"> {{ row.email }}</td>
@@ -28,16 +24,12 @@
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> is_active </th>
                     <td mat-cell *matCellDef="let row"> {{ row.is_active }}</td>
                 </ng-container>
-                <ng-container matColumnDef="creation_date">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> creation_date </th>
-                    <td mat-cell *matCellDef="let row"> {{ row.creation_date }}</td>
-                </ng-container>
                 <ng-container matColumnDef="is_verified">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> is_verified </th>
                     <td mat-cell *matCellDef="let row"> {{ row.is_verified }}</td>
                 </ng-container>
                 <ng-container matColumnDef="nn">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> National Number </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> National N° </th>
                     <td mat-cell *matCellDef="let row"> {{ row.nn }}</td>
                 </ng-container>
                 <!-- <ng-container matColumnDef="roles">
