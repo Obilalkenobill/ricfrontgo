@@ -19,10 +19,8 @@ export class UsersViewComponent implements OnInit {
   displayedColumns: string[] = ['id', 
   'nom',
   'prenom',
-  'login',
   'email', 
   'is_active',
-  'creation_date',
   'is_verified',
   'nn',
   'actions'];
