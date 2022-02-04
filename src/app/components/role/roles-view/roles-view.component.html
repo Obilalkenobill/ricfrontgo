@@ -1,4 +1,4 @@
-<div class="container">
+<div class="table-responsive">
     <table class="table">
         <thead>
             <tr>
@@ -9,7 +9,7 @@
         <tbody>
             <tr *ngFor="let role of rolesList">
                 <td>{{ role.id }}</td>
-                <td>{{ role.label }}</td>
+                <td><p> {{ role.label }}</p></td>
                 <td>
                     <button type="button" class="btn btn-info">Info</button>
                     <button type="button" class="btn btn-primary" >Edit</button>
