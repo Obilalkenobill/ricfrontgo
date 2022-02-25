@@ -6,7 +6,7 @@
                 matSortDisableClear>
                 <ng-container matColumnDef="titre">
                     <mat-header-cell *matHeaderCellDef mat-sort-header> titre </mat-header-cell>
-                    <mat-cell class="d-inline-block text-truncate" *matCellDef="let row"> {{ row.titre }}</mat-cell>
+                    <mat-cell *matCellDef="let row"> {{ row.titre }}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="descriptif">
                     <mat-header-cell *matHeaderCellDef mat-sort-header> descriptif </mat-header-cell>
