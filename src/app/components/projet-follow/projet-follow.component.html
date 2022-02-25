@@ -10,7 +10,7 @@
                 </ng-container>
                 <ng-container matColumnDef="descriptif">
                     <mat-header-cell *matHeaderCellDef mat-sort-header> descriptif </mat-header-cell>
-                    <mat-cell *matCellDef="let row"> {{ row.descriptif }}</mat-cell>
+                    <mat-cell class="d-inline-block text-truncate" *matCellDef="let row"> {{ row.descriptif }}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="nbr_vote_pour">
                     <mat-header-cell *matHeaderCellDef mat-sort-header> vote(s) pour </mat-header-cell>
