@@ -33,7 +33,7 @@ export class CreateProjetComponent implements OnInit {
   {
 
     this.titreCtl = this.formBuilder.control('', [Validators.required],);
-    this.descriptifCtl = this.formBuilder.control('', [Validators.required] );
+    this.descriptifCtl = this.formBuilder.control('',[Validators.minLength(7),Validators.maxLength(78)] );
     let token=sessionStorage.getItem('id_token');
     if (typeof token == 'string') {this.UserId=this.jwt.decodeToken(token).id;}
 
