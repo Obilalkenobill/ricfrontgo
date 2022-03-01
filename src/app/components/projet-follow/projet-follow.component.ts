@@ -63,8 +63,7 @@ export class ProjetFollowComponent implements OnInit {
       this.dataSource.sort = this.sort;
     }
     redirectCreateProjet(){
-     this.UserId=this.authService.getCurrentUser()?.id;
-     this.router.navigate(['/create-projet',this.UserId]);
+     this.router.navigate(['/create-projet']);
     }
 
   deleteProj(Projet_id:any,User_id:any){
