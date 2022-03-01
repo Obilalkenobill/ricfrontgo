@@ -34,7 +34,7 @@ const routes: Routes = [
   { path: 'projets-view', canActivate: [AuthGuard], component: ProjetViewComponent},
   { path: 'projets-follow', canActivate: [AuthGuard], component: ProjetFollowComponent},
   { path: 'detail-proj/:id', canActivate: [AuthGuard], component: DetailsProjetComponent},
-  { path: 'create-projet/:id',canActivate: [AuthGuard], component: CreateProjetComponent},
+  { path: 'create-projet',canActivate: [AuthGuard], component: CreateProjetComponent},
   { path: 'own-projet',canActivate: [AuthGuard], component: OwnProjectComponent},
   { path: 'not-found', component: FourhofourComponent },
   { path: 'charte', component: CharteComponent},
