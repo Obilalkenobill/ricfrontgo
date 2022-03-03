@@ -67,7 +67,8 @@ export class UsersViewComponent implements OnInit {
   {
     if (confirm("Are sur to delete user: "+user.nom+" "+user.prenom+" wich login is :"+user.login)) {
     this.userService.deleteUser(id).subscribe(result=>{this.refresh();},error=>{
-      alert("Cet utilisateur a participé au projet, il ne peut pas être supprimé !")
+      alert("Cet utilisateur a participé au projet, il ne peut pas être supprimé !");
+      console.error(error);
     });
     //window.location.reload();
     }
