@@ -76,6 +76,10 @@ i{
 .navContFluid{
   align-content: center;
 }
+body {
+  min-width: 550px;
+  min-height: 100vh;
+}
 .nav{
   width:100% !important;
 }
@@ -110,30 +114,5 @@ margin-left:5%;
 }
 .navbar{
   width:107% !important;
-}
-@media screen and (max-width: 550px) {
-  .footer{
-    background-image: linear-gradient(white,black);
-    width:100%;
-    height:60vh;
-    // position:fixed;
-    // bottom:0px;
-    // right:0px;
-    text-align: center;
-    font-size:2rem;
-}
-}
-@media screen and (max-height: 270px) and (max-width:190px) {
-  .footer{
-    background-image: linear-gradient(white,black);
-    width:100%;
-    height:60vh;
-    // position:fixed;
-    // bottom:0px;
-    // right:0px;
-    text-align: center;
-    padding-top:5%;
-    font-size:2.8rem;
-}
 }
 
