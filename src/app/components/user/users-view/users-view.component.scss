@@ -2,6 +2,10 @@ td{
     border:solid lightgray 2px;
     border-bottom:solid lightsalmon 2px;
 }
-.btn-group{
-    display: flex;
+.dropdown-menu {
+  min-width:auto !important;
 }
+.mat-column-actions{
+  overflow: visible !important;
+}
+
