@@ -37,7 +37,7 @@ export class AuthService {
         roles : roles,
         id : id,
         is_verified : is_verified,
-        username : sessionStorage.getItem('username')
+        username : JSON.parse(sessionStorage.getItem('user') || '')?.username
       });
       const user:User=(newUser);
   return user;
