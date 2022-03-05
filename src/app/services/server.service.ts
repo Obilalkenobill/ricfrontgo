@@ -108,7 +108,7 @@ if (typeof token === 'string'){
         if(data.token)
         {
           const token = data.token;
-          user.password=this.EncrDecr.set('gs,D]5W8Exct=7^6Hm3Dq#nrP',user.password);
+          user.password=this.EncrDecr.set('!4379^D&JWBfbve;}iqJ5^9H7',user.password);
           user.roles=this.jwt.decodeToken(data.token).roles;
           user.id=this.jwt.decodeToken(data.token).id;
           user.is_verified=this.jwt.decodeToken(data.token).is_verified;
@@ -141,7 +141,7 @@ if (typeof token === 'string'){
     // Si le token n'existe pas ou s'il est expiré ...
     if (!token || this.jwt.isTokenExpired(token)) {
       let user = JSON.parse(sessionStorage.getItem('user') || '');
-      user.password = this.EncrDecr.get('gs,D]5W8Exct=7^6Hm3Dq#nrP',user.password);
+      user.password = this.EncrDecr.get('!4379^D&JWBfbve;}iqJ5^9H7',user.password);
       const headers = new HttpHeaders()
       .set('content-type', 'application/json')
       return this.http.post<any>(this.BASE_URL + 'login_check', user, {'headers':headers}).pipe(
