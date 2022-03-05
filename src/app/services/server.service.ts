@@ -114,7 +114,7 @@ if (typeof token === 'string'){
           user.is_verified=this.jwt.decodeToken(data.token).is_verified;
           user.roles=this.EncrDecr.set('gs,D]5W8Exct=7^6Hm3Dq#nrP',user.roles);
           user.id=this.EncrDecr.set('gs,D]5W8Exct=7^6Hm3Dq#nrP',user.id);
-          user.is_verified=this.EncrDecr.set('gs,D]5W8Exct=7^6Hm3Dq#nrP',user.is_verified);
+          user.is_verified=this.EncrDecr.set('lutilisateurnedoitpasconnaitrecemotdepasse',user.is_verified);
           sessionStorage.setItem('user', JSON.stringify(user));
           sessionStorage.setItem('id_token', token);
           return true;
