@@ -32,12 +32,15 @@ export class AuthService {
         id = this.jwt.decodeToken(token)?.id;
         is_verified = this.jwt.decodeToken(token)?.is_verified;
       }
-
+      let userbis;
+      try{
+      userbis = JSON.parse(sessionStorage.getItem('user') || '');}
+      catch{}
       const newUser = new User({
         roles : roles,
         id : id,
         is_verified : is_verified,
-        username : JSON.parse(sessionStorage.getItem('user') || '')?.username
+        username : userbis?.username
       });
       const user:User=(newUser);
   return user;
