@@ -64,7 +64,9 @@ table{
 .mat-header-cell{
 
  }
-
+ mat-row, mat-header-row, mat-footer-row {
+  display: block !important;
+}
  .mat-row{
   display: list-item !important;
   border:solid lightgray 2px !important;
@@ -81,5 +83,11 @@ table{
 @media screen and (max-width: 930px) {
   .smartfor{
       display: none !important;
+  }
+}
+
+@media screen and (min-width: 650px) {
+  mat-row, mat-header-row, mat-footer-row {
+    display: flex!important;
   }
 }
