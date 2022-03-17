@@ -4,25 +4,26 @@
 
             <mat-table class="lessons-table mat-elevation-z8" [dataSource]='dataSource' matSort matSortActive="id" matSortDirection="asc"
                 matSortDisableClear>
+                Trier par :
                 <ng-container matColumnDef="titre">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header> titre </mat-header-cell>
-                    <mat-cell *matCellDef="let row"> {{ row.titre }}</mat-cell>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>titre </mat-header-cell>
+                    <mat-cell class="title" *matCellDef="let row"> {{ row.titre }}</mat-cell>
                 </ng-container>
-                <ng-container matColumnDef="descriptif">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header> descriptif </mat-header-cell>
-                    <mat-cell *matCellDef="let row"> {{ row.descriptif }}</mat-cell>
+                <ng-container  matColumnDef="descriptif">
+                    <mat-header-cell  *matHeaderCellDef mat-sort-header> descriptif </mat-header-cell>
+                    <mat-cell class="copte" *matCellDef="let row"> {{ row.descriptif }}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="nbr_vote_pour">
                     <mat-header-cell *matHeaderCellDef mat-sort-header> vote(s) pour </mat-header-cell>
-                    <mat-cell *matCellDef="let row" class="alert-success" role="alert" > {{ row.nbr_vote_pour }}</mat-cell>
+                    <mat-cell *matCellDef="let row" class="alert-success" role="alert" > {{ row.nbr_vote_pour }} POUR</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="nbr_vote_contre">
                     <mat-header-cell *matHeaderCellDef mat-sort-header> vote(s) contre </mat-header-cell>
-                    <mat-cell *matCellDef="let row" class="alert-danger" role="alert"> {{ row.nbr_vote_contre }}</mat-cell>
+                    <mat-cell *matCellDef="let row" class="alert-danger" role="alert"> {{ row.nbr_vote_contre }} CONTRE</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="nbr_vote_null">
                     <mat-header-cell *matHeaderCellDef mat-sort-header> vote(s) null </mat-header-cell>
-                    <mat-cell *matCellDef="let row" class="alert-secondary" role="alert"> {{ row.nbr_vote_null }}</mat-cell>
+                    <mat-cell *matCellDef="let row" class="alert-secondary" role="alert"> {{ row.nbr_vote_null }} NULL</mat-cell>
                 </ng-container>
                 <ng-container  matColumnDef="date_adm">
                     <mat-header-cell *matHeaderCellDef mat-sort-header> date d'admission </mat-header-cell>
@@ -37,7 +38,7 @@
                     <mat-cell *matCellDef="let row"> {{ row.creation_date }}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="actions">
-                    <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+                    <mat-header-cell class="invisible" *matHeaderCellDef></mat-header-cell>
                     <mat-cell *matCellDef="let row">
                         <div class="btn-group">
                             <button class="btn btn-info" [routerLink]='["/detail-proj", row.id]'><i class="glyphicon glyphicon-resize-full"></i></button>
