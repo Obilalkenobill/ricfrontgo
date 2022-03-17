@@ -4,7 +4,6 @@
 
             <mat-table class="lessons-table mat-elevation-z8" [dataSource]='dataSource' matSort matSortActive="id" matSortDirection="asc"
                 matSortDisableClear>
-                Trier par :
                 <ng-container matColumnDef="titre">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>titre </mat-header-cell>
                     <mat-cell class="title" *matCellDef="let row"> {{ row.titre }}</mat-cell>
