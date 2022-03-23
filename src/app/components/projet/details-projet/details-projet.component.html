@@ -3,7 +3,7 @@
     <div class="card-body">
       <h5 class="card-title" *ngIf="projet!=null">{{projet.titre}}</h5>
       <p class="card-text" *ngIf="projet!=null">{{projet.descriptif}}</p>
-      <button type="button" class="btn btn-secondary" *ngIf="is_verified && !a_vote" (click)="vote(null)">Votez null</button> 
+      <button type="button" class="btn btn-secondary" *ngIf="is_verified && !a_vote" (click)="vote(null)">Votez null</button>
       <ng-container *ngIf="a_vote && VoteBase!=null && VoteBase[0].bull_vote==null  "><div class="alert alert-secondary" role="alert">
         Vous avez voté NULL.
       </div></ng-container>
@@ -27,15 +27,15 @@
         Nombre de vote pour : {{projet.nbr_vote_pour}}
       </div>
       <button *ngIf="is_Admin() || is_current_User()" type="button" class="btn btn-warning" (click)="deleteProj(projet.id)"><i class="glyphicon glyphicon-trash"></i></button>
-      <button *ngIf="!user_follow" type="button" class="btn btn-info" (click)="follow(projet.id,userID_Curr)"><i class="glyphicon glyphicon-search"></i></button>
-      <button *ngIf="user_follow" type="button" class="btn btn-info" (click)="unfollow(projet.id,userID_Curr)"><i class="glyphicon glyphicon-zoom-out"></i></button>
+      <button *ngIf="!user_follow" type="button" class="btn btn-info" (click)="follow(projet.id,userID_Curr)"><i class="glyphicon glyphicon-eye-open"></i></button>
+      <button *ngIf="user_follow" type="button" class="btn btn-info" (click)="unfollow(projet.id,userID_Curr)"><i class="glyphicon glyphicon-eye-close"></i></button>
 
         <div class="coment-bottom bg-white p-2 px-4">
           <div class="d-flex flex-row add-comment-section mt-4 mb-4">
             <form (ngSubmit)="onSubmit()" [formGroup]="commentsForm">
             <div class="inptbtn"> <input [(ngModel)]="comment" [formControl]="commentCtl" name="comment" type="text" class="form-control mr-3" placeholder="Add comment">
             <button class="btn btn-primary" type="submit" [disabled]="commentsForm.invalid"><i class="glyphicon glyphicon-comment"></i></button>
-          </div>  
+          </div>
           </form>
           </div>
           <div class="list-group">
@@ -45,13 +45,13 @@
               <p>{{comment.creation_date}}</p><p *ngIf="is_Admin() || is_current_UserCom(comment.personne_id_id)" class="edit" (click)="editComment(comment)">Édit</p>
               <div class="d-flex flex-row add-comment-section mt-4 mb-4">
                 <form (ngSubmit)="onSubmit2(comment.id)" [formGroup]="commentsForm">
-                <div class="inptbtn"> 
+                <div class="inptbtn">
                   <input [(ngModel)]="commentOFCom" [formControl]="commentCtl" name="comment" type="text" class="form-control mr-3" placeholder="Response">
                 <button class="btn btn-primary" type="submit" [disabled]="commentsForm.invalid"><i class="glyphicon glyphicon-send"></i></button>
-              </div>  
+              </div>
               </form>
               </div>
-            
+
                 <ng-container *ngFor="let commentt of comments" class="list-group-item border">
                   <ng-container *ngIf="commentt.commentaire_referent_id_id==comment.id">
                   <h4 class="list-group-item-heading" >{{commentt.login}}</h4>
@@ -59,7 +59,7 @@
                   <p>{{commentt.creation_date}}</p><p *ngIf="is_Admin() || is_current_UserCom(commentt.personne_id_id)" class="edit" (click)="editComment(commentt)">Édit</p>
                   </ng-container>
                 </ng-container>
-                   
+
             </div>
           </div>
         </div>
