@@ -31,7 +31,8 @@ export class OwnProjectComponent implements OnInit {
     dataSource!: MatTableDataSource<Projet>;
     public projetList!: Projet[];
     UserId!:any;
-
+    pageSize!:any;
+    pageSizeOptions!:any;
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
 
@@ -42,6 +43,17 @@ export class OwnProjectComponent implements OnInit {
 
     ngOnInit(): void {
       this.refresh();
+      if (window.innerWidth > 450 && window.innerWidth <= 650) {
+        this.pageSize = 10;
+        this.pageSizeOptions= [6,10,12,16,20];
+      }
+      else if (window.innerWidth > 650 ) {
+        this.pageSize = 15;
+        this.pageSizeOptions= [6,9,12,15,21];
+      } else {
+        this.pageSize = 10;
+        this.pageSizeOptions= [6,10,12,16,20];
+      }
     }
 
     refresh()
@@ -55,7 +67,22 @@ export class OwnProjectComponent implements OnInit {
         this.updateDataSource();
       });
     }
+    onResize(event:any) {
 
+      if (event.target.innerWidth > 450 && event.target.innerWidth <= 650) {
+        this.pageSize = 10;
+        this.pageSizeOptions= [6,10,12,16,20];
+      }
+      else if (event.target.innerWidth > 650 ) {
+        this.pageSize = 15;
+        this.pageSizeOptions= [6,9,12,15,21];
+
+      } else {
+        this.pageSize = 10;
+        this.pageSizeOptions= [6,10,12,16,20];
+      }
+
+    }
     updateDataSource()
     {
       this.dataSource = new MatTableDataSource(this.projetList);
