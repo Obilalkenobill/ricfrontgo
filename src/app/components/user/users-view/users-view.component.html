@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-sm-12">
         <div class="mat-elevation-z2">
-            <mat-table [dataSource]='dataSource' matSort matSortActive="id" matSortDirection="asc"
+            <mat-table (window:resize)="onResize($event)" [dataSource]='dataSource' matSort matSortActive="id" matSortDirection="asc"
                 matSortDisableClear width="100%">
 
                 <ng-container matColumnDef="id">
@@ -58,7 +58,7 @@
                 </mat-row>
 
             </mat-table>
-            <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 15, 20]"></mat-paginator>
+            <mat-paginator [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"></mat-paginator>
         </div>
     </div>
 </div>
