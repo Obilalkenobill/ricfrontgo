@@ -80,9 +80,27 @@ table{
   height:100px;
   word-wrap: break-word;
 }
-@media screen and (max-width: 930px) {
-  .smartfor{
-      display: none !important;
+
+mat-row, mat-footer-row {
+  width: 30%;
+  margin:1.5%;
+}
+mat-table{
+  display:flex;
+  flex-wrap: wrap;
+}
+mat-header-row {
+  min-width: 100%;
+  max-width: 100%;
+}
+@media screen and (max-width: 650px) {
+  mat-row, mat-footer-row {
+    width: 47%;
+  }
+}
+@media screen and (max-width: 450px) {
+  mat-row, mat-footer-row {
+    width: 100%;
   }
 }
 

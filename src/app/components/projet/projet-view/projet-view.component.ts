@@ -20,10 +20,10 @@ export class ProjetViewComponent implements OnInit {
   displayedColumns: string[] = [
   'titre',
   'descriptif',
-  'nbr_vote_pour',  
+  'nbr_vote_pour',
   'nbr_vote_contre',
-  'nbr_vote_null', 
-  'date_adm', 
+  'nbr_vote_null',
+  'date_adm',
   'date_rej',
   'creation_date',
 
@@ -31,6 +31,8 @@ export class ProjetViewComponent implements OnInit {
   dataSource!: MatTableDataSource<Projet>;
   public projetList!: Projet[];
   UserId!:any;
+  pageSize!:any;
+  pageSizeOptions!:any;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -43,13 +45,25 @@ export class ProjetViewComponent implements OnInit {
   ngOnInit(): void {
     this.UserId=this.authService.getCurrentUser()?.id;
     this.refresh();
+    if (window.innerWidth > 450 && window.innerWidth <= 650) {
+      this.pageSize = 10;
+      this.pageSizeOptions= [6,10,12,16,20];
+    }
+    else if (window.innerWidth > 650 ) {
+      this.pageSize = 15;
+      this.pageSizeOptions= [6,9,12,15,21];
+    } else {
+      this.pageSize = 10;
+      this.pageSizeOptions= [6,10,12,16,20];
+    }
+
   }
 
   refresh()
   {
-    this.projetService.getAll().subscribe(projets => 
+    this.projetService.getAll().subscribe(projets =>
     {
-   
+
       this.projetList = projets;
       this.updateDataSource();
     });
@@ -70,6 +84,23 @@ deleteProj(Projet_id:any,User_id:any){
   {
     this.projetService.deleteProjet(Projet_id).subscribe();
   }
+}
+
+onResize(event:any) {
+
+  if (event.target.innerWidth > 450 && event.target.innerWidth <= 650) {
+    this.pageSize = 10;
+    this.pageSizeOptions= [6,10,12,16,20];
+  }
+  else if (event.target.innerWidth > 650 ) {
+    this.pageSize = 15;
+    this.pageSizeOptions= [6,9,12,15,21];
+
+  } else {
+    this.pageSize = 10;
+    this.pageSizeOptions= [6,10,12,16,20];
+  }
+
 }
   // deleteUser(id:any,user:any)
   // {
