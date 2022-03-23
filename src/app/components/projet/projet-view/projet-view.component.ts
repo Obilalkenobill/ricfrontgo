@@ -63,7 +63,6 @@ export class ProjetViewComponent implements OnInit {
   {
     this.projetService.getAll(this.UserId).subscribe(projets =>
     {
-console.log(projets);
       this.projetList = projets;
       this.updateDataSource();
     });
