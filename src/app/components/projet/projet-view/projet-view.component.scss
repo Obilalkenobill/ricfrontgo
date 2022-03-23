@@ -2,9 +2,6 @@ td{
     border:solid lightgray 2px !important;
     border-bottom:solid lightsalmon 2px !important;
 }
-.invisible{
-  display:none;
-}
 button{
     margin-right:2%;
 }
@@ -37,7 +34,7 @@ table{
 .title{
   font-style: italic;
   color: #474747;
-  font-size: 1.3em;
+  font-size: 2em;
 }
 .mat-cell{
    text-align: center;
@@ -88,11 +85,13 @@ border:solid lightgray 2px !important;
   height:100px;
   word-wrap: break-word;
 }
-
+.invisible{
+  display:none;
+}
 mat-row, mat-footer-row {
   width: 30%;
   margin:1.5%;
-  border-radius: 25px;;
+  border-radius: 25px;
 }
 mat-table{
   display:flex;
@@ -101,6 +100,15 @@ mat-table{
 mat-header-row {
   min-width: 100%;
   max-width: 100%;
+}
+.border_vote_pour{
+  border: 1px solid #228b22;
+}
+.border_vote_contre{
+  border: 1px solid #f50000;
+}
+.border_vote_null{
+  border: 1px solid #353839;
 }
 @media screen and (max-width: 650px) {
   mat-row, mat-footer-row {

@@ -61,9 +61,9 @@ export class ProjetViewComponent implements OnInit {
 
   refresh()
   {
-    this.projetService.getAll().subscribe(projets =>
+    this.projetService.getAll(this.UserId).subscribe(projets =>
     {
-
+console.log(projets);
       this.projetList = projets;
       this.updateDataSource();
     });
