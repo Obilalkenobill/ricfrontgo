@@ -68,7 +68,7 @@ background-image: linear-gradient(lightgray,white) !important;
  .mat-row{
   display: list-item !important;
   border:solid lightgray 2px !important;
-  border-bottom:solid lightsalmon 2px !important;
+  box-shadow: 5px 0 5px lightgray, 0 15px 15px -10px lightsalmon;
  }
 
 .copte{
@@ -80,6 +80,7 @@ background-image: linear-gradient(lightgray,white) !important;
 }
 mat-row, mat-footer-row {
   width: 33%;
+  border-radius: 25px;
 }
 mat-table{
   display:flex;
