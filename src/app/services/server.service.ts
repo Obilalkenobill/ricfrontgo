@@ -30,7 +30,7 @@ headers!:any;
       let headers = new HttpHeaders();
 if (typeof token === 'string'){
      headers = new HttpHeaders()
-      .set('content-type', 'application/json').set('Authorization', 'Bearer ' + token ).set('Access-Control-Allow-Origin','*');
+      .set('content-type', 'application/json').set('Authorization', 'Bearer ' + token ).set('Access-Control-Allow-Origin','*').set('Access-Control-Allow-Headers','*').set('Access-Control-Allow-Methods', '*');
     }
     return this.call(() =>this.http.get(this.BASE_URL + url, {'headers':headers}));
    }
@@ -47,7 +47,7 @@ if (typeof token === 'string'){
       let headers = new HttpHeaders();
 if (typeof token === 'string'){
      headers = new HttpHeaders()
-      .set('content-type', 'application/json').set('Authorization', 'Bearer ' + token ).set('Access-Control-Allow-Origin','*');
+      .set('content-type', 'application/json').set('Authorization', 'Bearer ' + token ).set('Access-Control-Allow-Origin','*').set('Access-Control-Allow-Headers','*').set('Access-Control-Allow-Methods', '*');
     }
     return this.call(() =>this.http.post(this.BASE_URL + url, body,  {'headers':headers}));
    }
@@ -64,7 +64,7 @@ public postbis<T>(url: string, body: T, secure:boolean=true): Observable<any>
     let headers = new HttpHeaders();
 if (typeof token === 'string'){
    headers = new HttpHeaders()
-    .set('Authorization', 'Bearer ' + token ).set( 'method' , 'POST').set('Access-Control-Allow-Origin','*');
+    .set('Authorization', 'Bearer ' + token ).set( 'method' , 'POST').set('Access-Control-Allow-Origin','*').set('Access-Control-Allow-Headers','*').set('Access-Control-Allow-Methods', '*');
   }
   return this.call(() =>this.http.post(this.BASE_URL + url, body,  {'headers':headers}));
  }
@@ -80,7 +80,7 @@ if (typeof token === 'string'){
     let headers = new HttpHeaders();
 if (typeof token === 'string'){
    headers = new HttpHeaders()
-    .set('content-type', 'application/json').set('Authorization', 'Bearer ' + token ).set('Access-Control-Allow-Origin','*');
+    .set('content-type', 'application/json').set('Authorization', 'Bearer ' + token ).set('Access-Control-Allow-Origin','*').set('Access-Control-Allow-Headers','*').set('Access-Control-Allow-Methods', '*');
   }
     return this.call(() =>this.http.put(this.BASE_URL + url, body,  {'headers':headers}));
   }
@@ -95,7 +95,7 @@ if (typeof token === 'string'){
     let headers = new HttpHeaders();
 if (typeof token === 'string'){
    headers = new HttpHeaders()
-    .set('content-type', 'application/json').set('Authorization', 'Bearer ' + token ).set('Access-Control-Allow-Origin','*');
+    .set('content-type', 'application/json').set('Authorization', 'Bearer ' + token ).set('Access-Control-Allow-Origin','*').set('Access-Control-Allow-Headers','*').set('Access-Control-Allow-Methods', '*');
   }
     return this.call(() => this.http.delete(this.BASE_URL + url, {'headers':headers}));
   }
@@ -104,7 +104,7 @@ if (typeof token === 'string'){
   public login(user: User): Observable<any>
   {
     const headers = new HttpHeaders()
-   .set('content-type', 'application/json').set('Access-Control-Allow-Origin','*')
+   .set('content-type', 'application/json').set('Access-Control-Allow-Origin','*').set('Access-Control-Allow-Headers','*').set('Access-Control-Allow-Methods', '*');
 
     return this.http.post<any>(this.BASE_URL + 'login_check', user, {'headers':headers}).pipe(
       map((data: any) => {
@@ -149,7 +149,7 @@ if (typeof token === 'string'){
       user.password = this.EncrDecr.get('!4379^D&JWBfbve;}iqJ5^9H7',user.password);
       console.log(user);
       const headers = new HttpHeaders()
-      .set('content-type', 'application/json').set('Access-Control-Allow-Origin','*');
+      .set('content-type', 'application/json').set('Access-Control-Allow-Origin','*').set('Access-Control-Allow-Headers','*').set('Access-Control-Allow-Methods', '*');
       return this.http.post<any>(this.BASE_URL + 'login_check', user, {'headers':headers}).pipe(
         flatMap((data: any) => {
           if(data.token)
