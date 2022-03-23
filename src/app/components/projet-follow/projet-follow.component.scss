@@ -1,111 +1,117 @@
 td{
-  border:solid lightgray 2px !important;
-  border-bottom:solid lightsalmon 2px !important;
+    border:solid lightgray 2px !important;
+    border-bottom:solid lightsalmon 2px !important;
 }
 button{
-  margin-right:2%;
+    margin-right:2%;
 }
 .grey{
-background-image: linear-gradient(lightgray,white) !important;
-  border-bottom: 1px dashed  gold !important;
-  color:black;
-  font-family: 'Source Serif 4', sans-serif;
+  background-image: linear-gradient(lightgray,white) !important;
+    border-bottom: 1px dashed  gold !important;
+    color:black;
+    font-family: 'Source Serif 4', sans-serif;
 }
 .orange{
-background-image: linear-gradient(lightgray,white) !important;
-  border-bottom: 1px dashed  gold !important;
-  color:black;
-  font-family: 'Source Serif 4', sans-serif;
-}
-.invisible{
-display:none;
+  background-image: linear-gradient(lightgray,white) !important;
+    border-bottom: 1px dashed  gold !important;
+    color:black;
+    font-family: 'Source Serif 4', sans-serif;
 }
 .jaune{
-background-image: linear-gradient(lightgray,white) !important;
-  border-bottom: 1px dashed  gold !important;
-  color:black;
-  font-family: 'Source Serif 4', sans-serif;
+  background-image: linear-gradient(lightgray,white) !important;
+    border-bottom: 1px dashed  gold !important;
+    color:black;
+    font-family: 'Source Serif 4', sans-serif;
 }
 table{
-width:100%;
+  width:100%;
 }
 
 .mat-sort-header-container{
-justify-content: center !important;
- padding-left: 18px !important; /* Allow for sort icon*/
+  justify-content: center !important;
+   padding-left: 18px !important; /* Allow for sort icon*/
 }
 .title{
-font-style: italic;
-color: #474747;
-font-size: 2em;
+  font-style: italic;
+  color: #474747;
+  font-size: 2em;
 }
 .mat-cell{
- text-align: center;
- justify-content: center;
-}
+   text-align: center;
+   justify-content: center;
+ }
 
-.left-align-cell.mat-cell{
- text-align: left;
- justify-content: center;
-}
+ .left-align-cell.mat-cell{
+   text-align: left;
+   justify-content: center;
+ }
 
-.left-align-header>.mat-sort-header-container{
-justify-content: flex-start !important;
-padding-left:0px !important;
-flex: 1;
-display: flex;
-align-items: center;
-overflow: hidden;
-word-wrap: break-word;
-min-height: inherit;
-flex-direction: column !important;
+ .left-align-header>.mat-sort-header-container{
+  justify-content: flex-start !important;
+  padding-left:0px !important;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  word-wrap: break-word;
+  min-height: inherit;
+  flex-direction: column !important;
 }
 
 .mat-header-cell{
 
+ }
+ mat-row, mat-header-row, mat-footer-row {
+  display: block !important;
 }
-mat-row, mat-header-row, mat-footer-row {
-display: block !important;
-}
-.mat-row{
-display: list-item !important;
+ .mat-row{
+  display: list-item !important;
+  // border:solid lightgray 2px !important;
+  // border-bottom:solid lightsalmon 2px !important;
 border:solid lightgray 2px !important;
-border-bottom:solid lightsalmon 2px !important;
-}
+    box-shadow: 5px 0 5px lightgray, 0 15px 15px -10px lightsalmon;
 
+ }
+ .btn-block {
+  display: block;
+  width: 111%;
+  margin-right: 0%;
+  margin-top: 3%;
+}
 .copte{
-display:flex !important;
-overflow: hidden !important;
-max-width:100%;
-height:100px;
-word-wrap: break-word;
+  display:flex !important;
+  overflow: hidden !important;
+  max-width:100%;
+  height:100px;
+  word-wrap: break-word;
 }
 
 mat-row, mat-footer-row {
-width: 30%;
-margin:1.5%;
+  width: 30%;
+  margin:1.5%;
+  border-radius: 25px;;
 }
 mat-table{
-display:flex;
-flex-wrap: wrap;
+  display:flex;
+  flex-wrap: wrap;
 }
 mat-header-row {
-min-width: 100%;
-max-width: 100%;
+  min-width: 100%;
+  max-width: 100%;
 }
 @media screen and (max-width: 650px) {
-mat-row, mat-footer-row {
-  width: 47%;
-}
+  mat-row, mat-footer-row {
+    width: 47%;
+  }
 }
 @media screen and (max-width: 450px) {
-mat-row, mat-footer-row {
-  width: 100%;
-}
+  mat-row, mat-footer-row {
+    width: 100%;
+  }
 }
 
 @media screen and (min-width: 650px) {
-mat-row, mat-header-row, mat-footer-row {
-  display: flex!important;
-}
+  mat-row, mat-header-row, mat-footer-row {
+    display: flex!important;
+  }
 }
