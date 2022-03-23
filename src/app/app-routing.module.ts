@@ -16,26 +16,29 @@ import { EditUserComponent } from './components/user/edit-user/edit-user.compone
 import { ImageValidateComponent } from './components/user/image-validate/image-validate.component';
 import { UsersViewComponent } from './components/user/users-view/users-view.component';
 import { ValidateComponent } from './components/user/validate/validate.component';
+import { ContactsComponent } from './components/contacts/contacts.component';
+
 
 import { AuthGuard,AdminGuard } from './services/auth-guard.service';
 
 
 const routes: Routes = [
   { path:'',redirectTo:'/home',pathMatch:'full'},
-  { path: 'home', component:HomeComponent},
+  { path: 'home', component: HomeComponent},
   { path: 'auth', component: AuthComponent },
   { path: 'register', component: CreateUserComponent},
   { path: 'users-view', canActivate: [AdminGuard], component: UsersViewComponent},
   { path: 'edit-user/:id', canActivate: [AdminGuard], component: EditUserComponent},
-  { path:'img-validate/:id',canActivate: [AuthGuard], component: ImageValidateComponent},
-  { path:'validate/:id',  canActivate: [AdminGuard], component: ValidateComponent},
+  { path:'img-validate',canActivate: [AuthGuard], component: ImageValidateComponent},
+  { path:'validate/:id',canActivate: [AdminGuard], component: ValidateComponent},
   { path: 'view-roles',canActivate: [AdminGuard], component: RolesViewComponent},
   { path: 'create-role',canActivate: [AdminGuard], component: CreateRoleComponent},
   { path: 'projets-view', canActivate: [AuthGuard], component: ProjetViewComponent},
-  { path: 'projets-follow', canActivate: [AuthGuard], component: ProjetFollowComponent},
-  { path: 'detail-proj/:id', canActivate: [AuthGuard], component: DetailsProjetComponent},
+  { path: 'projets-follow',canActivate: [AuthGuard], component: ProjetFollowComponent},
+  { path: 'detail-proj/:id',canActivate: [AuthGuard], component: DetailsProjetComponent},
   { path: 'create-projet',canActivate: [AuthGuard], component: CreateProjetComponent},
   { path: 'own-projet',canActivate: [AuthGuard], component: OwnProjectComponent},
+  { path: 'contacts',canActivate: [AuthGuard], component: ContactsComponent},
   { path: 'not-found', component: FourhofourComponent },
   { path: 'charte', component: CharteComponent},
   { path: '**', redirectTo: 'not-found' }
@@ -46,5 +49,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { 
+export class AppRoutingModule {
 }
