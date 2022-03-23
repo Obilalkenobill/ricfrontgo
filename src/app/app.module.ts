@@ -66,7 +66,7 @@ import { ProjetFollowComponent } from './components/projet-follow/projet-follow.
 import { MatCommentEditComponent } from './components/projet/comment-edit/comment-edit.component';
 import { CharteComponent } from './components/charte/charte.component';
 import { EncrDecrService } from './services/EncrDecrSevice';
-
+import { ContactsComponent } from './components/contacts/contacts.component';
 
 
 
@@ -75,57 +75,57 @@ export function tokenGetter(){
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    AuthComponent,
-    CreateUserComponent,
-    UsersViewComponent,
-    FourhofourComponent,
-    CreateRoleComponent,
-    RolesViewComponent,
-    EditUserComponent,
-    ImageValidateComponent,
-    ValidateComponent,
-    ProjetViewComponent,
-    CreateProjetComponent,
-    DetailsProjetComponent,
-    OwnProjectComponent,
-    HomeComponent,
-    ProjetFollowComponent,
-    MatCommentEditComponent,
-    CharteComponent
-  ],
-  imports: [
-    BrowserModule,
-    MatSelectModule,
-    AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatListModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatIconModule,
-    MatSlideToggleModule,
-    MatDialogModule,
-    MatSnackBarModule,
-    MatRadioModule,
-    MatTabsModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    JwtModule.forRoot({
-      config: {
-        tokenGetter: tokenGetter,
-        allowedDomains:["localhost:8000"]
-      }
-    })
-  ],
-  providers: [EncrDecrService,AuthService,ServerService,UsersService, UsersCommonService,AuthGuard,AdminGuard,RoleService],
-  entryComponents:[MatCommentEditComponent],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        AuthComponent,
+        CreateUserComponent,
+        UsersViewComponent,
+        FourhofourComponent,
+        CreateRoleComponent,
+        RolesViewComponent,
+        EditUserComponent,
+        ImageValidateComponent,
+        ValidateComponent,
+        ProjetViewComponent,
+        CreateProjetComponent,
+        DetailsProjetComponent,
+        OwnProjectComponent,
+        HomeComponent,
+        ProjetFollowComponent,
+        MatCommentEditComponent,
+        CharteComponent,
+        ContactsComponent
+    ],
+    imports: [
+        BrowserModule,
+        MatSelectModule,
+        AppRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatButtonModule,
+        MatCheckboxModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatListModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSortModule,
+        MatIconModule,
+        MatSlideToggleModule,
+        MatDialogModule,
+        MatSnackBarModule,
+        MatRadioModule,
+        MatTabsModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        JwtModule.forRoot({
+            config: {
+                tokenGetter: tokenGetter,
+                allowedDomains: ["localhost:8000"]
+            }
+        })
+    ],
+    providers: [EncrDecrService, AuthService, ServerService, UsersService, UsersCommonService, AuthGuard, AdminGuard, RoleService],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
