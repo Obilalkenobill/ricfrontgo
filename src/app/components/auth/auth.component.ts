@@ -38,10 +38,11 @@ export class AuthComponent implements OnInit {
     const newUser = new User(formVal);
     this.server.login(newUser).subscribe(m =>
       {
-        this.authserv.isLoggedIn=m;
-        if(m)
+        
+        if(m===true)
         {
-        // this.router.navigate(['/users-view']);
+          this.authserv.isLoggedIn=m;
+        this.router.navigate(['/contacts']);
          }
       });
   }
