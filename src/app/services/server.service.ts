@@ -120,7 +120,6 @@ if (typeof token === 'string'){
           user.is_verified=this.EncrDecr.set('lutilisateurnedoitpasconnaitrecemotdepasse',user.is_verified);
           sessionStorage.setItem('user', JSON.stringify(user));
           sessionStorage.setItem('id_token', token);
-          console.log(user);
           return true;
         }
         return false;
