@@ -2,7 +2,7 @@
 <button class="btn orange" [routerLink]='["/own-projet"]'> <i class="glyphicon glyphicon-user"></i> </button>
 <button class="btn jaune" [routerLink]='["/projets-follow"]'><i class="glyphicon glyphicon-search"></i></button>
 
-            <mat-table class="lessons-table mat-elevation-z8" [dataSource]='dataSource' matSort matSortActive="id" matSortDirection="asc"
+            <mat-table class="lessons-table mat-elevation-z8" (window:resize)="onResize($event)" [dataSource]='dataSource' matSort matSortActive="id" matSortDirection="asc"
                 matSortDisableClear>
                 <ng-container matColumnDef="titre">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>titre </mat-header-cell>
@@ -34,14 +34,12 @@
                 </ng-container>
                 <ng-container matColumnDef="creation_date">
                     <mat-header-cell *matHeaderCellDef mat-sort-header> date de création</mat-header-cell>
-                    <mat-cell *matCellDef="let row"> {{ row.creation_date }}</mat-cell>
+                    <mat-cell *matCellDef="let row">Créé le  {{ row.creation_date }}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="actions">
                     <mat-header-cell class="invisible" *matHeaderCellDef></mat-header-cell>
                     <mat-cell *matCellDef="let row">
-                        <div class="btn-group">
                             <button class="btn btn-info" [routerLink]='["/detail-proj", row.id]'><i class="glyphicon glyphicon-resize-full"></i></button>
-                        </div>
                     </mat-cell>
                 </ng-container>
 
@@ -50,5 +48,5 @@
                 </mat-row>
 
             </mat-table>
-            <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 15, 20]"></mat-paginator>
+            <mat-paginator [pageSize]="10" [pageSizeOptions]="pageSizeOptions"></mat-paginator>
 
