@@ -23,11 +23,11 @@ export class ProjetViewComponent implements OnInit {
   'nbr_vote_pour',
   'nbr_vote_contre',
   'nbr_vote_null',
+  'actions',
   'date_adm',
   'date_rej',
-  'creation_date',
-
-  'actions'];
+  'creation_date'
+  ];
   dataSource!: MatTableDataSource<Projet>;
   public projetList!: Projet[];
   UserId!:any;
