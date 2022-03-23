@@ -14,15 +14,15 @@
                 </ng-container>
                 <ng-container matColumnDef="nbr_vote_pour">
                     <mat-header-cell *matHeaderCellDef mat-sort-header> vote(s) pour </mat-header-cell>
-                    <mat-cell *matCellDef="let row" class="alert-success" role="alert" > {{ row.nbr_vote_pour }} POUR</mat-cell>
+                    <mat-cell *matCellDef="let row" class="alert-success" [ngClass]="{'border_vote_pour' : row.a_vote && row.bull_vote==true}" role="alert" > {{ row.nbr_vote_pour }} POUR</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="nbr_vote_contre">
                     <mat-header-cell *matHeaderCellDef mat-sort-header> vote(s) contre </mat-header-cell>
-                    <mat-cell *matCellDef="let row" class="alert-danger" role="alert"> {{ row.nbr_vote_contre }} CONTRE</mat-cell>
+                    <mat-cell *matCellDef="let row" class="alert-danger" [ngClass]="{'border_vote_contre' : row.a_vote && row.bull_vote==false}" role="alert"> {{ row.nbr_vote_contre }} CONTRE</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="nbr_vote_null">
                     <mat-header-cell *matHeaderCellDef mat-sort-header> vote(s) null </mat-header-cell>
-                    <mat-cell *matCellDef="let row" class="alert-secondary" role="alert"> {{ row.nbr_vote_null }} NULL</mat-cell>
+                    <mat-cell *matCellDef="let row" class="alert-secondary" [ngClass]="{'border_vote_null' : row.a_vote && row.bull_vote==null}" role="alert"> {{ row.nbr_vote_null }} NULL</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="actions">
                   <mat-header-cell *matHeaderCellDef class="invisible" ></mat-header-cell>
