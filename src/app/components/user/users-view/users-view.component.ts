@@ -16,10 +16,10 @@ import { Role } from 'src/app/Models/role.model';
 })
 export class UsersViewComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 
+  displayedColumns: string[] = ['id',
   'nom',
   'prenom',
-  'email', 
+  'email',
   'is_active',
   'is_verified',
   'nn',
@@ -41,7 +41,7 @@ export class UsersViewComponent implements OnInit {
 
   refresh()
   {
-    this.userService.getAll().subscribe(users => 
+    this.userService.getAll().subscribe(users =>
     {
       this.usersList = users;
       this.updateDataSource();
