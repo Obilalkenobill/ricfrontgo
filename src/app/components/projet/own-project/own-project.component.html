@@ -25,7 +25,7 @@
                     <mat-cell *matCellDef="let row" class="alert-secondary" role="alert"> {{ row.nbr_vote_null }} NULL</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="actions">
-                  <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                  <mat-header-cell *matHeaderCellDef class="invisible" ></mat-header-cell>
                   <mat-cell *matCellDef="let row">
                           <button class="btn btn-primary btn-lg btn-block" [routerLink]='["/detail-proj", row.id]'>Intéragissez avec le projet</button>
                   </mat-cell>
