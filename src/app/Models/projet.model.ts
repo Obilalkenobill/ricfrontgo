@@ -13,7 +13,8 @@ export class Projet
     date_rej!:Date;
     creation_date!:Date;
     personne_id_id!:number;
-    
+    a_vote!:any;
+    bull_vote!:any;
     constructor(data: any)
     {
         this.id=data.id;
@@ -26,5 +27,7 @@ export class Projet
         this.date_rej=data.date_rej;
         this.creation_date=data.creation_date;
         this.personne_id_id=data.personne_id_id;
+        this.a_vote=data.a_vote;
+    this.bull_vote=data.bull_vote;
     }
 }
