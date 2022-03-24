@@ -157,4 +157,17 @@ mat-header-row {
 .pseudo { /* or `:nth-child(n + 4)` */
   order: 1;
   margin-top: -16%;
+  min-width: 142px;
+  margin-left: 5%;
+}
+
+.pseudo1 { /* or `:nth-child(n + 4)` */
+  order: 2;
+  margin-top: -16%
+}
+@media screen and (max-width: 210px) {
+  .pseudo { /* or `:nth-child(n + 4)` */
+    order: 1;
+    margin-top: -47%;
+  }
 }

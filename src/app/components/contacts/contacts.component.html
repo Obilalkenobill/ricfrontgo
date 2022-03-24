@@ -12,8 +12,7 @@
     <small class="text-danger" *ngIf="searchCtl?.hasError('required')"> requis </small>
   </form>
 
-<div class="row">
-  <div class="col-sm-12">
+
       <div class="mat-elevation-z2">
           <mat-table [dataSource]='dataSource' matSort matSortActive="id" matSortDirection="asc"
               matSortDisableClear width="100%">
@@ -27,7 +26,7 @@
               </ng-container>
               <ng-container matColumnDef="actions">
                 <mat-header-cell *matHeaderCellDef  class="invisible" > </mat-header-cell>
-                <mat-cell  *matCellDef="let row">
+                <mat-cell  class="pseudo1" *matCellDef="let row">
                   <div class="btn-group">
 
                     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
@@ -52,6 +51,5 @@
 
           </mat-table>
           <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 15, 20]"></mat-paginator>
-      </div>
-  </div>
 </div>
+
