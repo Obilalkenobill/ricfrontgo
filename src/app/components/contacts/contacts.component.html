@@ -18,32 +18,33 @@
           <mat-table [dataSource]='dataSource' matSort matSortActive="id" matSortDirection="asc"
               matSortDisableClear width="100%">
               <ng-container matColumnDef="nom">
-                  <mat-header-cell style="max-width:115px" *matHeaderCellDef mat-sort-header> Nom </mat-header-cell>
-                  <mat-cell style="max-width:115px" *matCellDef="let row"> {{ row.nom }}</mat-cell>
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Nom </mat-header-cell>
+                  <mat-cell  *matCellDef="let row"> {{ row.nom }}</mat-cell>
               </ng-container>
               <ng-container matColumnDef="prenom">
-                  <mat-header-cell style="max-width:115px" *matHeaderCellDef mat-sort-header> Prenom </mat-header-cell>
-                  <mat-cell style="max-width:115px" *matCellDef="let row"> {{ row.prenom }}</mat-cell>
+                  <mat-header-cell  *matHeaderCellDef mat-sort-header> Prenom </mat-header-cell>
+                  <mat-cell  *matCellDef="let row"> {{ row.prenom }}</mat-cell>
               </ng-container>
-              <ng-container matColumnDef="login">
-                <mat-header-cell style="max-width:115px" *matHeaderCellDef mat-sort-header> Pseudo </mat-header-cell>
-                <mat-cell style="max-width:115px" *matCellDef="let row"> {{ row.login }}</mat-cell>
-            </ng-container>
               <ng-container matColumnDef="actions">
-                  <mat-header-cell style="max-width:45px" *matHeaderCellDef> Actions </mat-header-cell>
-                  <mat-cell style="max-width:45px" *matCellDef="let row">
-                    <div class="btn-group">
+                <mat-header-cell *matHeaderCellDef  class="invisible" > </mat-header-cell>
+                <mat-cell  *matCellDef="let row">
+                  <div class="btn-group">
 
-                      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                        <span class="caret"></span>
-                      </button>
-                      <ul class="dropdown-menu" role="menu">
-                        <li><button class="btn btn-info" ><i class="glyphicon glyphicon-plus"></i></button></li>
-                        <li><button class="btn btn-primary" ><i class="glyphicon glyphicon-minus"></i></button></li>
-                      </ul>
-                    </div>
-                  </mat-cell>
-              </ng-container>
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                      <li><button class="btn btn-info" ><i class="glyphicon glyphicon-plus"></i></button></li>
+                      <li><button class="btn btn-primary" ><i class="glyphicon glyphicon-minus"></i></button></li>
+                    </ul>
+                  </div>
+                </mat-cell>
+            </ng-container>
+
+              <ng-container matColumnDef="login">
+                <mat-header-cell  *matHeaderCellDef mat-sort-header> Pseudo </mat-header-cell>
+                <mat-cell  class="pseudo" *matCellDef="let row" style="width: 125px;"> {{ row.login }}</mat-cell>
+            </ng-container>
 
               <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
               <mat-row *matRowDef="let row; columns: displayedColumns;">

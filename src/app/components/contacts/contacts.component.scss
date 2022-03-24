@@ -87,3 +87,74 @@ flex-direction: column !important;
   display: flex;
   flex-direction: row;
 }
+
+.invisible{
+  display:none;
+}
+
+mat-row, mat-header-row, mat-footer-row {
+  display: block !important;
+}
+ .mat-row{
+  display: flex !important;
+  // border:solid lightgray 2px !important;
+  // border-bottom:solid lightsalmon 2px !important;
+border:solid lightgray 2px !important;
+    box-shadow: 5px 0 5px lightgray, 0 15px 15px -10px lightsalmon;
+    flex-wrap: wrap !important;
+
+ }
+ .btn-block {
+  display: block;
+  width: 100%;
+  margin-right: 0%;
+  margin-top: 3%;
+}
+.copte{
+  display:flex !important;
+  overflow: hidden !important;
+  max-width:100%;
+  height:100px;
+  word-wrap: break-word;
+}
+.invisible{
+  display:none;
+}
+mat-row, mat-footer-row {
+  width: 30%;
+  margin:1.5%;
+  border-radius: 25px;
+}
+mat-table{
+  display:flex;
+  flex-wrap: wrap;
+}
+mat-header-row {
+  min-width: 100%;
+  max-width: 100%;
+}
+@media screen and (max-width: 650px) {
+  mat-row, mat-footer-row {
+    width: 47%;
+  }
+}
+@media screen and (max-width: 450px) {
+  mat-row, mat-footer-row {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 650px) {
+  mat-row, mat-header-row, mat-footer-row {
+    display: flex!important;
+  }
+}
+
+.mat-row::after {
+  content: '';
+  width: 100%;
+}
+.pseudo { /* or `:nth-child(n + 4)` */
+  order: 1;
+  margin-top: -16%;
+}

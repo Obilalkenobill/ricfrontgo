@@ -21,8 +21,8 @@ export class ContactsComponent implements OnInit {
   displayedColumns: string[] = [
   'nom',
   'prenom',
-  'login',
-  'actions'
+  'actions',
+  'login'
   ];
   dataSource!: MatTableDataSource<User>;
   public usersList!: User[];
