@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { Projet } from 'src/app/Models/projet.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { ProjetService } from 'src/app/services/projet.service';
+import {MatPaginatorIntl} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-projet-view',
@@ -33,6 +34,7 @@ export class ProjetViewComponent implements OnInit {
   UserId!:any;
   pageSize!:any;
   pageSizeOptions!:any;
+  itemsPerPageLabel = 'Item par page';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
