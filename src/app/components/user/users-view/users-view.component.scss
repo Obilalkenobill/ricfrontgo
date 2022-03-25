@@ -1,3 +1,22 @@
+mat-header-cell{
+  flex: 1;
+  display:inline-block;
+  background-image: linear-gradient(lightgray,gold) !important;
+border-radius:19px;
+padding-top:10px;
+border:1px solid lightgray !important;
+padding-left:20px;
+color:black;
+border-bottom:1px solid black !important;
+box-shadow: 5px 0 5px lightgray, 0 15px 15px -10px black;
+opacity: 0.7;
+}
+mat-header-row{
+  padding-top:10px;
+  display:inline;
+}
+
+
 td{
   border:solid lightgray 2px;
   border-bottom:solid lightsalmon 2px;
