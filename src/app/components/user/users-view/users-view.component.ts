@@ -8,7 +8,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from 'src/app/services/auth.service';
 import { Role } from 'src/app/Models/role.model';
-
+import {MatPaginatorIntl} from '@angular/material/paginator';
 @Component({
   selector: 'app-users-view',
   templateUrl: './users-view.component.html',
@@ -28,13 +28,16 @@ export class UsersViewComponent implements OnInit {
   public usersList!: User[];
   pageSize!:any;
   pageSizeOptions!:any;
+  itemsPerPageLabel = 'Item par page';
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private userService: UsersService,
     public dialog: MatDialog,
     public snackBar: MatSnackBar,
-    public authService: AuthService) { }
+    public authService: AuthService,private matpag :MatPaginatorIntl ) {
+      matpag.itemsPerPageLabel = 'Items par page';
+    }
 
   ngOnInit(): void {
     this.refresh();
