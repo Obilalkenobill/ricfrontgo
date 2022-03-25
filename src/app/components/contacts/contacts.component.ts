@@ -9,6 +9,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import {MatPaginatorIntl} from '@angular/material/paginator';
 @Component({
   selector: 'app-contacts',
   templateUrl: './contacts.component.html',
@@ -33,8 +34,9 @@ export class ContactsComponent implements OnInit {
   constructor(private userService: UsersService,
     public dialog: MatDialog,
     public snackBar: MatSnackBar,
-    public authService: AuthService,private formBuilder: FormBuilder,private jwt: JwtHelperService) {
+    public authService: AuthService,private formBuilder: FormBuilder,private jwt: JwtHelperService,private matpag :MatPaginatorIntl) {
       this.initForm();
+      matpag.itemsPerPageLabel = 'Items par page';
      }
   ngOnInit(): void {
     this.refresh();
