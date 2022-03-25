@@ -1,3 +1,11 @@
+mat-header-cell{
+  flex: 1;
+  display:inline-block;
+}
+mat-header-row{
+  display:inline;
+}
+
 td{
     border:solid lightgray 2px !important;
     border-bottom:solid lightsalmon 2px !important;
