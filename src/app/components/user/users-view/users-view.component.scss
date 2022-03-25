@@ -89,7 +89,9 @@ background-image: linear-gradient(lightgray,white) !important;
   border:solid lightgray 2px !important;
   box-shadow: 5px 0 5px lightgray, 0 15px 15px -10px lightsalmon;
  }
-
+.invisible{
+  display:none;
+}
 .copte{
   display:flex !important;
   overflow: hidden !important;
