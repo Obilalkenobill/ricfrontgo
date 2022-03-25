@@ -40,7 +40,7 @@ export class ProjetViewComponent implements OnInit {
   constructor(private projetService: ProjetService,
     public dialog: MatDialog,
     public snackBar: MatSnackBar,
-    private authService: AuthService,private router: Router) { }
+    private authService: AuthService,private router: Router,private matpag :MatPaginatorIntl) {  matpag.itemsPerPageLabel = 'Items par page'; }
 
   ngOnInit(): void {
     this.UserId=this.authService.getCurrentUser()?.id;
