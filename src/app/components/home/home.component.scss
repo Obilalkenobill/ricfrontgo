@@ -45,7 +45,9 @@
   border-radius:25px;
   opacity:0.85;
 }
-
+.block{
+  display:inline-block;
+}
 @media screen and (max-width: 750px) {
   .brMedia{
 display:block  ;
