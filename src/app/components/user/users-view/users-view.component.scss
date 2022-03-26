@@ -15,7 +15,9 @@ mat-header-row{
   padding-top:10px;
   display:inline;
 }
-
+.invisible{
+  display:none;
+}
 
 td{
   border:solid lightgray 2px;
@@ -85,13 +87,10 @@ background-image: linear-gradient(lightgray,white) !important;
   display: block !important;
 }
  .mat-row{
-  display: list-item !important;
   border:solid lightgray 2px !important;
   box-shadow: 5px 0 5px lightgray, 0 15px 15px -10px lightsalmon;
  }
-.invisible{
-  display:none;
-}
+
 .copte{
   display:flex !important;
   overflow: hidden !important;
@@ -122,9 +121,4 @@ mat-header-row {
   }
 }
 
-@media screen and (min-width: 650px) {
-  mat-row, mat-header-row, mat-footer-row {
-    display: flex!important;
-  }
-}
 
