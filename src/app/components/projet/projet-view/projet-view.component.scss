@@ -138,8 +138,3 @@ mat-header-row {
   }
 }
 
-@media screen and (min-width: 650px) {
-  mat-row, mat-header-row, mat-footer-row {
-    display: flex!important;
-  }
-}
