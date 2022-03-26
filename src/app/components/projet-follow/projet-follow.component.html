@@ -1,6 +1,6 @@
 <button class="btn grey" (click)=redirectCreateProjet()> Émettre un Projet </button>
 <button class="btn orange" [routerLink]='["/own-projet"]'> <i class="glyphicon glyphicon-user"></i> </button>
-<button class="btn jaune" [routerLink]='["/projets-follow"]'><i class="glyphicon glyphicon-eye-open"></i><i class="glyphicon glyphicon-eye-open"></i></button>
+<button class="btn jaune" [routerLink]='["/projets-follow"]'><i class="glyphicon glyphicon-eye-open"></i>;&nbsp;<i class="glyphicon glyphicon-eye-open"></i></button>
 
             <mat-table class="lessons-table mat-elevation-z8" (window:resize)="onResize($event)" [dataSource]='dataSource' matSort matSortActive="id" matSortDirection="asc"
                 matSortDisableClear>
