@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  ghibli:string="../../../assets/img/istockphoto-476679667-170667a.jpg";
+  ghibli:string="../../../assets/img/justice.jpg";
   constructor() { }
 
   ngOnInit(): void {
