@@ -5,16 +5,17 @@ mat-header-cell{
 border-radius:19px;
 padding-top:10px;
 border:1px solid lightgray !important;
-padding-left:5px;
+padding-left:20px;
 color:black;
 border-bottom:1px solid black !important;
 box-shadow: 5px 0 5px lightgray, 0 15px 15px -10px black;
-opacity: 0.6 !important;
+opacity: 0.7;
 }
 mat-header-row{
   padding-top:10px;
   display:inline;
 }
+
 
 td{
     border:solid lightgray 2px !important;
@@ -76,9 +77,6 @@ table{
   flex-direction: column !important;
 }
 
-.mat-header-cell{
-
- }
  mat-row, mat-header-row, mat-footer-row {
   display: block !important;
 }
@@ -95,6 +93,7 @@ border:solid lightgray 2px !important;
   width: 114%;
   margin-right: -14% !important;
   margin-top: 3%;
+
 }
 .copte{
   display:flex !important;
