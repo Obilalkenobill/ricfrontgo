@@ -17,10 +17,11 @@
     font-size:2rem;
     padding-top:2%;
 
+
 // left: 0;
 }
 .glyphicon-ok{
-  color:#E4E4E4;
+  color: gold;
 }
 .glyphicon-ok:hover{
   cursor : pointer;
@@ -35,6 +36,8 @@ i{
     color:white;
     height:100%;
     width:100%;
+    border-right: 3px solid gold;
+    padding-right:2%;
 }
 .center_div{
     margin-bottom: 10%;
@@ -108,7 +111,6 @@ margin-left:5%;
   li:not(:first-child):not(:last-child) {
 
 }
-
 .nav{
   width: 88% !important;
 }
