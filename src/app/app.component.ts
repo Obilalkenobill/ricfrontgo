@@ -4,30 +4,32 @@ import { User } from './Models/userLogin.model';
 import { AdminGuard, is_verifiedGuard } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
 
+
+
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  userCurr:any
+  userCurr:any;
   userCurrId:any;
   title = 'ric';
+//customize item per page label
+
   constructor(private authService: AuthService, private router: Router, private adminAuth: AdminGuard, private Is_verified: is_verifiedGuard)
   {
   }
 ngOnInit(): void {
-  
-  
+
+
 }
 public userId()
 {
-  this.userCurr=this.authService.getCurrentUser();
-  
-  if(this.userCurr !=undefined){
-    this.userCurrId=this.userCurr.id; 
-  }
-  this.router.navigate(['/img-validate/'+this.userCurrId])
+
+  this.router.navigate(['/img-validate/'])
 }
 
   public checkAuth()

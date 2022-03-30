@@ -67,6 +67,7 @@ import { MatCommentEditComponent } from './components/projet/comment-edit/commen
 import { CharteComponent } from './components/charte/charte.component';
 import { EncrDecrService } from './services/EncrDecrSevice';
 import { ContactsComponent } from './components/contacts/contacts.component';
+import { InvitationsComponent } from './components/invitations/invitations.component';
 
 
 
@@ -94,7 +95,8 @@ export function tokenGetter(){
         ProjetFollowComponent,
         MatCommentEditComponent,
         CharteComponent,
-        ContactsComponent
+        ContactsComponent,
+        InvitationsComponent
     ],
     imports: [
         BrowserModule,
