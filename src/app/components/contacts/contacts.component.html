@@ -1,5 +1,5 @@
-<button class="btn grey" ><i class="glyphicon glyphicon-user"></i><i class="glyphicon glyphicon-user"></i></button>
-<button class="btn orange"> <i class="glyphicon glyphicon-envelope"></i></button>
+<button class="btn grey" [routerLink]='["/invitations"]'><i class="glyphicon glyphicon-hourglass"></i><i class="glyphicon glyphicon-user"></i><i class="glyphicon glyphicon-user"></i></button>
+<button class="btn orange" > <i class="glyphicon glyphicon-user"></i><i class="glyphicon glyphicon-envelope"></i></button>
 <br>
 
   <form (ngSubmit)="onSubmit()" [formGroup]="searchForm">
@@ -27,14 +27,16 @@
               <ng-container matColumnDef="actions">
                 <mat-header-cell *matHeaderCellDef  class="invisible" > </mat-header-cell>
                 <mat-cell  class="pseudo1" *matCellDef="let row">
-                  <div class="btn-group">
+                  <div *ngIf="row.id != UserId"  class="btn-group">
 
                     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                       <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                      <li><button class="btn btn-info" ><i class="glyphicon glyphicon-plus"></i></button></li>
-                      <li><button class="btn btn-primary" ><i class="glyphicon glyphicon-minus"></i></button></li>
+                      <li *ngIf="row.accept_personne1==1 && row.accept_personne2==0"><button class="btn btn-info" ><i class="glyphicon glyphicon-hourglass"></i></button></li>
+                      <li *ngIf="row.accept_personne1==1 && row.accept_personne2==0"><button class="btn btn-primary" ><i class="glyphicon glyphicon-minus"></i></button></li>
+                      <li *ngIf="row.accept_personne1==0 && row.accept_personne2==1"><button class="btn btn-info" ><i (click)="ajouter_contact(row.id)" class="glyphicon glyphicon-plus"></i></button></li>
+                      <li *ngIf="row.accept_personne1==undefined && row.accept_personne2==undefined"><button class="btn btn-info" ><i (click)="ajouter_contact(row.id)" class="glyphicon glyphicon-plus"></i></button></li>
                     </ul>
                   </div>
                 </mat-cell>

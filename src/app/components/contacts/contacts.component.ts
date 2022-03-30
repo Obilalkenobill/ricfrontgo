@@ -39,12 +39,15 @@ export class ContactsComponent implements OnInit {
       matpag.itemsPerPageLabel = 'Items par page';
      }
   ngOnInit(): void {
-    this.refresh();
+    let token=sessionStorage.getItem('id_token');
+    if (typeof token == 'string') {this.UserId=this.jwt.decodeToken(token).id;}
+    this.reload();
   }
-  refresh()
+  reload()
   {
-    this.userService.getAll().subscribe(users =>
+    this.userService.getAllbis(this.UserId).subscribe(users =>
     {
+
       this.usersList = users;
       this.updateDataSource();
     });
@@ -72,11 +75,20 @@ export class ContactsComponent implements OnInit {
   onSubmit()
   {
     const formVal = this.searchForm.value;
-    console.log('ok');
-    console.log(formVal.search);
+
+
 
       // this.searchService.searchContact(formVal.search).subscribe(m => {
       //   this.router.navigate(['/projets-view'])
       // });
   }
+  ajouter_contact(UserId2:any){
+    this.userService.addContact(this.UserId,UserId2).subscribe(m=>{
+
+      this.reload();
+      //window.location.reload();
+    });
 }
+}
+
+
