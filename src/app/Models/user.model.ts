@@ -25,7 +25,8 @@ export class User
     username: string;
     password: string;
     salt:string;
-
+    accept_personne1:any;
+    accept_personne2:any;
     constructor(data: any)
     {
         this.salt=data.salt;
@@ -53,7 +54,8 @@ export class User
         if (data.role_pers) {data.role_pers.forEach((element: any) => {
             this.role_pers.push(element.role_id);
         });
-        
     }
+    this.accept_personne1=data.accept_personne1;
+    this.accept_personne2=data.accept_personne2;
     }
 }
