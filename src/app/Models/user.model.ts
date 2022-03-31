@@ -27,6 +27,8 @@ export class User
     salt:string;
     accept_personne1:any;
     accept_personne2:any;
+    personne1_id_id:any;//il s'agit ici de voir si l'user est ami ou non avec lui
+    personne2_id_id:any;// idem
     constructor(data: any)
     {
         this.salt=data.salt;
@@ -57,5 +59,7 @@ export class User
     }
     this.accept_personne1=data.accept_personne1;
     this.accept_personne2=data.accept_personne2;
+    this.personne1_id_id=data.personne1_id_id;
+    this.personne2_id_id=data.personne2_id_id;
     }
 }
