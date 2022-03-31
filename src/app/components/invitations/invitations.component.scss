@@ -184,6 +184,18 @@ mat-header-row {
   min-width: 142px;
   margin-left: 5%;
 }
+.goldblack {
+  color:gold;
+  background-color:black;
+}
+.goldblack1 {
+  color:gold;
+  background-color:black;
+}
+.goldblack1:hover{
+  border:2px solid gold;
+  background-color:black;
+  }
 .invisible{
   display:none;
   max-width: 0px !important;
