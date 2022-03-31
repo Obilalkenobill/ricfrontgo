@@ -88,6 +88,34 @@ export class ContactsComponent implements OnInit {
       this.reload();
       //window.location.reload();
     });
+  }
+    ajouter_contact2(UserId1:any,UserId2:any){
+      this.userService.ajouter_contact2(UserId1,UserId2).subscribe(m=>{
+
+        this.reload();
+        //window.location.reload();
+      });
+}
+
+annuler_invit(UserId1:any,UserId2:any){
+  this.userService.annuler_invit(UserId1,UserId2).subscribe(m=>{
+
+    this.reload();
+    //window.location.reload();
+  });
+}
+accepter_invit(UserId1:any,UserId2:any){
+this.userService.accepter_invit(UserId1,UserId2).subscribe(m=>{
+
+  this.reload();
+  //window.location.reload();
+});
+}  refuser_invit(UserId1:any,UserId2:any){
+this.userService.refuser_invit(UserId1,UserId2).subscribe(m=>{
+
+  this.reload();
+  //window.location.reload();
+});
 }
 }
 
