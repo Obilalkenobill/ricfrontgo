@@ -53,6 +53,50 @@ public addContact(UserId1:any,UserId2:any){
       })
   );
 }
+public accepter_invit(UserId1:any,UserId2:any){
+  return this.server.put('personne/invitation/accepter/'+UserId1+'/'+UserId2).pipe(
+
+    map(res => {return []}),
+    catchError(err =>
+      {
+
+        return [];
+      })
+  );
+}
+public ajouter_contact2(UserId1:any,UserId2:any){
+  return this.server.put('personne/invitation2/'+UserId1+'/'+UserId2).pipe(
+
+    map(res => {return []}),
+    catchError(err =>
+      {
+
+        return [];
+      })
+  );
+}
+public refuser_invit(UserId1:any,UserId2:any){
+  return this.server.put('personne/invitation/refuser/'+UserId1+'/'+UserId2).pipe(
+
+    map(res => {return []}),
+    catchError(err =>
+      {
+
+        return [];
+      })
+  );
+}
+public annuler_invit(UserId1:any,UserId2:any){
+  return this.server.put('personne/invitation/annuler/'+UserId1+'/'+UserId2).pipe(
+
+    map(res => {return []}),
+    catchError(err =>
+      {
+
+        return [];
+      })
+  );
+}
   public getInvitation(UserId:any): Observable<User[]>
   {
     return this.server.get<User[]>('personne/invitation/'+UserId).pipe(
