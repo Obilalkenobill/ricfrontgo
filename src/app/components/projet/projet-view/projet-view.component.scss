@@ -86,13 +86,13 @@ table{
 border:solid lightgray 2px !important;
     box-shadow: 5px 0 5px lightgray, 0 15px 15px -10px lightgrey;
  }
-.border_red{
-  box-shadow:  10px 0 10px rgba(204, 23, 23,0.5) !important;
+.border_red:hover{
+  box-shadow: 10px 0 10px rgba(184, 54, 54, 0.587)!important;
 }
-.border_null{
+.border_null:hover{
   box-shadow: 10px 0 10px rgba(89, 87, 100,0.5)!important;
 }
-.border_green{
+.border_green:hover{
   box-shadow: 10px 0 10px rgba(11, 104, 16,0.5) !important;
 }
 
