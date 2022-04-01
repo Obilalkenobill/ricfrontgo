@@ -88,13 +88,13 @@ display: block !important;
   border:solid lightgray 2px !important;
       box-shadow: 5px 0 5px lightgray, 0 15px 15px -10px lightgrey;
    }
-   .border_red{
-    box-shadow:  10px 0 10px rgba(204, 23, 23,0.5) !important;
+   .border_red:hover{
+    box-shadow: 10px 0 10px rgba(184, 54, 54, 0.587)!important;
   }
-  .border_null{
+  .border_null:hover{
     box-shadow: 10px 0 10px rgba(89, 87, 100,0.5)!important;
   }
-  .border_green{
+  .border_green:hover{
     box-shadow: 10px 0 10px rgba(11, 104, 16,0.5) !important;
   }
 .btn-block {
@@ -140,14 +140,17 @@ mat-header-row {
 min-width: 100%;
 max-width: 100%;
 }
-.border_red:hover{
-  box-shadow: 10px 0 10px rgba(184, 54, 54, 0.587)!important;
+.border_vote_pour{
+  border: 1px solid #228b22;
+  border-radius: 15px;
 }
-.border_null:hover{
-  box-shadow: 10px 0 10px rgba(89, 87, 100,0.5)!important;
+.border_vote_contre{
+  border: 1px solid #f50000;
+  border-radius: 15px;
 }
-.border_green:hover{
-  box-shadow: 10px 0 10px rgba(11, 104, 16,0.5) !important;
+.border_vote_null{
+  border: 1px solid #353839;
+  border-radius: 15px;
 }
 @media screen and (max-width: 650px) {
 mat-row, mat-footer-row {
