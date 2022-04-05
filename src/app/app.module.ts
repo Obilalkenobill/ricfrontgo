@@ -68,7 +68,7 @@ import { CharteComponent } from './components/charte/charte.component';
 import { EncrDecrService } from './services/EncrDecrSevice';
 import { ContactsComponent } from './components/contacts/contacts.component';
 import { InvitationsComponent } from './components/invitations/invitations.component';
-
+import { AmiMessageComponent } from './components/ami-message/ami-message.component';
 
 
 export function tokenGetter(){
@@ -96,7 +96,8 @@ export function tokenGetter(){
         MatCommentEditComponent,
         CharteComponent,
         ContactsComponent,
-        InvitationsComponent
+        InvitationsComponent,
+        AmiMessageComponent
     ],
     imports: [
         BrowserModule,
