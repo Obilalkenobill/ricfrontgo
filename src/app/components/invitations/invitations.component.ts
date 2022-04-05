@@ -90,25 +90,19 @@ export class InvitationsComponent implements OnInit {
       // });
   }
 
-  annuler_invit(UserId1:any,UserId2:any){
-    this.userService.annuler_invit(UserId1,UserId2).subscribe(m=>{
-
-      this.refresh();
-      //window.location.reload();
-    });
-}
 accepter_invit(UserId1:any,UserId2:any){
   this.userService.accepter_invit(UserId1,UserId2).subscribe(m=>{
 
     this.refresh();
     //window.location.reload();
   });
-}  refuser_invit(UserId1:any,UserId2:any){
-  this.userService.refuser_invit(UserId1,UserId2).subscribe(m=>{
+}
+retirer_ami(UserId1:any,UserId2:any){
+  this.userService.retirer_ami(UserId1,UserId2).subscribe(m=>{
 
     this.refresh();
     //window.location.reload();
   });
-}
+  }
 }
 
