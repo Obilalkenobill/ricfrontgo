@@ -18,7 +18,7 @@ import { UsersViewComponent } from './components/user/users-view/users-view.comp
 import { ValidateComponent } from './components/user/validate/validate.component';
 import { ContactsComponent } from './components/contacts/contacts.component';
 import { InvitationsComponent } from './components/invitations/invitations.component';
-
+import { AmiMessageComponent } from './components/ami-message/ami-message.component';
 import { AuthGuard,AdminGuard } from './services/auth-guard.service';
 
 
@@ -40,6 +40,7 @@ const routes: Routes = [
   { path: 'own-projet',canActivate: [AuthGuard], component: OwnProjectComponent},
   { path: 'contacts',canActivate: [AuthGuard], component: ContactsComponent},
   { path: 'invitations',canActivate: [AuthGuard], component: InvitationsComponent},
+  { path: 'ami-message',canActivate: [AuthGuard], component: AmiMessageComponent},
   { path: 'not-found', component: FourhofourComponent },
   { path: 'charte', component: CharteComponent},
   { path: '**', redirectTo: 'not-found' }
