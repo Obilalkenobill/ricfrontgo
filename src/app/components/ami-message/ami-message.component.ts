@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import {MatPaginatorIntl} from '@angular/material/paginator';
+import { Groupe } from 'src/app/Models/group.model';
 
 @Component({
   selector: 'app-ami-message',
@@ -19,7 +20,10 @@ import {MatPaginatorIntl} from '@angular/material/paginator';
 export class AmiMessageComponent implements OnInit {
   searchCtl!: FormControl;
   searchForm!: FormGroup;
+  groupeCtl!: FormControl;
+  groupeForm!: FormGroup;
   UserId!:any;
+  ListGroups!:Groupe[];
   displayedColumns: string[] = [
   'nom',
   'prenom',
@@ -27,6 +31,12 @@ export class AmiMessageComponent implements OnInit {
   'login'
   ];
   dataSource!: MatTableDataSource<User>;
+  formData:FormData=new FormData();;
+  formArray:number[]=[];
+  k:any=0;
+  element_group:number[]=[];
+  group_pers:[]=[];
+  public groupsList:any=[] ;
   public usersList!: User[];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -36,6 +46,7 @@ export class AmiMessageComponent implements OnInit {
     public dialog: MatDialog,
     public snackBar: MatSnackBar,
     public authService: AuthService,private formBuilder: FormBuilder,private jwt: JwtHelperService,private matpag :MatPaginatorIntl) {
+      this.initFormGroupe()
       this.initForm();
       matpag.itemsPerPageLabel = 'Items par page';
      }
@@ -52,9 +63,38 @@ export class AmiMessageComponent implements OnInit {
       this.usersList = users;
       this.updateDataSource();
     });
+
+//     this.userService.getGroupMessage(this.UserId).subscribe((users:any) =>    {
+
+//       this.groupsList =users;
+//       const groupBy = <T, K extends keyof any>(list: T[], getKey: (item: T) => K) =>
+//   list.reduce((previous, currentItem) => {
+//     const group = getKey(currentItem);
+//     if (!previous[group]) previous[group] = [];
+//     previous[group].push(currentItem);
+//     return previous;
+//   }, {} as Record<K, T[]>);
+
+//     this.groupsList = groupBy(this.groupsList, (i:any) => i.group_group_id_id);
+//     this.groupsList= Object.entries(this.groupsList);
+// })
+
+this.userService.getGroupMessage(this.UserId).subscribe(groups =>    {
+  console.log(groups);
+ this.ListGroups=groups;
+})
+
+}
+
+initFormGroupe(): void
+  {
+
+    this.groupeCtl = this.formBuilder.control('', [Validators.required,Validators.minLength(7),Validators.maxLength(78),Validators.pattern('^[A-Za-z0-9_-]+$')]);
+
+    this.groupeForm = this.formBuilder.group({
+      name: this.groupeCtl
+    });
   }
-
-
   updateDataSource()
   {
     this.dataSource = new MatTableDataSource(this.usersList);
@@ -83,19 +123,46 @@ export class AmiMessageComponent implements OnInit {
       //   this.router.navigate(['/projets-view'])
       // });
   }
+  retirer_ami(UserId1:any,UserId2:any){
+    this.userService.retirer_ami(UserId1,UserId2).subscribe(m=>{
 
-accepter_invit(UserId1:any,UserId2:any){
-  this.userService.accepter_invit(UserId1,UserId2).subscribe(m=>{
+      this.refresh();
+      //window.location.reload();
+    });
+    }
 
-    this.refresh();
-    //window.location.reload();
-  });
+ajouter_group(ROWID:number){
+  this.formArray.push(ROWID);
+
 }
-retirer_ami(UserId1:any,UserId2:any){
-  this.userService.retirer_ami(UserId1,UserId2).subscribe(m=>{
+createGroup(){
 
-    this.refresh();
-    //window.location.reload();
-  });
+for (var key in this.formArray) {
+  this.formData.append(key.toString(),this.formArray[key].toString());
+  this.k=key;
+};
+this.k++;
+
+
+this.formData.append(this.k,this.UserId);
+
+const formVal = this.groupeForm.value;
+
+let newGroup = new Groupe(formVal);
+console.log(newGroup.name.toString());
+let groupe_name= newGroup.name.toString();
+this.userService.createGroup(this.formData,groupe_name).subscribe(m => {this.refresh();});
+
+}
+
+retirer_group(ROWID:number){
+  const index = this.formArray.indexOf(ROWID, 0);
+  if (index > -1) {
+     this.formArray.splice(index, 1);
   }
+}
+
+messageTo(group_id:any){
+console.log(group_id);
+}
 }

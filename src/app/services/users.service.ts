@@ -3,6 +3,7 @@ import { ServerService } from './server.service';
 import { User } from '../Models/user.model';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+import { Groupe } from '../Models/group.model';
 
 @Injectable({
   providedIn: 'root'
@@ -108,6 +109,19 @@ public retirer_ami(UserId1:any,UserId2:any){
     ));
   }
 
+  public getGroupMessage(UserId:any):Observable<Groupe[]>{
+    return this.server.get<Groupe[]>('personne/group/'+UserId).pipe(
+      map(res =>{
+        console.log(res);
+        return res[0].map((m: any) => new Groupe(m));
+      },
+      catchError(err =>
+        {
+          return [];
+        })
+    ));
+  }
+
   public getOneByID(id: any): Observable<User | null>
   {
     return this.server.get<User>('users/id/'+ id).pipe(
@@ -166,6 +180,19 @@ public retirer_ami(UserId1:any,UserId2:any){
         })
     );
   }
+
+  public createGroup(data: any,param: any):  Observable<User[]>
+  {
+    return this.server.postbis<any>('personne/creategroup/'+param, data).pipe(
+      map(res => res),
+      catchError(err =>
+        {
+
+          return [];
+        })
+    );
+  }
+
 
   public updateUser(user: User): Observable<User | null>
   {

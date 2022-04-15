@@ -206,5 +206,28 @@ mat-header-row {
     margin-top: -47%;
   }
 }
+.border_group {
+  border:solid lightgray 2px !important;
+  box-shadow: 5px 0 5px lightgray, 0 15px 15px -10px lightsalmon;
+  border-radius: 17px;
+}
 
+.border_group:hover {
+  border:solid lightgray 2px !important;
+  box-shadow: 5px 0 5px lightgray, 0 15px 15px -10px lightsalmon;
+  border-radius: 17px;
+  background-color: gold;
+  cursor : pointer;
+}
+.flex_arr{
+  flex: 1;
+  display:inline-block;
+ ;}
+ .flex_arr0{
+  flex: 1;
+  display:inline-block;
+ }
 
+ .group_nom{
+display:table-cell !important;
+ }

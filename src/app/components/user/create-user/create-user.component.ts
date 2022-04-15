@@ -42,8 +42,8 @@ export class CreateUserComponent implements OnInit {
     this.prenomCtl = this.formBuilder.control('', [Validators.required]);
     this.nnCtl = this.formBuilder.control('', [Validators.required,Validators.minLength(11),Validators.maxLength(11)],[this.NNAlreadyUsed()]);
     this.nn_confirmCtl = this.formBuilder.control('', [Validators.required,this.checkNN()]);
-    
-    this.usernameCtl = this.formBuilder.control('', [Validators.required], [this.usernameExist()]);
+
+    this.usernameCtl = this.formBuilder.control('', [Validators.required,Validators.maxLength(17)], [this.usernameExist()]);
       this.emailCtl = this.formBuilder.control('', [Validators.required, Validators.email],[this.emailAlreadyUsed()] );
     this.passwordCtl = this.formBuilder.control('', [Validators.required]);
     this.confirm_passwordCtl=this.formBuilder.control('',[Validators.required, this.checkPassword()])
@@ -151,7 +151,7 @@ export class CreateUserComponent implements OnInit {
       formVal.id = 0;
       const newUser = new User(formVal);
       this.userComServ.addUser(newUser).subscribe(m => {});
-confirm("Veuillez vérifier votre compte en ajoutant votre photo de vérification et le recto/verso de votre carte d'identité");
+      confirm("Veuillez vérifier votre compte en ajoutant votre photo de vérification et le recto/verso de votre carte d'identité");
     this.router.navigate(['/auth']);
   }
 }

@@ -41,8 +41,8 @@ userCurrId:any;
     const formData = new FormData();
 
     formData.append("filephotoverif",file);
-     formData.append("UserId",this.UserId);
-    this.userService.validateUser(formData).subscribe(m => { this.onUploadRefresh();});
+    formData.append("UserId",this.UserId);
+    this.userService.validateUser(formData).subscribe(m => {this.onUploadRefresh();});
 
     //window.location.reload();
   }
@@ -51,7 +51,7 @@ userCurrId:any;
     const formData = new FormData();
 
     formData.append("filerectocarteid",file);
-     formData.append("UserId",this.UserId);
+    formData.append("UserId",this.UserId);
     this.userService.validateUser(formData).subscribe(m => {this.onUploadRefresh();});
 
     //window.location.reload();
@@ -61,20 +61,19 @@ userCurrId:any;
     const formData = new FormData();
 
     formData.append("fileversocarteid",file);
-     formData.append("UserId",this.UserId);
+    formData.append("UserId",this.UserId);
     this.userService.validateUser(formData).subscribe(m => {this.onUploadRefresh();});
 
     //window.location.reload();
   }
 
 onUploadRefresh(){
-  if(this.route.snapshot.params["id"])
-  {
+
     this.userService.getOneByID(this.UserId).subscribe(m =>
       {
         if(m)
         {
-       this.user = m;
+          this.user = m;
           this.imgURLPhotoVerif=this.sanitizer.bypassSecurityTrustUrl("data:"+this.user.mimeTypephotoverif+";base64,"+this.user.photoverif);
           this.imgURLRectoCarte=this.sanitizer.bypassSecurityTrustUrl("data:"+this.user.mimeTyperectocarteid+";base64,"+this.user.rectocarteid);
           this.imgURLVersoCarte=this.sanitizer.bypassSecurityTrustUrl("data:"+this.user.mimeTypeversocarteid+";base64,"+this.user.versocarteid);
@@ -84,4 +83,4 @@ onUploadRefresh(){
 }
 
 }
-}
+

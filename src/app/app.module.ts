@@ -71,6 +71,7 @@ import { InvitationsComponent } from './components/invitations/invitations.compo
 import { AmiMessageComponent } from './components/ami-message/ami-message.component';
 
 
+
 export function tokenGetter(){
   return sessionStorage.getItem('id_token');
 }
@@ -124,7 +125,7 @@ export function tokenGetter(){
         JwtModule.forRoot({
             config: {
                 tokenGetter: tokenGetter,
-                allowedDomains: ["https://gestion2vote.herokuapp.com/"]
+                allowedDomains: ["localhost:8000"]
             }
         })
     ],

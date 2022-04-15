@@ -36,16 +36,21 @@ export class AuthComponent implements OnInit {
   {
     const formVal = this.userForm.value;
     const newUser = new User(formVal);
-    this.server.login(newUser).subscribe(m =>
+    this.server.login(newUser).subscribe((m) =>
       {
         if(m==401)
-        {alert("Mot de passe ou Email incorrect");} 
-        if(m===true)
-        {
+{alert("Mot de passe ou Email incorrect");}
+
+
+          if(m===true)
+          {
           this.authserv.isLoggedIn=m;
-        this.router.navigate(['/contacts']);
-         }
-      });
+          this.router.navigate(['/projets-view']);
+          }
+          },
+          (error) =>{
+        }
+      );
   }
 }
 

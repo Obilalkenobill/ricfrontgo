@@ -27,8 +27,8 @@
         Nombre de vote pour : {{projet.nbr_vote_pour}}
       </div>
       <button *ngIf="is_Admin() || is_current_User()" type="button" class="btn btn-warning" (click)="deleteProj(projet.id)"><i class="glyphicon glyphicon-trash"></i></button>
-      <button *ngIf="!user_follow" type="button" class="btn btn-info" (click)="follow(projet.id,userID_Curr)"><i class="glyphicon glyphicon-eye-open"></i><i class="glyphicon glyphicon-eye-open"></i></button>
-      <button *ngIf="user_follow" type="button" class="btn btn-info" (click)="unfollow(projet.id,userID_Curr)"><i class="glyphicon glyphicon-eye-close"></i><i class="glyphicon glyphicon-eye-close"></i></button>
+      <button *ngIf="!user_follow" type="button" class="btn btn-info" (click)="follow(projet.id,userID_Curr)"><i class="glyphicon glyphicon-eye-open"></i></button>
+      <button *ngIf="user_follow" type="button" class="btn btn-info" (click)="unfollow(projet.id,userID_Curr)"><i class="glyphicon glyphicon-eye-close"></i></button>
 
         <div class="coment-bottom bg-white p-2 px-4">
           <div class="d-flex flex-row add-comment-section mt-4 mb-4">

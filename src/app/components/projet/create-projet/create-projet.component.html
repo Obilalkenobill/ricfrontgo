@@ -14,19 +14,19 @@
                 <input type="text" id="titre" class="form-control" placeholder="titre" [formControl]="titreCtl">
                 <small class="text-danger" *ngIf="titreCtl.hasError('required')"> requis </small>
                 <small class="text-danger" *ngIf="titreCtl.hasError('minlength')">
-                  La longueur minimum est de {{ titreCtl.errors?.minlength.requiredLength }} </small>
+                  La longueur minimum du titre est de {{ titreCtl.errors?.minlength.requiredLength }} </small>
                   <small class="text-danger" *ngIf="titreCtl.hasError('maxlength')">
-                    La longueur maximum est de {{ titreCtl.errors?.maxlength.requiredLength }} </small>
+                  La longueur maximum du titre est de {{ titreCtl.errors?.maxlength.requiredLength }} </small>
               </div>
             <div class="form-outline">
                 <label for="descriptif" class="form-label" for="textAreaExample">Message</label>
                 <textarea class="form-control" id="descriptif" rows="10" [formControl]="descriptifCtl"></textarea>
                 <small class="text-danger" *ngIf="descriptifCtl.hasError('required')"> requis </small>
-                  <small class="text-danger" *ngIf="descriptifCtl.hasError('minlength')">
-                  La longueur minimum est de {{ descriptifCtl.errors?.minlength.requiredLength }} </small>
+                <small class="text-danger" *ngIf="descriptifCtl.hasError('minlength')">
+                  La longueur minimum du descriptif est de {{ descriptifCtl.errors?.minlength.requiredLength }} </small>
                   <small class="text-danger" *ngIf="descriptifCtl.hasError('maxlength')">
-                    La longueur maximum est de {{ descriptifCtl.errors?.maxlength.requiredLength }} </small>
-            </div>
+                    La longueur maximum du descriptif est de {{ descriptifCtl.errors?.maxlength.requiredLength }} </small>
+              </div>
             <button class="btn btn-primary" type="submit" [disabled]="projetForm.invalid"> Enregistrer le projet</button>
         </form>
     </div>

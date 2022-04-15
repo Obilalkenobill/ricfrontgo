@@ -142,15 +142,15 @@ max-width: 100%;
 }
 .border_vote_pour{
   border: 1px solid #228b22;
+  border-radius: 15px;
 }
 .border_vote_contre{
   border: 1px solid #f50000;
+  border-radius: 15px;
 }
 .border_vote_null{
   border: 1px solid #353839;
-}
-.alert-secondary,.alert-danger,.alert-success{
-  border-radius: 5px;
+  border-radius: 15px;
 }
 @media screen and (max-width: 650px) {
 mat-row, mat-footer-row {
