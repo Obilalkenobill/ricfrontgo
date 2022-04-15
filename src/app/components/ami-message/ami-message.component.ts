@@ -80,7 +80,6 @@ export class AmiMessageComponent implements OnInit {
 // })
 
 this.userService.getGroupMessage(this.UserId).subscribe(groups =>    {
-  console.log(groups);
  this.ListGroups=groups;
 })
 
@@ -149,7 +148,7 @@ this.formData.append(this.k,this.UserId);
 const formVal = this.groupeForm.value;
 
 let newGroup = new Groupe(formVal);
-console.log(newGroup.name.toString());
+
 let groupe_name= newGroup.name.toString();
 this.userService.createGroup(this.formData,groupe_name).subscribe(m => {this.refresh();});
 
@@ -163,6 +162,6 @@ retirer_group(ROWID:number){
 }
 
 messageTo(group_id:any){
-console.log(group_id);
+
 }
 }
