@@ -144,9 +144,7 @@ if (typeof token === 'string'){
     // Si le token n'existe pas ou s'il est expiré ...
     if (!token || this.jwt.isTokenExpired(token)) {
       let user = JSON.parse(sessionStorage.getItem('user') || '');
-      console.log(user);
       user.password = this.EncrDecr.get('!4379^D&JWBfbve;}iqJ5^9H7',user.password);
-      console.log(user);
       const headers = new HttpHeaders()
       .set('content-type', 'application/json').set('Access-Control-Allow-Origin','*').set('Access-Control-Allow-Headers','*').set('Access-Control-Allow-Methods', '*');
       return this.http.post<any>(this.BASE_URL + 'login_check', user, {'headers':headers}).pipe(
