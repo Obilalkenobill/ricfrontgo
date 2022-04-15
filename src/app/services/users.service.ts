@@ -112,8 +112,7 @@ public retirer_ami(UserId1:any,UserId2:any){
   public getGroupMessage(UserId:any):Observable<Groupe[]>{
     return this.server.get<Groupe[]>('personne/group/'+UserId).pipe(
       map(res =>{
-        console.log(res);
-        return res[0].map((m: any) => new Groupe(m));
+          return res[0].map((m: any) => new Groupe(m));
       },
       catchError(err =>
         {
