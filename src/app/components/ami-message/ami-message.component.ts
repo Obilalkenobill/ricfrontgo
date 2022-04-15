@@ -150,7 +150,8 @@ const formVal = this.groupeForm.value;
 let newGroup = new Groupe(formVal);
 
 let groupe_name= newGroup.name.toString();
-this.userService.createGroup(this.formData,groupe_name).subscribe(m => {this.refresh();});
+this.userService.createGroup(this.formData,groupe_name).subscribe(m => {this.formArray=[];this.refresh();});
+
 
 }
 
