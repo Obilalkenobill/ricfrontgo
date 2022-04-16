@@ -36,7 +36,7 @@
 
                       <li *ngIf="row.personne1_id_id == UserId && row.personne2_id_id == row.id && row.accept_personne1==1 && row.accept_personne2==0"><button class="btn btn-info" ><i class="glyphicon glyphicon-hourglass"></i></button></li>
 
-                      <li *ngIf="row.personne1_id_id == UserId && row.personne2_id_id == row.id && row.accept_personne1==1 && row.accept_personne2==0"><button class="btn btn-primary" (click)="retirer_ami(UserId,row.id)"><i class="glyphicon glyphicon-minus"></i></button></li>
+                      <li *ngIf="row.personne1_id_id == UserId && row.personne2_id_id == row.id && row.accept_personne1==1 && row.accept_personne2==0"><button class="btn btn-danger" (click)="retirer_ami(UserId,row.id)"><i class="glyphicon glyphicon-minus"></i></button></li>
 
                       <li *ngIf="row.personne1_id_id == row.id && row.personne2_id_id == UserId && row.accept_personne1==1 && row.accept_personne2==0"><button class="btn btn-info goldblack1" (click)="accepter_invit(row.id,UserId)"><i class="glyphicon glyphicon-plus goldblack"></i></button></li>
 
