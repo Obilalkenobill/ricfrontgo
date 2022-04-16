@@ -11,6 +11,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { JwtHelperService } from '@auth0/angular-jwt';
 import {MatPaginatorIntl} from '@angular/material/paginator';
 import { Groupe } from 'src/app/Models/group.model';
+import { MatParticipantComponent } from '../mat-participant/mat-participant.component';
 
 @Component({
   selector: 'app-ami-message',
@@ -31,11 +32,14 @@ export class AmiMessageComponent implements OnInit {
   'login'
   ];
   dataSource!: MatTableDataSource<User>;
-  formData:FormData=new FormData();;
+  formData:FormData=new FormData();
   formArray:number[]=[];
   k:any=0;
   element_group:number[]=[];
   group_pers:[]=[];
+  group_actif!:any;
+  group_name_actif!:any;
+  partic_actif!:any;
   public groupsList:any=[] ;
   public usersList!: User[];
 
@@ -69,13 +73,14 @@ export class AmiMessageComponent implements OnInit {
 this.userService.getGroupMessage(this.UserId).subscribe(groups =>    {
  this.ListGroups=groups;
 })
-
+this.formData=new FormData();
+this.k=0;
 }
 
 initFormGroupe(): void
   {
 
-    this.groupeCtl = this.formBuilder.control('', [Validators.required,Validators.minLength(7),Validators.maxLength(78),Validators.pattern('^[A-Za-z0-9_-]+$')]);
+    this.groupeCtl = this.formBuilder.control('', [Validators.required,Validators.minLength(7),Validators.maxLength(78),Validators.pattern('^[A-Za-z0-9_-]*$')]);
 
     this.groupeForm = this.formBuilder.group({
       name: this.groupeCtl
@@ -122,20 +127,30 @@ ajouter_group(ROWID:number){
 
 }
 createGroup(){
-
+if(this.formArray.length>=1){
 for (var key in this.formArray) {
   this.formData.append(key.toString(),this.formArray[key].toString());
   this.k=key;
 };
 this.k++;
+this.formData.append(this.k.toString(),this.UserId.toString());
+}
+else{
+this.formData.append(this.k.toString(),this.UserId.toString());
+
+}
 
 
-this.formData.append(this.k,this.UserId);
+
+
+this.k++;
+
+
 
 const formVal = this.groupeForm.value;
 
 let newGroup = new Groupe(formVal);
-console.log(newGroup.name.toString());
+
 let groupe_name= newGroup.name.toString();
 this.userService.createGroup(this.formData,groupe_name).subscribe( (response) => {
 },
@@ -154,7 +169,32 @@ retirer_group(ROWID:number){
   }
 }
 
-messageTo(group_id:any){
+openConvers(group_id:any,group_name:any){
+  this.group_actif=group_id;
+  this.group_name_actif=group_name;
+  // this.userService.openConvers(group_id).subscribe( (response) => {
+  // },
+  // (err) => {
+  // },
+  // () => {
+  //   this.refresh();
+  // }
+  // );
+}
+
+voirPartic(group_id:any){
+
+  this.userService.voirPartic(group_id).subscribe( (response) => {
+    const dlg = this.dialog.open(MatParticipantComponent, {data:response});
+  },
+  (err) => {
+  },
+  () => {
+
+  }
+  );
 
 }
+
+
 }
