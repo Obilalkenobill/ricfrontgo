@@ -57,6 +57,7 @@ export class AmiMessageComponent implements OnInit {
   }
   refresh()
   {
+    this.formArray=[];
     this.userService.getAmi(this.UserId).subscribe(users =>
     {
 
@@ -150,7 +151,7 @@ const formVal = this.groupeForm.value;
 let newGroup = new Groupe(formVal);
 
 let groupe_name= newGroup.name.toString();
-this.userService.createGroup(this.formData,groupe_name).subscribe(m => {this.formArray=[];this.refresh();});
+this.userService.createGroup(this.formData,groupe_name).subscribe(m => {this.refresh();});
 
 
 }
