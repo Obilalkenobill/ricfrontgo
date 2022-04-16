@@ -65,20 +65,6 @@ export class AmiMessageComponent implements OnInit {
       this.updateDataSource();
     });
 
-//     this.userService.getGroupMessage(this.UserId).subscribe((users:any) =>    {
-
-//       this.groupsList =users;
-//       const groupBy = <T, K extends keyof any>(list: T[], getKey: (item: T) => K) =>
-//   list.reduce((previous, currentItem) => {
-//     const group = getKey(currentItem);
-//     if (!previous[group]) previous[group] = [];
-//     previous[group].push(currentItem);
-//     return previous;
-//   }, {} as Record<K, T[]>);
-
-//     this.groupsList = groupBy(this.groupsList, (i:any) => i.group_group_id_id);
-//     this.groupsList= Object.entries(this.groupsList);
-// })
 
 this.userService.getGroupMessage(this.UserId).subscribe(groups =>    {
  this.ListGroups=groups;
@@ -151,8 +137,14 @@ const formVal = this.groupeForm.value;
 let newGroup = new Groupe(formVal);
 
 let groupe_name= newGroup.name.toString();
-this.userService.createGroup(this.formData,groupe_name).subscribe(m => {this.refresh();});
-
+this.userService.createGroup(this.formData,groupe_name).subscribe( (response) => {
+},
+(err) => {
+},
+() => {
+  this.refresh();
+}
+);
 
 }
 
