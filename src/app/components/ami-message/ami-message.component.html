@@ -61,6 +61,7 @@
             <div style="display: table-cell;">
               <input type="text" placeholder="Nom_du-Groupe" [formControl]="groupeCtl" id="txtSearch"/>
               <small class="text-danger" *ngIf="groupeCtl?.hasError('required')"> requis </small>
+              <small class="text-danger" *ngIf="groupeCtl?.hasError('pattern')"> Admis Majuscule/minuscule, chiffres de 1 à 9 et tirets _ - </small>
                 <button button class="btn btn-success" type="submit" [disabled]="groupeForm?.invalid">
                   Créer la conversation
                 </button>
