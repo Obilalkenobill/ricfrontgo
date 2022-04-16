@@ -138,9 +138,6 @@ let newGroup = new Groupe(formVal);
 
 let groupe_name= newGroup.name.toString();
 this.userService.createGroup(this.formData,groupe_name).subscribe( (response) => {
-},
-(err) => {
-},
 () => {
   this.refresh();
 }
