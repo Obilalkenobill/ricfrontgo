@@ -112,7 +112,7 @@ public retirer_ami(UserId1:any,UserId2:any){
   public getGroupMessage(UserId:any):Observable<Groupe[]>{
     return this.server.get<Groupe[]>('personne/group/'+UserId).pipe(
       map(res =>{
-          return res[0].map((m: any) => new Groupe(m));
+        return res[0].map((m: any) => new Groupe(m));
       },
       catchError(err =>
         {
@@ -120,7 +120,28 @@ public retirer_ami(UserId1:any,UserId2:any){
         })
     ));
   }
-
+  public openConvers(group_id:any):Observable<Groupe[]>{
+    return this.server.get<Groupe[]>('personne/groupConvers/'+group_id).pipe(
+      map(res =>{
+        return res[0].map((m: any) => new Groupe(m));
+      },
+      catchError(err =>
+        {
+          return [];
+        })
+    ));
+  }
+  public voirPartic(group_id:any):Observable<User[]>{
+    return this.server.get<User[]>('personne/voirMessPartic/'+group_id).pipe(
+      map(res =>{
+        return res[0].map((m: any) => new User(m));
+      },
+      catchError(err =>
+        {
+          return [];
+        })
+    ));
+  }
   public getOneByID(id: any): Observable<User | null>
   {
     return this.server.get<User>('users/id/'+ id).pipe(
