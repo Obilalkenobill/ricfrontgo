@@ -69,6 +69,7 @@ import { EncrDecrService } from './services/EncrDecrSevice';
 import { ContactsComponent } from './components/contacts/contacts.component';
 import { InvitationsComponent } from './components/invitations/invitations.component';
 import { AmiMessageComponent } from './components/ami-message/ami-message.component';
+import { MatParticipantComponent } from './components/mat-participant/mat-participant.component';
 
 
 
@@ -98,7 +99,8 @@ export function tokenGetter(){
         CharteComponent,
         ContactsComponent,
         InvitationsComponent,
-        AmiMessageComponent
+        AmiMessageComponent,
+        MatParticipantComponent
     ],
     imports: [
         BrowserModule,
@@ -125,7 +127,7 @@ export function tokenGetter(){
         JwtModule.forRoot({
             config: {
                 tokenGetter: tokenGetter,
-                allowedDomains: ["https://gestion2vote.herokuapp.com"]
+                allowedDomains: ["localhost:8000"]
             }
         })
     ],
