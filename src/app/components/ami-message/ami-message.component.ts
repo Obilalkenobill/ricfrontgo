@@ -135,14 +135,16 @@ this.formData.append(this.k,this.UserId);
 const formVal = this.groupeForm.value;
 
 let newGroup = new Groupe(formVal);
-
+console.log(newGroup.name.toString());
 let groupe_name= newGroup.name.toString();
 this.userService.createGroup(this.formData,groupe_name).subscribe( (response) => {
+},
+(err) => {
+},
 () => {
   this.refresh();
 }
 );
-
 }
 
 retirer_group(ROWID:number){
