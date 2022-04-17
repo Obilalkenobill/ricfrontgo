@@ -3,8 +3,8 @@
 
     <ul class="flex_arr0"  *ngFor="let user of ListUsers">
       <div class="border_group">
-        <li>
-          {{user.login}}   <button class="btn btn-danger rad" (click)="retirer_part_group(user.id,user.group_group_id_id)"><i class="glyphicon glyphicon-minus-sign"></i></button>
+        <li *ngIf="curr_user != user.id ">
+          {{user.login}}   <button *ngIf="curr_user == user_init " class="btn btn-danger rad" (click)="retirer_part_group(user.id,user.group_group_id_id)"><i class="glyphicon glyphicon-minus-sign"></i></button>
         </li>
     </div>
     <br>

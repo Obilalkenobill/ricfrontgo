@@ -9,9 +9,13 @@ import { User } from 'src/app/Models/user.model';
 })
 export class MatParticipantComponent implements OnInit {
 ListUsers!:User[];
+curr_user!:any;
+user_init!:any;
   constructor(public dialogRef: MatDialogRef<MatParticipantComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: User[]) {
-      this.ListUsers=data;
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+      this.ListUsers=data.data;
+      this.curr_user=data.curr_user;
+      this.user_init=data.user_init;
     }
 
   ngOnInit(): void {
