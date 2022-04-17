@@ -36,9 +36,11 @@ export class AmiMessageComponent implements OnInit {
   formArray:number[]=[];
   k:any=0;
   element_group:number[]=[];
-  group_pers:[]=[];
+  group_pers!:User[];
+  group_pers_array:number[]=[];
   group_actif!:any;
   group_name_actif!:any;
+  pers_init_id!:any;
   partic_actif!:any;
   public groupsList:any=[] ;
   public usersList!: User[];
@@ -132,21 +134,12 @@ for (var key in this.formArray) {
   this.formData.append(key.toString(),this.formArray[key].toString());
   this.k=key;
 };
-this.k++;
-this.formData.append(this.k.toString(),this.UserId.toString());
+this.formData.append("pers_init",this.UserId.toString());
 }
 else{
-this.formData.append(this.k.toString(),this.UserId.toString());
+this.formData.append("pers_init",this.UserId.toString());
 
 }
-
-
-
-
-this.k++;
-
-
-
 const formVal = this.groupeForm.value;
 
 let newGroup = new Groupe(formVal);
@@ -168,10 +161,31 @@ retirer_group(ROWID:number){
      this.formArray.splice(index, 1);
   }
 }
-
-openConvers(group_id:any,group_name:any){
+quitter_convers(){
+  this.group_pers_array=[];
+  this.group_actif=null;
+  this.group_name_actif=null;
+  this.pers_init_id=null;
+  this.group_pers=[];
+}
+openConvers(group_id:any,group_name:any,pers_init:any){
+  this.group_pers_array=[];
   this.group_actif=group_id;
   this.group_name_actif=group_name;
+  this.pers_init_id=pers_init;
+  this.userService.voirPartic(group_id).subscribe( (response) => {
+this.group_pers=response
+  },
+  (err) => {
+  },
+  () => {
+
+    for (let index = 0; index < this.group_pers.length; index++) {
+      this.group_pers_array.push(this.group_pers[index].id);
+    }
+console.log(this.group_pers_array,this.UserId,this.pers_init_id);
+  }
+  );
   // this.userService.openConvers(group_id).subscribe( (response) => {
   // },
   // (err) => {
@@ -195,6 +209,10 @@ voirPartic(group_id:any){
   );
 
 }
+retirer_part_group(userid:any,group_actif:any){
 
+}
+ajouter_nvo_group(userid:any,group_actif:any){
 
+}
 }

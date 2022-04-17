@@ -33,13 +33,18 @@
                       <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                      <li *ngIf="row.personne1_id_id == UserId && row.personne2_id_id == row.id && row.accept_personne1==1 && row.accept_personne2==1"><button class="btn btn-warning retirer_ami" (click)="retirer_ami(UserId,row.id)"><i class="glyphicon glyphicon-minus"></i></button></li>
+                      <li *ngIf="row.personne1_id_id == UserId && row.personne2_id_id == row.id && row.accept_personne1==1 && row.accept_personne2==1"><button class="btn btn-danger retirer_ami" (click)="retirer_ami(UserId,row.id)"><i class="glyphicon glyphicon-minus"></i></button></li>
 
-                      <li *ngIf="row.personne1_id_id == row.id && row.personne2_id_id == UserId && row.accept_personne1==1 && row.accept_personne2==1"><button class="btn btn-warning retirer_ami" (click)="retirer_ami(row.id,UserId)"><i class="glyphicon glyphicon-minus"></i></button></li>
+                      <li *ngIf="row.personne1_id_id == row.id && row.personne2_id_id == UserId && row.accept_personne1==1 && row.accept_personne2==1"><button class="btn btn-primary retirer_ami" (click)="retirer_ami(row.id,UserId)"><i class="glyphicon glyphicon-minus"></i></button></li>
 
                       <li *ngIf="formArray == undefined || formArray.indexOf(row.id)== -1"><button class="btn btn-primary" (click)="ajouter_group(row.id)"><i class="glyphicon glyphicon-envelope" ></i></button></li>
 
-                      <li *ngIf="formArray != undefined &&formArray.indexOf(row.id)!== -1"><button class="btn btn-danger" (click)="retirer_group(row.id)"><i class="glyphicon glyphicon-envelope" ></i></button></li>
+                      <li *ngIf="formArray != undefined && formArray.indexOf(row.id)!== -1"><button class="btn btn-danger" (click)="retirer_group(row.id)"><i class="glyphicon glyphicon-envelope" ></i></button></li>
+
+                      <li *ngIf="group_actif != null && group_actif != undefined && group_pers_array.indexOf(row.id) !== -1 && pers_init_id == UserId"><button class="btn btn-danger" (click)="retirer_part_group(row.id,group_actif)"><i class="glyphicon glyphicon-minus-sign"></i></button></li>
+
+                      <li *ngIf="group_actif != null && group_actif != undefined && group_pers_array.indexOf(row.id) == -1 && pers_init_id == UserId"><button class="btn btn-success" (click)="ajouter_nvo_group(row.id,group_actif)"><i class="glyphicon glyphicon-plus-sign"></i></button></li>
+
                     </ul>
                     </div>
                 </mat-cell>
@@ -69,10 +74,9 @@
           </form>
         </div>
 <br>
-      
-<ng-container *ngIf="ListGroups != null || ListGroups != undefined">
+<ng-container *ngIf="ListGroups != null && ListGroups != undefined">
         <ul class="flex_arr0"  *ngFor="let group of ListGroups">
-          <div class="border_group" (click)="openConvers(group.id,group.name)">
+          <div class="border_group" (click)="openConvers(group.id,group.name,group.pers_init_id_id)">
             <li>
               {{group.name}}
             </li>
@@ -82,10 +86,10 @@
       </ng-container>
 
 
-      <ng-container *ngIf="group_actif != null || group_actif != undefined">
+      <ng-container *ngIf="group_actif != null && group_actif != undefined">
           <div class="headerConv">
 
-            <h1 class="border_group" (click)="voirPartic(group_actif)">{{group_name_actif}}</h1>
+            <h1 class="border_group" (click)="voirPartic(group_actif)">{{group_name_actif}}   <button class="btn btn-danger rad" (click)="quitter_convers()"><i class="glyphicon glyphicon-remove-sign"></i></button></h1>
         </div>
           <div class="scroll">It is a good platform to learn programming.
           It is an educational website. Prepare for the Recruitment drive
