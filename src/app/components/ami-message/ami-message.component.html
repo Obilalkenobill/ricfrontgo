@@ -35,7 +35,7 @@
                     <ul class="dropdown-menu" role="menu">
                       <li *ngIf="row.personne1_id_id == UserId && row.personne2_id_id == row.id && row.accept_personne1==1 && row.accept_personne2==1"><button class="btn btn-danger retirer_ami" (click)="retirer_ami(UserId,row.id)"><i class="glyphicon glyphicon-minus"></i></button></li>
 
-                      <li *ngIf="row.personne1_id_id == row.id && row.personne2_id_id == UserId && row.accept_personne1==1 && row.accept_personne2==1"><button class="btn btn-primary retirer_ami" (click)="retirer_ami(row.id,UserId)"><i class="glyphicon glyphicon-minus"></i></button></li>
+                      <li *ngIf="row.personne1_id_id == row.id && row.personne2_id_id == UserId && row.accept_personne1==1 && row.accept_personne2==1"><button class="btn btn-danger retirer_ami" (click)="retirer_ami(row.id,UserId)"><i class="glyphicon glyphicon-minus"></i></button></li>
 
                       <li *ngIf="formArray == undefined || formArray.indexOf(row.id)== -1"><button class="btn btn-primary" (click)="ajouter_group(row.id)"><i class="glyphicon glyphicon-envelope" ></i></button></li>
 
