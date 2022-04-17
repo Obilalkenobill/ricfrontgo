@@ -183,7 +183,6 @@ this.group_pers=response
     for (let index = 0; index < this.group_pers.length; index++) {
       this.group_pers_array.push(this.group_pers[index].id);
     }
-console.log(this.group_pers_array,this.UserId,this.pers_init_id);
   }
   );
   // this.userService.openConvers(group_id).subscribe( (response) => {
@@ -199,7 +198,7 @@ console.log(this.group_pers_array,this.UserId,this.pers_init_id);
 voirPartic(group_id:any){
 
   this.userService.voirPartic(group_id).subscribe( (response) => {
-    const dlg = this.dialog.open(MatParticipantComponent, {data:response});
+    const dlg = this.dialog.open(MatParticipantComponent, {data:{data:response,curr_user:this.UserId,user_init:this.pers_init_id}});
   },
   (err) => {
   },
