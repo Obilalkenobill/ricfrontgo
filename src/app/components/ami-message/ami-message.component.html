@@ -69,6 +69,8 @@
           </form>
         </div>
 <br>
+      
+<ng-container *ngIf="ListGroups != null || ListGroups != undefined">
         <ul class="flex_arr0"  *ngFor="let group of ListGroups">
           <div class="border_group" (click)="openConvers(group.id,group.name)">
             <li>
@@ -77,8 +79,10 @@
         </div>
         <br>
         </ul>
+      </ng-container>
 
 
+      <ng-container *ngIf="group_actif != null || group_actif != undefined">
           <div class="headerConv">
 
             <h1 class="border_group" (click)="voirPartic(group_actif)">{{group_name_actif}}</h1>
@@ -148,3 +152,4 @@
           coding style, and try to make you are close to them. In case you
           are a beginner, you may refer Guidelines to write an Article
           </div>
+</ng-container>
