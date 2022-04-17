@@ -17,5 +17,7 @@ ListUsers!:User[];
   ngOnInit(): void {
 
   }
+  retirer_part_group(userid:any,group_actif:any){
 
+  }
 }

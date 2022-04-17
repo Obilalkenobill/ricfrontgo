@@ -1,10 +1,10 @@
-<mat-tab-group mat-stretch-tabs dynamicHeight>
+<mat-tab-group class="bo" mat-stretch-tabs dynamicHeight>
   <mat-tab label="participant">
 
     <ul class="flex_arr0"  *ngFor="let user of ListUsers">
       <div class="border_group">
         <li>
-          {{user.login}}
+          {{user.login}}   <button class="btn btn-danger rad" (click)="retirer_part_group(user.id,user.group_group_id_id)"><i class="glyphicon glyphicon-minus-sign"></i></button>
         </li>
     </div>
     <br>
