@@ -225,7 +225,29 @@ public retirer_ami(UserId1:any,UserId2:any){
         })
     );
   }
+ public ajouter_nvo_o_group(userid:any,group_actif:any): any
+  {
+    return this.server.put<any>('personne/groupes/ajouter_part/'+ userid+'/'+group_actif).pipe(
+      map(res => res),
+      catchError(err =>
+        {
 
+          return [];
+        })
+    );
+  }
+
+  public retirer_part_group(userid:any,group_actif:any): any
+  {
+    return this.server.deletebis<any>('personne/groupes/retirer_part/'+ userid+'/'+group_actif).pipe(
+      map(res => res),
+      catchError(err =>
+        {
+
+          return [];
+        })
+    );
+  }
   public deleteUser(id:number): Observable<User[]>
   {
     return this.server.deletebis<User>('users/delete/'+ id).pipe(
@@ -242,6 +264,17 @@ public retirer_ami(UserId1:any,UserId2:any){
 
   public validate(id:number){
     return this.server.put('users/validate/'+ id).pipe(
+      map(res => res),
+      catchError(err =>
+        {
+
+          return [];
+        })
+    );
+  }
+
+  public setOnline(id:number,status:number){
+    return this.server.put('users/setOnline/'+ id +'/'+status).pipe(
       map(res => res),
       catchError(err =>
         {

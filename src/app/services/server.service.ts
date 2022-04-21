@@ -12,7 +12,7 @@ import { EncrDecrService } from './EncrDecrSevice';
 })
 export class ServerService {
 
- private BASE_URL: string = 'https://gestion2vote.herokuapp.com/api/';
+  private BASE_URL: string = 'https://gestion2vote.herokuapp.com/api/';
   /**
      * Instance privée de ce helper qui nous aidera à vérifier si
      * un token est expiré ou non.
@@ -30,7 +30,7 @@ headers!:any;
       let headers = new HttpHeaders();
 if (typeof token === 'string'){
      headers = new HttpHeaders()
-      .set('content-type', 'application/json').set('Authorization', 'Bearer ' + token ).set('Access-Control-Allow-Origin','*').set('Access-Control-Allow-Headers','*').set('Access-Control-Allow-Methods', '*');
+      .set('content-type', 'application/json').set('Authorization', 'Bearer ' + token ).set('Access-Control-Allow-Origin','*');
     }
     return this.call(() =>this.http.get(this.BASE_URL + url, {'headers':headers}));
    }
@@ -47,7 +47,7 @@ if (typeof token === 'string'){
       let headers = new HttpHeaders();
 if (typeof token === 'string'){
      headers = new HttpHeaders()
-      .set('content-type', 'application/json').set('Authorization', 'Bearer ' + token ).set('Access-Control-Allow-Origin','*').set('Access-Control-Allow-Headers','*').set('Access-Control-Allow-Methods', '*');
+      .set('content-type', 'application/json').set('Authorization', 'Bearer ' + token ).set('Access-Control-Allow-Origin','*');
     }
     return this.call(() =>this.http.post(this.BASE_URL + url, body,  {'headers':headers}));
    }
@@ -64,7 +64,7 @@ public postbis<T>(url: string, body: T, secure:boolean=true): Observable<any>
     let headers = new HttpHeaders();
 if (typeof token === 'string'){
    headers = new HttpHeaders()
-    .set('Authorization', 'Bearer ' + token ).set( 'method' , 'POST').set('Access-Control-Allow-Origin','*').set('Access-Control-Allow-Headers','*').set('Access-Control-Allow-Methods', '*');
+    .set('Authorization', 'Bearer ' + token ).set( 'method' , 'POST').set('Access-Control-Allow-Origin','*');
   }
   return this.call(() =>this.http.post(this.BASE_URL + url, body,  {'headers':headers}));
  }
@@ -80,12 +80,12 @@ if (typeof token === 'string'){
     let headers = new HttpHeaders();
 if (typeof token === 'string'){
    headers = new HttpHeaders()
-    .set('content-type', 'application/json').set('Authorization', 'Bearer ' + token ).set('Access-Control-Allow-Origin','*').set('Access-Control-Allow-Headers','*').set('Access-Control-Allow-Methods', '*');
+    .set('content-type', 'application/json').set('Authorization', 'Bearer ' + token ).set('Access-Control-Allow-Origin','*');
   }
     return this.call(() =>this.http.put(this.BASE_URL + url, body,  {'headers':headers}));
   }
 
-  public delete<T>(url: string, body: T): Observable<any>
+  public delete<T>(url: string, body: any): Observable<any>
   {
     return this.call(() => this.http.delete(this.BASE_URL + url, body));
   }
@@ -95,7 +95,7 @@ if (typeof token === 'string'){
     let headers = new HttpHeaders();
 if (typeof token === 'string'){
    headers = new HttpHeaders()
-    .set('content-type', 'application/json').set('Authorization', 'Bearer ' + token ).set('Access-Control-Allow-Origin','*').set('Access-Control-Allow-Headers','*').set('Access-Control-Allow-Methods', '*');
+    .set('content-type', 'application/json').set('Authorization', 'Bearer ' + token ).set('Access-Control-Allow-Origin','*');
   }
     return this.call(() => this.http.delete(this.BASE_URL + url, {'headers':headers}));
   }
@@ -104,7 +104,7 @@ if (typeof token === 'string'){
   public login(user: User): Observable<any>
   {
     const headers = new HttpHeaders()
-   .set('content-type', 'application/json').set('Access-Control-Allow-Origin','*').set('Access-Control-Allow-Headers','*').set('Access-Control-Allow-Methods', '*');
+   .set('content-type', 'application/json').set('Access-Control-Allow-Origin','*')
 
     return this.http.post<any>(this.BASE_URL + 'login_check', user, {'headers':headers}).pipe(
       map((data: any) => {
@@ -125,7 +125,7 @@ if (typeof token === 'string'){
         return false;
       }), catchError((res: any) =>
         {
-           return of(res.status);
+          return of(res.status);
         })
     );
   }
@@ -144,9 +144,11 @@ if (typeof token === 'string'){
     // Si le token n'existe pas ou s'il est expiré ...
     if (!token || this.jwt.isTokenExpired(token)) {
       let user = JSON.parse(sessionStorage.getItem('user') || '');
+
       user.password = this.EncrDecr.get('!4379^D&JWBfbve;}iqJ5^9H7',user.password);
+
       const headers = new HttpHeaders()
-      .set('content-type', 'application/json').set('Access-Control-Allow-Origin','*').set('Access-Control-Allow-Headers','*').set('Access-Control-Allow-Methods', '*');
+      .set('content-type', 'application/json').set('Access-Control-Allow-Origin','*');
       return this.http.post<any>(this.BASE_URL + 'login_check', user, {'headers':headers}).pipe(
         flatMap((data: any) => {
           if(data.token)
@@ -173,5 +175,3 @@ public logout(): void
   sessionStorage.removeItem('id_token');
 }
 }
-
- 

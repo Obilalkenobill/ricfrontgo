@@ -30,6 +30,7 @@ export class User
     personne1_id_id:any;//il s'agit ici de voir si l'user est ami ou non avec lui
     personne2_id_id:any;// idem
     group_group_id_id:any;
+    is_on_line:any;
     constructor(data: any)
     {
         this.salt=data.salt;
@@ -63,5 +64,6 @@ export class User
     this.personne1_id_id=data.personne1_id_id;
     this.personne2_id_id=data.personne2_id_id;
     this.group_group_id_id=data.group_group_id_id;
+    this.is_on_line=data.is_on_line;
     }
 }

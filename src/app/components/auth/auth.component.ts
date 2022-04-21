@@ -4,7 +4,8 @@ import { Router } from '@angular/router';
 import { User } from 'src/app/Models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { ServerService } from 'src/app/services/server.service';
-
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { UsersService } from 'src/app/services/users.service';
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
@@ -14,7 +15,7 @@ export class AuthComponent implements OnInit {
   userForm!: FormGroup;
   usernameCtl!: FormControl;
   passwordCtl!: FormControl;
-  constructor(private authserv: AuthService , private server: ServerService, private router: Router, private formBuilder: FormBuilder) { }
+  constructor(private userService: UsersService, private authserv: AuthService , private server: ServerService, private router: Router, private formBuilder: FormBuilder, private jwt: JwtHelperService) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -44,8 +45,14 @@ export class AuthComponent implements OnInit {
 
           if(m===true)
           {
+            let UserId;
+            const token = sessionStorage.getItem('id_token');
+          if (typeof token == 'string') {
+            UserId=this.jwt.decodeToken(token).id;
+          }
           this.authserv.isLoggedIn=m;
-          this.router.navigate(['/projets-view']);
+          this.userService.setOnline(UserId,1).subscribe((response:any)=>{this.router.navigate(['/projets-view']);})
+
           }
           },
           (error) =>{

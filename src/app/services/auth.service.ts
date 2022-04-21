@@ -6,15 +6,16 @@ import { map } from 'rxjs/operators';
 import { User } from '../Models/userLogin.model';
 import { ProjetService } from './projet.service';
 import { ServerService } from './server.service';
-
+import { UsersService } from 'src/app/services/users.service';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   isLoggedIn: any;
   redirectUrl: string;
+  UserId: any;
 
-  constructor(private http: ServerService, private router: Router, private projetService: ProjetService, private jwt: JwtHelperService)
+  constructor(private userService: UsersService,private http: ServerService, private router: Router, private projetService: ProjetService, private jwt: JwtHelperService)
   {
     this.isLoggedIn = sessionStorage.getItem('id_token') != null;
     this.redirectUrl = '/';
@@ -80,6 +81,11 @@ export class AuthService {
   public logout(): void
   {
     this.isLoggedIn = false;
+    const token = sessionStorage.getItem('id_token');
+    if (typeof token == 'string') {
+    this.UserId=this.jwt.decodeToken(token).id;
+  }
+  this.userService.setOnline(this.UserId,0).subscribe((response:any)=>{console.log(response)});
     this.http.logout();
     this.redirectUrl = '/';
     this.router.navigate(['/']);

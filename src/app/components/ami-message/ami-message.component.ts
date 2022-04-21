@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, ViewChild, AfterViewInit, ViewChildren, QueryList } from '@angular/core';
 import { User } from 'src/app/Models/user.model';
 import { UsersService } from 'src/app/services/users.service';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator }  from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -44,25 +44,50 @@ export class AmiMessageComponent implements OnInit {
   partic_actif!:any;
   public groupsList:any=[] ;
   public usersList!: User[];
-
+  pageSize!:any;
+  pageSizeOptions!:any;
+    itemsPerPageLabel = 'Item par page';
+  @ViewChildren('el') public div:any;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  scroll: any;
 
   constructor(private userService: UsersService,
     public dialog: MatDialog,
     public snackBar: MatSnackBar,
     public authService: AuthService,private formBuilder: FormBuilder,private jwt: JwtHelperService,private matpag :MatPaginatorIntl) {
+
+//window.scrollTo(0, 999999999);
+
       this.initFormGroupe()
       this.initForm();
       matpag.itemsPerPageLabel = 'Items par page';
      }
+
   ngOnInit(): void {
+
     let token=sessionStorage.getItem('id_token');
     if (typeof token == 'string') {this.UserId=this.jwt.decodeToken(token).id;}
     this.refresh();
   }
   refresh()
   {
+    if (window.innerWidth > 450 && window.innerWidth <= 650) {
+      this.pageSize = 10;
+      this.pageSizeOptions= [6,10,12,16,20];
+    }
+    else if (window.innerWidth > 650 ) {
+      this.pageSize = 15;
+      this.pageSizeOptions= [6,9,12,15,21];
+    } else {
+      this.pageSize = 10;
+      this.pageSizeOptions= [6,10,12,16,20];
+    }
+    this.userService.getGroupMessage(this.UserId).subscribe(groups =>    {
+ this.ListGroups=groups;
+})
+this.formData=new FormData();
+this.k=0;
     this.formArray=[];
     this.userService.getAmi(this.UserId).subscribe(users =>
     {
@@ -72,13 +97,24 @@ export class AmiMessageComponent implements OnInit {
     });
 
 
-this.userService.getGroupMessage(this.UserId).subscribe(groups =>    {
- this.ListGroups=groups;
-})
-this.formData=new FormData();
-this.k=0;
-}
 
+}
+onResize(event:any) {
+
+  if (event.target.innerWidth > 450 && event.target.innerWidth <= 650) {
+    this.pageSize = 10;
+    this.pageSizeOptions= [6,10,12,16,20];
+  }
+  else if (event.target.innerWidth > 650 ) {
+    this.pageSize = 15;
+    this.pageSizeOptions= [6,9,12,15,21];
+
+  } else {
+    this.pageSize = 10;
+    this.pageSizeOptions= [6,10,12,16,20];
+  }
+
+}
 initFormGroupe(): void
   {
 
@@ -116,13 +152,15 @@ initFormGroupe(): void
       //   this.router.navigate(['/projets-view'])
       // });
   }
-  retirer_ami(UserId1:any,UserId2:any){
+  retirer_ami(UserId1:any,UserId2:any,username:any){
+    if (confirm("Êtes vous sûre de vouloir retirer '"+ username +"' de votre liste de contacts? ")){
     this.userService.retirer_ami(UserId1,UserId2).subscribe(m=>{
-
+      this.snackBar.open("Prise de distance avec '"+username+"'","Continuer",{duration:5000});
       this.refresh();
       //window.location.reload();
     });
     }
+  }
 
 ajouter_group(ROWID:number){
   this.formArray.push(ROWID);
@@ -150,6 +188,7 @@ this.userService.createGroup(this.formData,groupe_name).subscribe( (response) =>
 (err) => {
 },
 () => {
+  this.snackBar.open("Groupe '"+ groupe_name+"' créé","Continuer",{duration:5000});
   this.refresh();
 }
 );
@@ -169,6 +208,11 @@ quitter_convers(){
   this.group_pers=[];
 }
 openConvers(group_id:any,group_name:any,pers_init:any){
+  this.div.changes.subscribe((comps:any)=>
+  {
+   comps.first.nativeElement.scrollTo(0,999999999);//Now you can access the child component
+  });
+
   this.group_pers_array=[];
   this.group_actif=group_id;
   this.group_name_actif=group_name;
@@ -198,20 +242,62 @@ this.group_pers=response
 voirPartic(group_id:any){
 
   this.userService.voirPartic(group_id).subscribe( (response) => {
-    const dlg = this.dialog.open(MatParticipantComponent, {data:{data:response,curr_user:this.UserId,user_init:this.pers_init_id}});
+    const dlg = this.dialog.open(MatParticipantComponent, {data:{data:response,group_id:group_id,curr_user:this.UserId,user_init:this.pers_init_id}});
   },
   (err) => {
   },
   () => {
-
+    this.refresh();
   }
   );
 
 }
-retirer_part_group(userid:any,group_actif:any){
+retirer_part_group_bis(userid:any,group_actif:any,group_name:any){
+  if(confirm("Êtes vous sûre de vouloir quitté le groupe '"+group_name+"'")) {
+  this.userService.retirer_part_group(userid,group_actif).subscribe( (response:any) => {
+  this.refresh();
+  const index = this.group_pers_array.indexOf(userid, 0);
+    if (index > -1) {
+       this.group_pers_array.splice(index, 1);
+    }
 
+
+  },
+  (err:any) => {
+  },
+  () => {
+this.quitter_convers();
+    this.snackBar.open("Vous avez quitté le groupe '"+group_name+"'","Continuer",{duration:5000});
+  }
+  );
+}}
+
+
+retirer_part_group(userid:any,group_actif:any,username:any){
+  this.userService.retirer_part_group(userid,group_actif).subscribe( (response:any) => {
+
+  },
+  (err:any) => {
+  },
+  () => {
+    const index = this.group_pers_array.indexOf(userid, 0);
+    if (index > -1) {
+       this.group_pers_array.splice(index, 1);
+    }
+    this.snackBar.open("'"+username+"' a été retiré du groupe '"+this.group_name_actif+"'","Continuer",{duration:5000});
+  }
+  );
 }
-ajouter_nvo_group(userid:any,group_actif:any){
+ajouter_nvo_o_group(userid:any,group_actif:any,username:any){
+  this.userService.ajouter_nvo_o_group(userid,group_actif).subscribe( (response:any) => {
 
+  },
+  (err:any) => {
+  },
+  () => {
+    this.group_pers_array.push(userid);
+    this.snackBar.open("'"+username+"' a été ajouté au groupe '"+this.group_name_actif+"'","Continuer",{duration:5000});
+  }
+  );
 }
 }

@@ -14,7 +14,7 @@
 
 
       <div class="mat-elevation-z2">
-          <mat-table [dataSource]='dataSource' matSort matSortActive="id" matSortDirection="asc"
+          <mat-table (window:resize)="onResize($event)" [dataSource]='dataSource' matSort matSortActive="id" matSortDirection="asc"
               matSortDisableClear width="100%">
               <ng-container matColumnDef="nom">
                   <mat-header-cell *matHeaderCellDef mat-sort-header> Nom </mat-header-cell>
@@ -33,17 +33,17 @@
                       <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                      <li *ngIf="row.personne1_id_id == UserId && row.personne2_id_id == row.id && row.accept_personne1==1 && row.accept_personne2==1"><button class="btn btn-danger retirer_ami" (click)="retirer_ami(UserId,row.id)"><i class="glyphicon glyphicon-minus"></i></button></li>
+                      <li *ngIf="row.personne1_id_id == UserId && row.personne2_id_id == row.id && row.accept_personne1==1 && row.accept_personne2==1"><button class="btn btn-danger retirer_ami" (click)="retirer_ami(UserId,row.id,row.login)"><i class="glyphicon glyphicon-minus"></i></button></li>
 
-                      <li *ngIf="row.personne1_id_id == row.id && row.personne2_id_id == UserId && row.accept_personne1==1 && row.accept_personne2==1"><button class="btn btn-danger retirer_ami" (click)="retirer_ami(row.id,UserId)"><i class="glyphicon glyphicon-minus"></i></button></li>
+                      <li *ngIf="row.personne1_id_id == row.id && row.personne2_id_id == UserId && row.accept_personne1==1 && row.accept_personne2==1"><button class="btn btn-danger retirer_ami" (click)="retirer_ami(row.id,UserId,row.login)"><i class="glyphicon glyphicon-minus"></i></button></li>
 
                       <li *ngIf="formArray == undefined || formArray.indexOf(row.id)== -1"><button class="btn btn-primary" (click)="ajouter_group(row.id)"><i class="glyphicon glyphicon-envelope" ></i></button></li>
 
                       <li *ngIf="formArray != undefined && formArray.indexOf(row.id)!== -1"><button class="btn btn-danger" (click)="retirer_group(row.id)"><i class="glyphicon glyphicon-envelope" ></i></button></li>
 
-                      <li *ngIf="group_actif != null && group_actif != undefined && group_pers_array.indexOf(row.id) !== -1 && pers_init_id == UserId"><button class="btn btn-danger" (click)="retirer_part_group(row.id,group_actif)"><i class="glyphicon glyphicon-minus-sign"></i></button></li>
+                      <li *ngIf="group_actif != null && group_actif != undefined && group_pers_array.indexOf(row.id) !== -1 && (pers_init_id == UserId || row.id == UserId)"><button class="btn btn-danger" (click)="retirer_part_group(row.id,group_actif,row.login)"><i class="glyphicon glyphicon-minus-sign"></i></button></li>
 
-                      <li *ngIf="group_actif != null && group_actif != undefined && group_pers_array.indexOf(row.id) == -1 && pers_init_id == UserId"><button class="btn btn-success" (click)="ajouter_nvo_group(row.id,group_actif)"><i class="glyphicon glyphicon-plus-sign"></i></button></li>
+                      <li *ngIf="group_actif != null && group_actif != undefined && group_pers_array.indexOf(row.id) == -1 && pers_init_id == UserId"><button class="btn btn-success" (click)="ajouter_nvo_o_group(row.id,group_actif,row.login)"><i class="glyphicon glyphicon-plus-sign"></i></button></li>
 
                     </ul>
                     </div>
@@ -52,14 +52,14 @@
 
               <ng-container matColumnDef="login">
                 <mat-header-cell  *matHeaderCellDef mat-sort-header> Pseudo </mat-header-cell>
-                <mat-cell  class="pseudo" *matCellDef="let row" style="width: 125px;"> {{ row.login }}</mat-cell>
+                <mat-cell  class="pseudo" *matCellDef="let row" style="width: 125px;"> {{ row.login }} <span *ngIf="row.is_on_line==1"><i class="glyphicon glyphicon-record"></i></span></mat-cell>
             </ng-container>
               <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
               <mat-row  *matRowDef="let row; columns: displayedColumns;">
               </mat-row>
 
           </mat-table>
-          <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 15, 20]" [showFirstLastButtons]="true" ></mat-paginator>
+          <mat-paginator  [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" [showFirstLastButtons]="true"></mat-paginator>
 
 
           <form (ngSubmit)="createGroup()" [formGroup]="groupeForm">
@@ -75,15 +75,23 @@
         </div>
 <br>
 <ng-container *ngIf="ListGroups != null && ListGroups != undefined">
-        <ul class="flex_arr0"  *ngFor="let group of ListGroups">
+  <ul *ngIf="group_actif != null && group_actif != undefined ">
+    <div class="border_group btn btn-danger" (click)="retirer_part_group_bis(UserId,group_actif,group_name_actif)">
+      <li > Quitter le groupe de convers.</li>
+    </div>
+  </ul>
+  <br>
+  <ul class="flex_arr0"  *ngFor="let group of ListGroups;index as indexOfelement;">
           <div class="border_group" (click)="openConvers(group.id,group.name,group.pers_init_id_id)">
             <li>
               {{group.name}}
             </li>
         </div>
-        <br>
         </ul>
+        <br>
+
       </ng-container>
+
 
 
       <ng-container *ngIf="group_actif != null && group_actif != undefined">
@@ -91,7 +99,7 @@
 
             <h1 class="border_group" (click)="voirPartic(group_actif)">{{group_name_actif}}   <button class="btn btn-danger rad" (click)="quitter_convers()"><i class="glyphicon glyphicon-remove-sign"></i></button></h1>
         </div>
-          <div class="scroll">It is a good platform to learn programming.
+          <div class="scroll"  #el id="el">It is a good platform to learn programming.
           It is an educational website. Prepare for the Recruitment drive
           of product based companies like Microsoft, Amazon, Adobe etc with
           a free online placement preparation course. The course focuses
@@ -157,3 +165,9 @@
           are a beginner, you may refer Guidelines to write an Article
           </div>
 </ng-container>
+<script type="text/javascript">
+  function goToBottom (el)
+   {
+    el.contentWindow.scrollTo (0, 999999999);
+   }
+  </script>

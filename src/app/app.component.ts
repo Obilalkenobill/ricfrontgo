@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { User } from './Models/userLogin.model';
 import { AdminGuard, is_verifiedGuard } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
-
-
+import { UsersService } from 'src/app/services/users.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 
 
@@ -17,15 +17,51 @@ export class AppComponent {
   userCurr:any;
   userCurrId:any;
   title = 'ric';
+  UserId: any;
+  isNumber:any = (val: any) => typeof val === "number" && val === val;
 //customize item per page label
-
-  constructor(private authService: AuthService, private router: Router, private adminAuth: AdminGuard, private Is_verified: is_verifiedGuard)
+delay(delay: number) {
+  return new Promise(r => {
+      setTimeout(r, delay);
+  })
+}
+  constructor(private userService: UsersService,private authService: AuthService, private jwt: JwtHelperService, private router: Router, private adminAuth: AdminGuard, private Is_verified: is_verifiedGuard)
   {
-  }
-ngOnInit(): void {
 
+this.doTimer();
+}
+ngOnInit(): void {
+ const token = sessionStorage.getItem('id_token');
+    if (typeof token == 'string') {
+      this.UserId=this.jwt.decodeToken(token).id;
+    console.log(this.UserId,this.authService.isLoggedIn);
+    }
 
 }
+
+async doTimer() {
+  while(true==true) {
+
+      const token = sessionStorage.getItem('id_token');
+      // Si le token n'existe pas ou s'il est expiré ...
+      if (!token || this.jwt.isTokenExpired(token)) {
+        this.authService.isLoggedIn=false;
+      }
+      if (typeof token == 'string') {
+      this.UserId=this.jwt.decodeToken(token).id;
+    console.log(this.UserId,this.authService.isLoggedIn,this.isNumber(this.UserId));
+    }
+    if(this.authService.isLoggedIn==false &&  this.isNumber(this.UserId)){
+      this.userService.setOnline(this.UserId,0).subscribe((response:any)=>{console.log(response)});
+     this.authService.logout();
+      break;
+    }
+      console.log(19,this.authService.isLoggedIn,this.isNumber(this.UserId));
+      await this.delay(900000);
+    }
+
+  }
+
 public userId()
 {
 

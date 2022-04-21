@@ -90,19 +90,22 @@ export class InvitationsComponent implements OnInit {
       // });
   }
 
-accepter_invit(UserId1:any,UserId2:any){
+accepter_invit(UserId1:any,UserId2:any,username:any){
   this.userService.accepter_invit(UserId1,UserId2).subscribe(m=>{
+    this.snackBar.open("Vous avez acceptez l'invitation de '"+username+"'","Continuer",{duration:5000});
 
     this.refresh();
     //window.location.reload();
   });
 }
-retirer_ami(UserId1:any,UserId2:any){
+retirer_ami(UserId1:any,UserId2:any,username:any){
+  if (confirm("Êtes vous sûre de vouloir prendre des distances avec "+ username +" ? ")){
   this.userService.retirer_ami(UserId1,UserId2).subscribe(m=>{
-
+    this.snackBar.open("Prise de distance avec '"+username+"'","Continuer",{duration:5000});
     this.refresh();
     //window.location.reload();
   });
   }
+}
 }
 

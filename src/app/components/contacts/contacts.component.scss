@@ -12,6 +12,10 @@ box-shadow: 5px 0 5px lightgray, 0 15px 15px -10px black;
 opacity: 0.7;
 width:7em;
 }
+.retirer_ami{
+  background-color: #696969;
+}
+
 mat-header-row{
   padding-top:10px;
   display:inline;
@@ -208,6 +212,3 @@ mat-header-row {
 }
 
 
-.retirer_ami{
-  background-color: #696969;
-}
