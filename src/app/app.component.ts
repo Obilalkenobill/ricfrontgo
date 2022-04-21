@@ -34,7 +34,6 @@ ngOnInit(): void {
  const token = sessionStorage.getItem('id_token');
     if (typeof token == 'string') {
       this.UserId=this.jwt.decodeToken(token).id;
-    console.log(this.UserId,this.authService.isLoggedIn);
     }
 
 }
@@ -49,14 +48,12 @@ async doTimer() {
       }
       if (typeof token == 'string') {
       this.UserId=this.jwt.decodeToken(token).id;
-    console.log(this.UserId,this.authService.isLoggedIn,this.isNumber(this.UserId));
     }
     if(this.authService.isLoggedIn==false &&  this.isNumber(this.UserId)){
-      this.userService.setOnline(this.UserId,0).subscribe((response:any)=>{console.log(response)});
+      this.userService.setOnline(this.UserId,0).subscribe((response:any)=>{response});
      this.authService.logout();
       break;
     }
-      console.log(19,this.authService.isLoggedIn,this.isNumber(this.UserId));
       await this.delay(900000);
     }
 

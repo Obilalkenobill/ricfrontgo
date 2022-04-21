@@ -85,7 +85,7 @@ export class AuthService {
     if (typeof token == 'string') {
     this.UserId=this.jwt.decodeToken(token).id;
   }
-  this.userService.setOnline(this.UserId,0).subscribe((response:any)=>{console.log(response)});
+  this.userService.setOnline(this.UserId,0).subscribe((response:any)=>{response});
     this.http.logout();
     this.redirectUrl = '/';
     this.router.navigate(['/']);
