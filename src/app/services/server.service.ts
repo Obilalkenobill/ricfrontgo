@@ -120,6 +120,7 @@ if (typeof token === 'string'){
           user.is_verified=this.EncrDecr.set('lutilisateurnedoitpasconnaitrecemotdepasse',user.is_verified);
           sessionStorage.setItem('user', JSON.stringify(user));
           sessionStorage.setItem('id_token', token);
+
           return true;
         }
         return false;
@@ -166,11 +167,14 @@ if (typeof token === 'string'){
           })
       );
     } else {
+      console.log("etape 1");
       let UserId;
       if (typeof token === 'string'){
+        console.log("etape 2");
         UserId=this.jwt.decodeToken(token).id;
         const headers2 = new HttpHeaders()
          .set('content-type', 'application/json').set('Authorization', 'Bearer ' + token ).set('Access-Control-Allow-Origin','*');
+         console.log("etape 3");
          this.http.put(this.BASE_URL +'users/setOnline/'+ UserId +'/1',  {'headers':headers2}).subscribe();
         }
         // si le token est valide et n'est pas expiré, on peut directement

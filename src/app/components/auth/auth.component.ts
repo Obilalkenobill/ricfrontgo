@@ -45,14 +45,9 @@ export class AuthComponent implements OnInit {
 
           if(m===true)
           {
-            let UserId;
-            const token = sessionStorage.getItem('id_token');
-          if (typeof token == 'string') {
-            UserId=this.jwt.decodeToken(token).id;
-          }
-          this.authserv.isLoggedIn=m;
-          this.userService.setOnline(UserId,1).subscribe((response:any)=>{this.router.navigate(['/projets-view']);})
 
+          this.authserv.isLoggedIn=m;
+          this.router.navigate(['/projets-view']);
           }
           },
           (error) =>{
