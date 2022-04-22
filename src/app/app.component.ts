@@ -48,7 +48,6 @@ async doTimer() {
       this.UserId=this.jwt.decodeToken(token).id;
     }
     if((!token || this.jwt.isTokenExpired(token)) &&  this.isNumber(this.UserId)){
-      console.log("je set à 0");
       this.userService.setOnline(this.UserId,0).subscribe((response:any)=>{response});
     }
       await this.delay(240000);
