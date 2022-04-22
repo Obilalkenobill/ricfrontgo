@@ -51,10 +51,8 @@ async doTimer() {
     }
     if(this.authService.isLoggedIn==false &&  this.isNumber(this.UserId)){
       this.userService.setOnline(this.UserId,0).subscribe((response:any)=>{response});
-     this.authService.logout();
-      break;
     }
-      await this.delay(900000);
+      await this.delay(300000);
     }
 
   }
