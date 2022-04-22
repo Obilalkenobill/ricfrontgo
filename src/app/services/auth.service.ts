@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 import { User } from '../Models/userLogin.model';
 import { ProjetService } from './projet.service';
 import { ServerService } from './server.service';
-import { UsersService } from 'src/app/services/users.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,7 +15,7 @@ export class AuthService {
   redirectUrl: string;
   UserId: any;
 
-  constructor(private userService: UsersService,private http: ServerService, private router: Router, private projetService: ProjetService, private jwt: JwtHelperService)
+  constructor(private httpC: HttpClient,private http: ServerService, private router: Router, private projetService: ProjetService, private jwt: JwtHelperService)
   {
     this.isLoggedIn = sessionStorage.getItem('id_token') != null;
     this.redirectUrl = '/';
@@ -85,7 +85,9 @@ export class AuthService {
     if (typeof token == 'string') {
     this.UserId=this.jwt.decodeToken(token).id;
   }
-  this.userService.setOnline(this.UserId,0).subscribe((response:any)=>{response});
+  const headers2 = new HttpHeaders()
+   .set('content-type', 'application/json').set('Authorization', 'Bearer ' + token ).set('Access-Control-Allow-Origin','*');
+   this.httpC.put('https://localhost:8000/api/users/setOnline/'+ this.UserId +'/0',  {'headers':headers2}).subscribe();
     this.http.logout();
     this.redirectUrl = '/';
     this.router.navigate(['/']);
