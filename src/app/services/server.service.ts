@@ -12,7 +12,7 @@ import { EncrDecrService } from './EncrDecrSevice';
 })
 export class ServerService {
 
-  private BASE_URL: string = 'https://localhost:8000/api/';
+  private BASE_URL: string = 'https://gestion2vote.herokuapp.com/api/';
   /**
      * Instance privée de ce helper qui nous aidera à vérifier si
      * un token est expiré ou non.
