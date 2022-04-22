@@ -29,7 +29,8 @@ export class AmiMessageComponent implements OnInit {
   'nom',
   'prenom',
   'actions',
-  'login'
+  'login',
+  'is_on_line'
   ];
   dataSource!: MatTableDataSource<User>;
   formData:FormData=new FormData();

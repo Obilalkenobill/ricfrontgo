@@ -12,7 +12,7 @@ import { EncrDecrService } from './EncrDecrSevice';
 })
 export class ServerService {
 
-  private BASE_URL: string = 'https://gestion2vote.herokuapp.com/api/';
+  private BASE_URL: string = 'https://localhost:8000/api/';
   /**
      * Instance privée de ce helper qui nous aidera à vérifier si
      * un token est expiré ou non.
@@ -153,9 +153,11 @@ if (typeof token === 'string'){
         flatMap((data: any) => {
           if(data.token)
           {
+
             const token = data.token;
             // sessionStorage.setItem('user', JSON.stringify(user));
             sessionStorage.setItem('id_token', token);
+
           }
           return func();
         }), catchError((res: any) =>
@@ -164,6 +166,13 @@ if (typeof token === 'string'){
           })
       );
     } else {
+      let UserId;
+      if (typeof token === 'string'){
+        UserId=this.jwt.decodeToken(token).id;
+        const headers2 = new HttpHeaders()
+         .set('content-type', 'application/json').set('Authorization', 'Bearer ' + token ).set('Access-Control-Allow-Origin','*');
+         this.http.put(this.BASE_URL +'users/setOnline/'+ UserId +'/1',  {'headers':headers2}).subscribe();
+        }
         // si le token est valide et n'est pas expiré, on peut directement
         // faire appel à l'API protégée
         return func();

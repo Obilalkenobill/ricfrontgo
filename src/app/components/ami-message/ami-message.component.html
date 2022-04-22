@@ -52,10 +52,14 @@
 
               <ng-container matColumnDef="login">
                 <mat-header-cell  *matHeaderCellDef mat-sort-header> Pseudo </mat-header-cell>
-                <mat-cell  class="pseudo" *matCellDef="let row" style="width: 125px;"> {{ row.login }} <span *ngIf="row.is_on_line==1"><i class="glyphicon glyphicon-record"></i></span></mat-cell>
+                <mat-cell  class="pseudo" *matCellDef="let row" style="width: 125px;"> {{ row.login }}</mat-cell>
             </ng-container>
+            <ng-container matColumnDef="is_on_line">
+              <mat-header-cell  *matHeaderCellDef mat-sort-header>En ligne </mat-header-cell>
+              <mat-cell   *matCellDef="let row" ></mat-cell>
+          </ng-container>
               <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-              <mat-row  *matRowDef="let row; columns: displayedColumns;">
+              <mat-row [ngClass]="{'border_green' : row.is_on_line==1 }" *matRowDef="let row; columns: displayedColumns;">
               </mat-row>
 
           </mat-table>

@@ -43,16 +43,15 @@ async doTimer() {
 
       const token = sessionStorage.getItem('id_token');
       // Si le token n'existe pas ou s'il est expiré ...
-      if (!token || this.jwt.isTokenExpired(token)) {
-        this.authService.isLoggedIn=false;
-      }
+
       if (typeof token == 'string') {
       this.UserId=this.jwt.decodeToken(token).id;
     }
-    if(this.authService.isLoggedIn==false &&  this.isNumber(this.UserId)){
+    if((!token || this.jwt.isTokenExpired(token)) &&  this.isNumber(this.UserId)){
+      console.log("je set à 0");
       this.userService.setOnline(this.UserId,0).subscribe((response:any)=>{response});
     }
-      await this.delay(300000);
+      await this.delay(240000);
     }
 
   }
