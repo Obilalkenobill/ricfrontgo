@@ -62,7 +62,7 @@ export class OwnProjectComponent implements OnInit {
 
     refresh()
     {
-      let token=sessionStorage.getItem('id_token');
+      let token=localStorage.getItem('id_token');
       if (typeof token == 'string') {this.UserId=this.jwt.decodeToken(token).id;}
       this.projetService.getProjetByUserId(this.UserId).subscribe((projets:any) =>
       {

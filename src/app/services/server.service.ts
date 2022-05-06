@@ -26,13 +26,20 @@ headers!:any;
   public get<T>(url: string, secure: boolean = true): Observable<any>
   {
     if(secure){
-      let token=sessionStorage.getItem('id_token');
+      let token=localStorage.getItem('id_token');
       let headers = new HttpHeaders();
 if (typeof token === 'string'){
      headers = new HttpHeaders()
       .set('content-type', 'application/json').set('Authorization', 'Bearer ' + token ).set('Access-Control-Allow-Origin','*');
     }
-    return this.call(() =>this.http.get(this.BASE_URL + url, {'headers':headers}));
+    return this.call(() =>{
+      let token=localStorage.getItem('id_token');
+      let headers = new HttpHeaders();
+if (typeof token === 'string'){
+     headers = new HttpHeaders()
+      .set('content-type', 'application/json').set('Authorization', 'Bearer ' + token ).set('Access-Control-Allow-Origin','*');
+    };
+     return this.http.get(this.BASE_URL + url, {'headers':headers})});
    }
    else
    {
@@ -43,13 +50,20 @@ if (typeof token === 'string'){
   public post<T>(url: string, body: T, secure:boolean=true): Observable<any>
   {
     if(secure){
-      let token=sessionStorage.getItem('id_token');
+      let token=localStorage.getItem('id_token');
       let headers = new HttpHeaders();
 if (typeof token === 'string'){
      headers = new HttpHeaders()
       .set('content-type', 'application/json').set('Authorization', 'Bearer ' + token ).set('Access-Control-Allow-Origin','*');
     }
-    return this.call(() =>this.http.post(this.BASE_URL + url, body,  {'headers':headers}));
+    return this.call(() =>{
+      let token=localStorage.getItem('id_token');
+      let headers = new HttpHeaders();
+if (typeof token === 'string'){
+     headers = new HttpHeaders()
+      .set('content-type', 'application/json').set('Authorization', 'Bearer ' + token ).set('Access-Control-Allow-Origin','*');
+    };
+    return  this.http.post(this.BASE_URL + url, body,  {'headers':headers})});
    }
    else{
     return this.http.post(this.BASE_URL + url, body);
@@ -60,13 +74,20 @@ if (typeof token === 'string'){
 public postbis<T>(url: string, body: T, secure:boolean=true): Observable<any>
 {
   if(secure){
-    let token=sessionStorage.getItem('id_token');
+    let token=localStorage.getItem('id_token');
     let headers = new HttpHeaders();
 if (typeof token === 'string'){
    headers = new HttpHeaders()
     .set('Authorization', 'Bearer ' + token ).set( 'method' , 'POST').set('Access-Control-Allow-Origin','*');
   }
-  return this.call(() =>this.http.post(this.BASE_URL + url, body,  {'headers':headers}));
+  return this.call(() =>{
+    let token=localStorage.getItem('id_token');
+    let headers = new HttpHeaders();
+if (typeof token === 'string'){
+   headers = new HttpHeaders()
+   .set( 'method' , 'POST').set('Authorization', 'Bearer ' + token ).set('Access-Control-Allow-Origin','*');
+  };
+  return  this.http.post(this.BASE_URL + url, body,  {'headers':headers})});
  }
  else{
   return this.http.post(this.BASE_URL + url, body);
@@ -76,13 +97,21 @@ if (typeof token === 'string'){
 
   public put<T>(url: string,body?: T): Observable<any>
   {
-    let token=sessionStorage.getItem('id_token');
+    let token=localStorage.getItem('id_token');
     let headers = new HttpHeaders();
 if (typeof token === 'string'){
    headers = new HttpHeaders()
     .set('content-type', 'application/json').set('Authorization', 'Bearer ' + token ).set('Access-Control-Allow-Origin','*');
   }
-    return this.call(() =>this.http.put(this.BASE_URL + url, body,  {'headers':headers}));
+    return this.call(() =>{
+      let token=localStorage.getItem('id_token');
+      let headers = new HttpHeaders();
+if (typeof token === 'string'){
+     headers = new HttpHeaders()
+      .set('content-type', 'application/json').set('Authorization', 'Bearer ' + token ).set('Access-Control-Allow-Origin','*');
+    }
+      return this.http.put(this.BASE_URL + url, body,  {'headers':headers});
+    });
   }
 
   public delete<T>(url: string, body: any): Observable<any>
@@ -91,14 +120,23 @@ if (typeof token === 'string'){
   }
   public deletebis<T>(url: string): Observable<any>
   {
-    let token=sessionStorage.getItem('id_token');
+    let token=localStorage.getItem('id_token');
     let headers = new HttpHeaders();
 if (typeof token === 'string'){
    headers = new HttpHeaders()
     .set('content-type', 'application/json').set('Authorization', 'Bearer ' + token ).set('Access-Control-Allow-Origin','*');
   }
-    return this.call(() => this.http.delete(this.BASE_URL + url, {'headers':headers}));
+    return this.call(() => {
+      let token=localStorage.getItem('id_token');
+      let headers = new HttpHeaders();
+  if (typeof token === 'string'){
+     headers = new HttpHeaders()
+      .set('content-type', 'application/json').set('Authorization', 'Bearer ' + token ).set('Access-Control-Allow-Origin','*');
+    };
+  return  this.http.delete(this.BASE_URL + url, {'headers':headers})
+      })
   }
+
 
 
   public login(user: User): Observable<any>
@@ -114,12 +152,13 @@ if (typeof token === 'string'){
           user.password=this.EncrDecr.set('!4379^D&JWBfbve;}iqJ5^9H7',user.password);
           user.roles=this.jwt.decodeToken(data.token).roles;
           user.id=this.jwt.decodeToken(data.token).id;
+          localStorage.setItem("id"+JSON.stringify(user.id), JSON.stringify(user.id));
           user.is_verified=this.jwt.decodeToken(data.token).is_verified;
           user.roles=this.EncrDecr.set('gs,D]5W8Exct=7^6Hm3Dq#nrP',user.roles);
           user.id=this.EncrDecr.set('gs,D]5W8Exct=7^6Hm3Dq#nrP',user.id);
           user.is_verified=this.EncrDecr.set('lutilisateurnedoitpasconnaitrecemotdepasse',user.is_verified);
-          sessionStorage.setItem('user', JSON.stringify(user));
-          sessionStorage.setItem('id_token', token);
+          localStorage.setItem('user', JSON.stringify(user));
+          localStorage.setItem('id_token', token);
 
           return true;
         }
@@ -140,11 +179,11 @@ if (typeof token === 'string'){
      * le code qui utilise ce service.
      */
    private call<T>(func: any): Observable<any> {
-    // Récupère le token depuis le sessionStorage
-    const token = sessionStorage.getItem('id_token');
+    // Récupère le token depuis le localStorage
+    const token = localStorage.getItem('id_token');
     // Si le token n'existe pas ou s'il est expiré ...
     if (!token || this.jwt.isTokenExpired(token)) {
-      let user = JSON.parse(sessionStorage.getItem('user') || '');
+      let user = JSON.parse(localStorage.getItem('user') || '');
 
       user.password = this.EncrDecr.get('!4379^D&JWBfbve;}iqJ5^9H7',user.password);
 
@@ -156,8 +195,8 @@ if (typeof token === 'string'){
           {
 
             const token = data.token;
-            // sessionStorage.setItem('user', JSON.stringify(user));
-            sessionStorage.setItem('id_token', token);
+            // localStorage.setItem('user', JSON.stringify(user));
+            localStorage.setItem('id_token', token);
 
           }
           return func();
@@ -181,7 +220,7 @@ if (typeof token === 'string'){
 }
 public logout(): void
 {
-  sessionStorage.removeItem('user');
-  sessionStorage.removeItem('id_token');
+  localStorage.removeItem('user');
+  localStorage.removeItem('id_token');
 }
 }

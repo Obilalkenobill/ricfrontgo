@@ -74,7 +74,7 @@ import { MatParticipantComponent } from './components/mat-participant/mat-partic
 
 
 export function tokenGetter(){
-  return sessionStorage.getItem('id_token');
+  return localStorage.getItem('id_token');
 }
 
 @NgModule({

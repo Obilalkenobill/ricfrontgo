@@ -7,6 +7,7 @@ import { User } from '../Models/userLogin.model';
 import { ProjetService } from './projet.service';
 import { ServerService } from './server.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {Location} from '@angular/common';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,15 +16,15 @@ export class AuthService {
   redirectUrl: string;
   UserId: any;
 
-  constructor(private httpC: HttpClient,private http: ServerService, private router: Router, private projetService: ProjetService, private jwt: JwtHelperService)
+  constructor(private location: Location, private httpC: HttpClient,private http: ServerService, private router: Router, private projetService: ProjetService, private jwt: JwtHelperService)
   {
-    this.isLoggedIn = sessionStorage.getItem('id_token') != null;
+    this.isLoggedIn = localStorage.getItem('id_token') != null;
     this.redirectUrl = '/';
   }
 
   public getCurrentUser(): User
   {
-      let token=sessionStorage.getItem('id_token');
+      let token=localStorage.getItem('id_token');
 
       let roles!:any;
       let id!:any;
@@ -35,7 +36,7 @@ export class AuthService {
       }
       let userbis;
       try{
-      userbis = JSON.parse(sessionStorage.getItem('user') || '');}
+      userbis = JSON.parse(localStorage.getItem('user') || '');}
       catch{}
       const newUser = new User({
         roles : roles,
@@ -51,10 +52,10 @@ export class AuthService {
   {
     if(!user.password)
     {
-      let oldUser = JSON.parse(sessionStorage.getItem('user') || '')
+      let oldUser = JSON.parse(localStorage.getItem('user') || '')
       user.roles = oldUser.roles;
     }
-    sessionStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('user', JSON.stringify(user));
   }
   public IsUserProjet(projetId:any,UserId:any){
     return this.projetService.getOneByID(projetId).subscribe(m=>{
@@ -78,18 +79,18 @@ export class AuthService {
     );
   }
 
-  public logout(): void
+  public logout(UserId:any,status:any=true): void// le parametre status se trouve par est-ce l'utilisateur qui décide de se logout lui même, dans ce cas nous effacons sa session. Sinon nous le metton hors ligne et nous gardons sa session active.
   {
-    this.isLoggedIn = false;
-    const token = sessionStorage.getItem('id_token');
-    if (typeof token == 'string') {
-    this.UserId=this.jwt.decodeToken(token).id;
-  }
+    if (status){
+    this.isLoggedIn = false;}
+    const token =  localStorage.getItem('token');
   const headers2 = new HttpHeaders()
    .set('content-type', 'application/json').set('Authorization', 'Bearer ' + token ).set('Access-Control-Allow-Origin','*');
-   this.httpC.put('https://gestion2vote.herokuapp.com/api/users/setOnline/'+ this.UserId +'/0',  {'headers':headers2}).subscribe();
-    this.http.logout();
+   this.httpC.put('https://gestion2vote.herokuapp.com/api/users/setOnline/'+ UserId +'/0',  {'headers':headers2}).subscribe(()=>{ this.router.navigate(['/']);;});
+   if(status){
+   this.http.logout();
     this.redirectUrl = '/';
     this.router.navigate(['/']);
+   }
   }
 }

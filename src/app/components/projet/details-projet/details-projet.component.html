@@ -27,8 +27,8 @@
         Nombre de vote pour : {{projet.nbr_vote_pour}}
       </div>
       <button *ngIf="is_Admin() || is_current_User()" type="button" class="btn btn-warning" (click)="deleteProj(projet.id)"><i class="glyphicon glyphicon-trash"></i></button>
-      <button *ngIf="!user_follow" type="button" class="btn btn-info" (click)="follow(projet.id,userID_Curr)"><i class="glyphicon glyphicon-eye-open"></i></button>
-      <button *ngIf="user_follow" type="button" class="btn btn-info" (click)="unfollow(projet.id,userID_Curr)"><i class="glyphicon glyphicon-eye-close"></i></button>
+      <button *ngIf="!user_follow" type="button" class="btn btn-info" (click)="follow(projet.id,userID_Curr)"><i class="glyphicon glyphicon-eye-open"></i>&nbsp;<i class="glyphicon glyphicon-eye-open"></i></button>
+      <button *ngIf="user_follow" type="button" class="btn btn-info" (click)="unfollow(projet.id,userID_Curr)"><i class="glyphicon glyphicon-eye-close"></i>&nbsp;<i class="glyphicon glyphicon-eye-close"></i></button>
 
         <div class="coment-bottom bg-white p-2 px-4">
           <div class="d-flex flex-row add-comment-section mt-4 mb-4">
@@ -48,7 +48,7 @@
                 <div class="inptbtn">
                   <input [(ngModel)]="commentOFCom" [formControl]="commentCtl" name="comment" type="text" class="form-control mr-3" placeholder="Response">
                 <button class="btn btn-primary" type="submit" [disabled]="commentsForm.invalid"><i class="glyphicon glyphicon-send"></i></button>
-              </div>
+                </div>
               </form>
               </div>
 

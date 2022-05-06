@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, OnInit, ViewChild, AfterViewInit, ViewChildren, QueryList } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, ViewChild, AfterViewInit, ViewChildren, QueryList, HostListener } from '@angular/core';
 import { User } from 'src/app/Models/user.model';
 import { UsersService } from 'src/app/services/users.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -12,6 +12,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import {MatPaginatorIntl} from '@angular/material/paginator';
 import { Groupe } from 'src/app/Models/group.model';
 import { MatParticipantComponent } from '../mat-participant/mat-participant.component';
+import { Message } from 'src/app/Models/message.model';
 
 @Component({
   selector: 'app-ami-message',
@@ -48,11 +49,17 @@ export class AmiMessageComponent implements OnInit {
   pageSize!:any;
   pageSizeOptions!:any;
     itemsPerPageLabel = 'Item par page';
-  @ViewChildren('el') public div:any;
+  @ViewChildren('el') public div!: QueryList<ElementRef>;
+  charg1: any=0;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   scroll: any;
-
+  messageCtl!: FormControl;
+  messagesForm!: FormGroup;
+  message!: string;
+  messageOFCom!: string;
+  messages!: Message[];
+  messagesWOREF!: Message[];
   constructor(private userService: UsersService,
     public dialog: MatDialog,
     public snackBar: MatSnackBar,
@@ -67,10 +74,20 @@ export class AmiMessageComponent implements OnInit {
 
   ngOnInit(): void {
 
-    let token=sessionStorage.getItem('id_token');
+    let token=localStorage.getItem('id_token');
     if (typeof token == 'string') {this.UserId=this.jwt.decodeToken(token).id;}
     this.refresh();
   }
+//  scrollTo1(){
+//    console.log(this.div.changes);
+//    this.div.changes.subscribe((comps:any)=>
+//    {
+//               console.log("je passe par là");
+//               console.log(comps);
+//             comps.first.nativeElement.scrollTo(0,999999999);//Now you can access the child component
+//             });
+//   }
+
   refresh()
   {
     if (window.innerWidth > 450 && window.innerWidth <= 650) {
@@ -86,6 +103,7 @@ export class AmiMessageComponent implements OnInit {
     }
     this.userService.getGroupMessage(this.UserId).subscribe(groups =>    {
  this.ListGroups=groups;
+ console.log(this.ListGroups);
 })
 this.formData=new FormData();
 this.k=0;
@@ -208,12 +226,46 @@ quitter_convers(){
   this.pers_init_id=null;
   this.group_pers=[];
 }
-openConvers(group_id:any,group_name:any,pers_init:any){
-  this.div.changes.subscribe((comps:any)=>
-  {
-   comps.first.nativeElement.scrollTo(0,999999999);//Now you can access the child component
-  });
 
+async chargerMessage(){
+
+  this.userService.getMessageByGroupeID(this.group_actif).subscribe((m:any)=>{
+console.log(m);
+    this.messages=m;
+    this.messagesWOREF=[];
+    this.messages.forEach(element => {
+      if(element.message_ref_id === undefined){
+       this.messagesWOREF.push(element);
+      }
+    });
+},o=>o,()=>this.goToAnchor(true));
+;
+}
+clicktoggle() {
+  const targetDiv = document.getElementById("#inptbtn1");
+  const btn = document.getElementById("#inptbtn1");
+    if (targetDiv && targetDiv?.style.display !== "none") {
+      targetDiv.style.display = "none";
+    } else if (targetDiv ){
+      targetDiv.style.display = "block";
+    }
+  }
+async goToAnchor(oui?:any){
+
+  const appaer= document.querySelector("#appaer");
+  const element = document.querySelector("#el");
+if (element && appaer && (this.charg1<2 || oui ))
+{
+  element.scrollTo(0, 99999999999);
+  this.charg1++;
+  return true
+}
+  else {
+    return false;
+  }
+}
+openConvers(group_id:any,group_name:any,pers_init:any){
+  this.goToAnchor(true);
   this.group_pers_array=[];
   this.group_actif=group_id;
   this.group_name_actif=group_name;
@@ -230,25 +282,62 @@ this.group_pers=response
     }
   }
   );
-  // this.userService.openConvers(group_id).subscribe( (response) => {
-  // },
-  // (err) => {
-  // },
-  // () => {
-  //   this.refresh();
-  // }
-  // );
-}
+  this.goToAnchor(true);
+this.chargerMessage();
+  this.messageCtl = this.formBuilder.control('', [Validators.required],);
 
+  this.messagesForm = this.formBuilder.group({
+    message_txt: this.messageCtl,
+ group_group_id: this.group_actif,
+ expediteur:this.UserId
+  });
+  this.goToAnchor(true);
+}
+  onSubmitMess()
+  {
+
+    let formVal = this.messagesForm.value;
+console.log(formVal);
+const newMessage = new Message(formVal);
+
+console.log(newMessage);
+      this.userService.addMessage(newMessage).subscribe(m => {
+        this.refresh();
+        this.message='';
+      },o=>o,()=>{this.chargerMessage();this.goToAnchor(true);});
+  }
+  onSubmit2(idReferent:any){
+    let formVal = this.messagesForm.value;
+    formVal.expediteur_id=this.UserId;
+    formVal.message_ref_id=idReferent;
+    formVal.message_read=false;
+
+      const newMessage = new Message(formVal);
+      this.userService.addMessage(newMessage).subscribe(m => {
+        this.refresh();
+        this.messageOFCom='';
+      });
+
+      this.chargerMessage();
+
+    }
 voirPartic(group_id:any){
 
   this.userService.voirPartic(group_id).subscribe( (response) => {
-    const dlg = this.dialog.open(MatParticipantComponent, {data:{data:response,group_id:group_id,curr_user:this.UserId,user_init:this.pers_init_id}});
+    const dlg = this.dialog.open(MatParticipantComponent,
+      {data:
+        {data:response,
+          group_id:group_id,
+          curr_user:this.UserId,
+          user_init:this.pers_init_id,
+          group_name:this.group_name_actif
+        }
+      });
+      dlg.afterClosed().subscribe( (data:any) => {if(data != undefined && data.chgt===true){this.quitter_convers(); this.refresh()}});
   },
   (err) => {
   },
   () => {
-    this.refresh();
   }
   );
 
@@ -301,4 +390,6 @@ ajouter_nvo_o_group(userid:any,group_actif:any,username:any){
   }
   );
 }
+
+
 }

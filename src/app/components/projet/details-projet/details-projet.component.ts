@@ -56,7 +56,7 @@ commentOFCom!:any;
   ngOnInit(): void {
   this.is_verified = this.auth.getCurrentUser().is_verified ;
   this.reload();
-  let token=sessionStorage.getItem('id_token');
+  let token=localStorage.getItem('id_token');
   if (typeof token == 'string') {this.userID_Curr=this.jwt.decodeToken(token).id;}
   this.initForm();
   }

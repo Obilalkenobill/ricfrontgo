@@ -16,11 +16,15 @@ mat-header-row{
   padding-top:10px;
   display:inline;
 }
-
+#inptbtn1{
+display:none;
+}
 mat-header-row{
   display:inline;
 }
-
+.h4,h4{
+ font-size:12px;
+}
 
 td{
   border:solid lightgray 2px;
@@ -219,6 +223,17 @@ mat-header-row {
   background-color: gold;
   cursor : pointer;
 }
+.glyphicon-arrow-down{
+  margin-left:47% !important;
+}
+
+.scroll1:hover{
+  cursor : pointer;
+  margin-right:auto !important;
+}
+.gold {
+  background-color: gold;
+}
 .flex_arr{
   flex: 1;
   display:inline-block;
@@ -239,16 +254,16 @@ div.scroll {
   padding:4px;
   background-color: lightsteelblue;
   width: 85vw;;
-  height: 50vh;
+  height: 83vh;
   overflow-x: hidden;
   overflow-y: auto;
   text-align:justify;
   margin:auto !important;
 }
-
 .scroll::-webkit-scrollbar {
   width: 12px;               /* width of the entire scrollbar */
 }
+
 
 .scroll::-webkit-scrollbar-track {
   background: white;        /* color of the tracking area */
@@ -270,4 +285,7 @@ div.scroll {
 }
 .border_green{
   box-shadow: 5px 0 5px lightgray, 0 15px 15px -10px rgb(48, 173, 48);
+}
+textarea{
+  width:55vw;
 }

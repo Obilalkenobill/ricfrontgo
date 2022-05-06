@@ -4,6 +4,7 @@ import { User } from '../Models/user.model';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { Groupe } from '../Models/group.model';
+import { Message } from '../Models/message.model';
 
 @Injectable({
   providedIn: 'root'
@@ -93,6 +94,32 @@ public retirer_ami(UserId1:any,UserId2:any){
     ));
   }
 
+
+
+  public getMessageByGroupeID(Groupe_ID:any):Observable<Message[]>{
+    return this.server.get<Message[]>('personne/message_by_group/'+Groupe_ID).pipe(
+      map(res =>{
+        return res[0].map((m: any) => new Message(m));
+      },
+      catchError(err =>
+        {
+          return [];
+        })
+    ));
+  }
+
+
+  public addMessage(message: Message):  Observable<Message[]>
+  {
+    return this.server.post<Message>('personne/send/message', message).pipe(
+      map(res => {;return res}),
+      catchError(err =>
+        {
+
+          return [];
+        })
+    );
+  }
   public getAmi(UserId:any): Observable<User[]>
   {
     return this.server.get<User[]>('personne/ami/'+UserId).pipe(
@@ -283,4 +310,26 @@ public retirer_ami(UserId1:any,UserId2:any){
         })
     );
   }
+
+  public dissoudreGroupe(group_id:number){
+    return this.server.deletebis('personne/groupes/delete/'+group_id).pipe(
+      map(res => res),
+      catchError(err =>
+        {
+
+          return [];
+        })
+    )
+  }
+
+  public elireAdminGroupe(user_id:number,group_id:number){
+    return this.server.put('personne/groupes/elire/'+group_id+'/'+user_id).pipe(
+      map(res => res),
+      catchError(err =>
+        {
+          return [];
+        })
+    )
+  }
+
 }

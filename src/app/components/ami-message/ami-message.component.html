@@ -79,15 +79,15 @@
         </div>
 <br>
 <ng-container *ngIf="ListGroups != null && ListGroups != undefined">
-  <ul *ngIf="group_actif != null && group_actif != undefined ">
+  <ul *ngIf="group_actif != null && group_actif != undefined && pers_init_id != UserId">
     <div class="border_group btn btn-danger" (click)="retirer_part_group_bis(UserId,group_actif,group_name_actif)">
       <li > Quitter le groupe de convers.</li>
     </div>
   </ul>
   <br>
   <ul class="flex_arr0"  *ngFor="let group of ListGroups;index as indexOfelement;">
-          <div class="border_group" (click)="openConvers(group.id,group.name,group.pers_init_id_id)">
-            <li>
+          <div class="border_group" [ngClass]="{'gold' : group.message_read===0 }" (click)="openConvers(group.id,group.name,group.pers_init_id_id)">
+            <li >
               {{group.name}}
             </li>
         </div>
@@ -103,71 +103,44 @@
 
             <h1 class="border_group" (click)="voirPartic(group_actif)">{{group_name_actif}}   <button class="btn btn-danger rad" (click)="quitter_convers()"><i class="glyphicon glyphicon-remove-sign"></i></button></h1>
         </div>
-          <div class="scroll"  #el id="el">It is a good platform to learn programming.
-          It is an educational website. Prepare for the Recruitment drive
-          of product based companies like Microsoft, Amazon, Adobe etc with
-          a free online placement preparation course. The course focuses
-          on various MCQ's & Coding question likely to be asked in the
-          interviews & make your upcoming placement season efficient and
-          successful. Also, any geeks can help other geeks by writing
-          articles on the GeeksforGeeks, publishing articles follow few
-          steps that are Articles that need little modification/improvement
-          from reviewers are published first. To quickly get your articles
-          reviewed, please refer existing articles, their formatting style,
-          coding style, and try to make you are close to them. In case you
-          are a beginner, you may refer Guidelines to write an Article
-          It is a good platform to learn programming.
-          It is an educational website. Prepare for the Recruitment drive
-          of product based companies like Microsoft, Amazon, Adobe etc with
-          a free online placement preparation course. The course focuses
-          on various MCQ's & Coding question likely to be asked in the
-          interviews & make your upcoming placement season efficient and
-          successful. Also, any geeks can help other geeks by writing
-          articles on the GeeksforGeeks, publishing articles follow few
-          steps that are Articles that need little modification/improvement
-          from reviewers are published first. To quickly get your articles
-          reviewed, please refer existing articles, their formatting style,
-          coding style, and try to make you are close to them. In case you
-          are a beginner, you may refer Guidelines to write an Article
-          It is a good platform to learn programming.
-          It is an educational website. Prepare for the Recruitment drive
-          of product based companies like Microsoft, Amazon, Adobe etc with
-          a free online placement preparation course. The course focuses
-          on various MCQ's & Coding question likely to be asked in the
-          interviews & make your upcoming placement season efficient and
-          successful. Also, any geeks can help other geeks by writing
-          articles on the GeeksforGeeks, publishing articles follow few
-          steps that are Articles that need little modification/improvement
-          from reviewers are published first. To quickly get your articles
-          reviewed, please refer existing articles, their formatting style,
-          coding style, and try to make you are close to them. In case you
-          are a beginner, you may refer Guidelines to write an Article
-          It is an educational website. Prepare for the Recruitment drive
-          of product based companies like Microsoft, Amazon, Adobe etc with
-          a free online placement preparation course. The course focuses
-          on various MCQ's & Coding question likely to be asked in the
-          interviews & make your upcoming placement season efficient and
-          successful. Also, any geeks can help other geeks by writing
-          articles on the GeeksforGeeks, publishing articles follow few
-          steps that are Articles that need little modification/improvement
-          from reviewers are published first. To quickly get your articles
-          reviewed, please refer existing articles, their formatting style,
-          coding style, and try to make you are close to them. In case you
-          are a beginner, you may refer Guidelines to write an Article
-          It is a good platform to learn programming.
-          It is an educational website. Prepare for the Recruitment drive
-          of product based companies like Microsoft, Amazon, Adobe etc with
-          a free online placement preparation course. The course focuses
-          on various MCQ's & Coding question likely to be asked in the
-          interviews & make your upcoming placement season efficient and
-          successful. Also, any geeks can help other geeks by writing
-          articles on the GeeksforGeeks, publishing articles follow few
-          steps that are Articles that need little modification/improvement
-          from reviewers are published first. To quickly get your articles
-          reviewed, please refer existing articles, their formatting style,
-          coding style, and try to make you are close to them. In case you
-          are a beginner, you may refer Guidelines to write an Article
+          <div class="scroll" #el id="el">
+             <div class="transition" (click)="goToAnchor(true)"><i  class="glyphicon glyphicon-arrow-down"></i></div>
+              <div *ngIf="messages || messagesWOREF" class="coment-bottom bg-white p-2 px-4">
+                <div class="list-group">
+                  <div *ngFor="let message of messagesWOREF" class="list-group-item border">
+                    <h4 id="appaer" class="list-group-item-heading" >{{message.login}}</h4>
+                    <p class="list-group-item-text"  >{{message.message_txt}}</p>
+                    <p>{{message.creation_date}}</p>
+                      <div class="d-flex flex-row add-message-section mt-4 mb-4">
+                        <form (ngSubmit)="onSubmit2(message.id)" [formGroup]="messagesForm">
+                        <div id="inptbtn1" class="inptbtn">
+                          <textarea [(ngModel)]="messageOFCom" [formControl]="messageCtl" name="message" rows="1" class="form-control mr-3" placeholder="Response"></textarea>
+                        <button class="btn btn-primary" type="submit" [disabled]="messagesForm.invalid"><i class="glyphicon glyphicon-send"></i></button>
+                        </div>
+                        </form>
+                      </div>
+
+                      <ng-container *ngFor="let message of messages" class="list-group-item border">
+                        <ng-container *ngIf="message.message_ref_id==message.id">
+                        <h4 class="list-group-item-heading" >{{message.login}}</h4>
+                        <p class="list-group-item-text"  >{{message.message_txt}}</p>
+
+                        </ng-container>
+                      </ng-container>
+
+                  </div>
+              </div>
+
+            </div>
+        </div>
+        <div *ngIf="goToAnchor()" id="dest" class="d-flex flex-row add-message-section mt-4 mb-4">
+          <form (ngSubmit)="onSubmitMess()" [formGroup]="messagesForm">
+          <div class="inptbtn">
+            <textarea [(ngModel)]="message" [formControl]="messageCtl" name="message" rows="2" class="form-control mr-3" placeholder="Add message"></textarea>
+            <button class="btn btn-primary" type="submit" [disabled]="messagesForm.invalid"><i class="glyphicon glyphicon-comment"></i></button>
           </div>
+          </form>
+        </div>
 </ng-container>
 <script type="text/javascript">
   function goToBottom (el)
