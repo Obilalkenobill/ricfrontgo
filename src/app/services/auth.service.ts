@@ -86,7 +86,7 @@ export class AuthService {
     const token =  localStorage.getItem('token');
   const headers2 = new HttpHeaders()
    .set('content-type', 'application/json').set('Authorization', 'Bearer ' + token ).set('Access-Control-Allow-Origin','*');
-   this.httpC.put('https://localhost:8000/api/users/setOnline/'+ UserId +'/0',  {'headers':headers2}).subscribe(()=>{ this.router.navigate(['/']);;});
+   this.httpC.put('https://gestion2vote.herokuapp.com/api/users/setOnline/'+ UserId +'/0',  {'headers':headers2}).subscribe(()=>{ this.router.navigate(['/']);;});
    if(status){
    this.http.logout();
     this.redirectUrl = '/';
