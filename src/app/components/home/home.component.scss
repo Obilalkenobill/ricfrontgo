@@ -1,0 +1,55 @@
+
+
+.conteneur{
+    display: flex;
+    justify-content: center;
+	align-items: center;
+
+}
+
+.contenu{
+    display: inline-block;
+    text-align: center;
+
+}
+
+.lettreR{
+    color:black;
+    font-size: 19px;
+
+}
+.lettreI{
+    color:yellow;
+    font-size: 25px;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+.lettreC{
+    color:red;
+    font-size: 19px;
+
+}
+.brMedia{
+  display:none;
+}
+.imageHome{
+  width:100%;
+  margin-left: auto;
+  margin-right:auto;
+  height:100%;
+  border-radius: 50%;
+}
+.tiitle{
+  width:100%;
+  height:100%;
+  box-shadow: 0 -5px 3px -3px #ffee58, 0 5px 3px -3px #ffee58;
+  border-radius:25px;
+  opacity:0.85;
+}
+.block{
+  display:inline-block;
+}
+@media screen and (max-width: 750px) {
+  .brMedia{
+display:block  ;
+}
+}

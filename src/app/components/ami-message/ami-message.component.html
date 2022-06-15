@@ -1,0 +1,152 @@
+<button class="btn grey" [routerLink]='["/invitations"]'><i class="glyphicon glyphicon-hourglass"></i><i class="glyphicon glyphicon-user"></i><i class="glyphicon glyphicon-user"></i></button>
+<button class="btn orange" > <i class="glyphicon glyphicon-user"></i><i class="glyphicon glyphicon-envelope"></i></button>
+<br>
+
+  <form (ngSubmit)="onSubmit()" [formGroup]="searchForm">
+    <div class="search">
+      <input type="text" placeholder="Search" [formControl]="searchCtl" id="txtSearch"/>
+        <button class="btn btn-primary" type="submit" [disabled]="searchForm?.invalid">
+          <span class="glyphicon glyphicon-search"></span>
+        </button>
+    </div>
+    <small class="text-danger" *ngIf="searchCtl?.hasError('required')"> requis </small>
+  </form>
+
+
+      <div class="mat-elevation-z2">
+          <mat-table (window:resize)="onResize($event)" [dataSource]='dataSource' matSort matSortActive="id" matSortDirection="asc"
+              matSortDisableClear width="100%">
+              <ng-container matColumnDef="nom">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Nom </mat-header-cell>
+                  <mat-cell  *matCellDef="let row"> {{ row.nom }}</mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="prenom">
+                  <mat-header-cell  *matHeaderCellDef mat-sort-header> Prenom </mat-header-cell>
+                  <mat-cell  *matCellDef="let row"> {{ row.prenom }}</mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef  class="invisible" > </mat-header-cell>
+                <mat-cell  class="pseudo1" *matCellDef="let row">
+                  <div  *ngIf="row.id != UserId" class="btn-group">
+
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                      <li *ngIf="row.personne1_id_id == UserId && row.personne2_id_id == row.id && row.accept_personne1==1 && row.accept_personne2==1"><button class="btn btn-danger retirer_ami" (click)="retirer_ami(UserId,row.id,row.login)"><i class="glyphicon glyphicon-minus"></i></button></li>
+
+                      <li *ngIf="row.personne1_id_id == row.id && row.personne2_id_id == UserId && row.accept_personne1==1 && row.accept_personne2==1"><button class="btn btn-danger retirer_ami" (click)="retirer_ami(row.id,UserId,row.login)"><i class="glyphicon glyphicon-minus"></i></button></li>
+
+                      <li *ngIf="formArray == undefined || formArray.indexOf(row.id)== -1"><button class="btn btn-primary" (click)="ajouter_group(row.id)"><i class="glyphicon glyphicon-envelope" ></i></button></li>
+
+                      <li *ngIf="formArray != undefined && formArray.indexOf(row.id)!== -1"><button class="btn btn-danger" (click)="retirer_group(row.id)"><i class="glyphicon glyphicon-envelope" ></i></button></li>
+
+                      <li *ngIf="group_actif != null && group_actif != undefined && group_pers_array.indexOf(row.id) !== -1 && (pers_init_id == UserId || row.id == UserId)"><button class="btn btn-danger" (click)="retirer_part_group(row.id,group_actif,row.login)"><i class="glyphicon glyphicon-minus-sign"></i></button></li>
+
+                      <li *ngIf="group_actif != null && group_actif != undefined && group_pers_array.indexOf(row.id) == -1 && pers_init_id == UserId"><button class="btn btn-success" (click)="ajouter_nvo_o_group(row.id,group_actif,row.login)"><i class="glyphicon glyphicon-plus-sign"></i></button></li>
+
+                    </ul>
+                    </div>
+                </mat-cell>
+            </ng-container>
+
+              <ng-container matColumnDef="login">
+                <mat-header-cell  *matHeaderCellDef mat-sort-header> Pseudo </mat-header-cell>
+                <mat-cell  class="pseudo" *matCellDef="let row" style="width: 125px;"> {{ row.login }}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="is_on_line">
+              <mat-header-cell  *matHeaderCellDef mat-sort-header>En ligne </mat-header-cell>
+              <mat-cell   *matCellDef="let row" ></mat-cell>
+          </ng-container>
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row [ngClass]="{'border_green' : row.is_on_line==1 }" *matRowDef="let row; columns: displayedColumns;">
+              </mat-row>
+
+          </mat-table>
+          <mat-paginator  [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" [showFirstLastButtons]="true"></mat-paginator>
+
+
+          <form (ngSubmit)="createGroup()" [formGroup]="groupeForm">
+            <div style="display: table-cell;">
+              <input type="text" placeholder="Nom_du-Groupe" [formControl]="groupeCtl" id="txtSearch"/>
+              <small class="text-danger" *ngIf="groupeCtl?.hasError('required')"> requis </small>
+              <small class="text-danger" *ngIf="groupeCtl?.hasError('pattern')"> Admis Majuscule/minuscule, chiffres de 1 à 9 et tirets _ - </small>
+                <button button class="btn btn-success" type="submit" [disabled]="groupeForm?.invalid">
+                  Créer la conversation
+                </button>
+            </div>
+          </form>
+        </div>
+<br>
+<ng-container *ngIf="ListGroups != null && ListGroups != undefined">
+  <ul *ngIf="group_actif != null && group_actif != undefined && pers_init_id != UserId">
+    <div class="border_group btn btn-danger" (click)="retirer_part_group_bis(UserId,group_actif,group_name_actif)">
+      <li > Quitter le groupe de convers.</li>
+    </div>
+  </ul>
+  <br>
+  <ul class="flex_arr0"  *ngFor="let group of ListGroups;index as indexOfelement;">
+          <div class="border_group" [ngClass]="{'blue' : group.message_read===0 }" (click)="openConvers(group.id,group.name,group.pers_init_id_id)">
+            <li >
+              {{group.name}}
+            </li>
+        </div>
+        </ul>
+        <br>
+
+      </ng-container>
+
+
+
+      <ng-container *ngIf="group_actif != null && group_actif != undefined">
+          <div class="headerConv">
+
+            <h1 class="border_group" (click)="voirPartic(group_actif)">{{group_name_actif}}   <button class="btn btn-danger rad" (click)="quitter_convers()"><i class="glyphicon glyphicon-remove-sign"></i></button></h1>
+        </div>
+          <div class="scroll" #el id="el">
+             <div class="transition" (click)="goToAnchor(true)"><i  class="glyphicon glyphicon-arrow-down"></i></div>
+              <div *ngIf="messages || messagesWOREF" class="coment-bottom bg-white p-2 px-4">
+                <div class="list-group">
+                  <div *ngFor="let message of messagesWOREF" id="messages" class="list-group-item border">
+                    <h4 id="appaer" class="list-group-item-heading" >{{message.login}}<i *ngIf="message.is_on_line==1" class="glyphicon glyphicon-unchecked online"></i></h4>
+                    <div class="msg1"> <p class="list-group-item-text"  >{{message.message_txt}}</p></div>
+                    <p>{{message.creation_date| date:'HH:mm:s dd/MM/yy'}}</p>
+                      <div class="d-flex flex-row add-message-section mt-4 mb-4">
+                        <form (ngSubmit)="onSubmit2(message.id)" [formGroup]="messagesForm">
+                        <div id="inptbtn1" class="inptbtn">
+                          <textarea [(ngModel)]="messageOFCom" [formControl]="messageCtl" name="message" rows="1" class="form-control mr-3" placeholder="Response"></textarea>
+                        <button class="btn btn-primary" type="submit" [disabled]="messagesForm.invalid"><i class="glyphicon glyphicon-send"></i></button>
+                        </div>
+                        </form>
+                      </div>
+
+                      <ng-container *ngFor="let message_ of messages" class="list-group-item border">
+                        <ng-container *ngIf="message_.message_ref_id != undefined && message.id != undefined && message_.message_ref_id==message.id">
+                        <h4 class="list-group-item-heading" >{{message.login}}</h4>
+                        <p class="list-group-item-text"  >{{message.message_txt}}</p>
+
+                        </ng-container>
+                      </ng-container>
+
+                  </div>
+                  <div id="dest" class="d-flex flex-row add-message-section mt-4 mb-4">
+                    <form (ngSubmit)="onSubmitMess()" [formGroup]="messagesForm">
+                    <div class="inptbtn">
+                      <textarea autofocus id="msg" #msg [(ngModel)]="message" [formControl]="messageCtl" name="message" rows="2" class="form-control mr-3" placeholder="Add message"></textarea>
+                      <button class="btn btn-primary" type="submit" [disabled]="messagesForm.invalid"><i class="glyphicon glyphicon-comment"></i></button>
+                      <span id="out"></span>
+                    </div>
+                    </form>
+                  </div>
+              </div>
+
+            </div>
+        </div>
+
+</ng-container>
+<script type="text/javascript">
+  function goToBottom (el)
+   {
+    el.contentWindow.scrollTo (0, 999999999);
+   }
+  </script>

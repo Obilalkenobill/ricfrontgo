@@ -1,0 +1,51 @@
+<button class="btn grey" (click)=redirectCreateProjet()> Émettre un Projet </button>
+<button class="btn orange" [routerLink]='["/own-projet"]'> <i class="glyphicon glyphicon-user"></i> </button>
+<button class="btn jaune" [routerLink]='["/projets-follow"]'><i class="glyphicon glyphicon-eye-open"></i>&nbsp;<i class="glyphicon glyphicon-eye-open"></i></button>
+
+            <mat-table class="lessons-table mat-elevation-z8" (window:resize)="onResize($event)" [dataSource]='dataSource' matSort matSortActive="id" matSortDirection="asc"
+                matSortDisableClear>
+                <ng-container matColumnDef="titre">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>titre </mat-header-cell>
+                    <mat-cell class="title card-header" *matCellDef="let row"> {{ row.titre }}</mat-cell>
+                </ng-container>
+                <ng-container  matColumnDef="descriptif">
+                    <mat-header-cell  *matHeaderCellDef mat-sort-header> descriptif </mat-header-cell>
+                    <mat-cell class="copte" *matCellDef="let row"> {{ row.descriptif }}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="nbr_vote_pour">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> vote(s) pour </mat-header-cell>
+                    <mat-cell *matCellDef="let row" class="alert-success" [ngClass]="{'border_vote_pour' : row.a_vote && row.bull_vote==true}" role="alert" > {{ row.nbr_vote_pour }} POUR</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="nbr_vote_contre">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> vote(s) contre </mat-header-cell>
+                    <mat-cell *matCellDef="let row" class="alert-danger" [ngClass]="{'border_vote_contre' : row.a_vote && row.bull_vote==false}" role="alert"> {{ row.nbr_vote_contre }} CONTRE</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="nbr_vote_null">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> vote(s) null </mat-header-cell>
+                    <mat-cell *matCellDef="let row" class="alert-secondary" [ngClass]="{'border_vote_null' : row.a_vote && row.bull_vote==null}" role="alert"> {{ row.nbr_vote_null }} NULL</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="actions">
+                  <mat-header-cell *matHeaderCellDef class="invisible" ></mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                          <button class="btn btn-primary btn-lg btn-block" [routerLink]='["/detail-proj", row.id]'>Intéragir au projet</button>
+                  </mat-cell>
+              </ng-container>
+                <ng-container  matColumnDef="date_adm">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> date d'admission </mat-header-cell>
+                    <mat-cell *matCellDef="let row"><span *ngIf="row.date_adm">Admis le</span>  {{ row.date_adm }}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="date_rej">
+                    <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> date de rejet </mat-header-cell>
+                    <mat-cell *matCellDef="let row"><span *ngIf="row.date_rej">Rejeté le </span>{{ row.date_rej }}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="creation_date">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> date de création</mat-header-cell>
+                    <mat-cell class="card-footer text-muted" *matCellDef="let row">Créé le  {{ row.creation_date }}</mat-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row [ngClass]="{'border_green' : row.nbr_vote_pour > row.nbr_vote_contre && row.nbr_vote_pour > row.nbr_vote_null,'border_red' : row.nbr_vote_contre > row.nbr_vote_pour && row.nbr_vote_contre > row.nbr_vote_null,'border_null' : row.nbr_vote_null > row.nbr_vote_contre && row.nbr_vote_null > row.nbr_vote_pour}" *matRowDef="let row; columns: displayedColumns;">
+                </mat-row>
+
+            </mat-table>
+            <mat-paginator [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" [showFirstLastButtons]="true"></mat-paginator>
+

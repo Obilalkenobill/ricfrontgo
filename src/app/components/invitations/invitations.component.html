@@ -1,0 +1,59 @@
+<button class="btn grey" [routerLink]='["/invitations"]'><i class="glyphicon glyphicon-hourglass"></i><i class="glyphicon glyphicon-user"></i><i class="glyphicon glyphicon-user"></i></button>
+<button class="btn orange" [routerLink]='["/ami-message"]'> <i class="glyphicon glyphicon-user"></i><i class="glyphicon glyphicon-envelope"></i></button>
+<br>
+
+  <form (ngSubmit)="onSubmit()" [formGroup]="searchForm">
+    <div class="search">
+      <input type="text" placeholder="Search" [formControl]="searchCtl" id="txtSearch"/>
+        <button class="btn btn-primary" type="submit" [disabled]="searchForm?.invalid">
+          <span class="glyphicon glyphicon-search"></span>
+        </button>
+    </div>
+    <small class="text-danger" *ngIf="searchCtl?.hasError('required')"> requis </small>
+  </form>
+
+
+      <div class="mat-elevation-z2">
+          <mat-table [dataSource]='dataSource' matSort matSortActive="id" matSortDirection="asc"
+              matSortDisableClear width="100%">
+              <ng-container matColumnDef="nom">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Nom </mat-header-cell>
+                  <mat-cell  *matCellDef="let row"> {{ row.nom }}</mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="prenom">
+                  <mat-header-cell  *matHeaderCellDef mat-sort-header> Prenom </mat-header-cell>
+                  <mat-cell  *matCellDef="let row"> {{ row.prenom }}</mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef  class="invisible" > </mat-header-cell>
+                <mat-cell  class="pseudo1" *matCellDef="let row">
+                  <div  *ngIf="row.id != UserId" class="btn-group">
+
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                      <li *ngIf="row.personne1_id_id == UserId && row.personne2_id_id == row.id && row.accept_personne1==1 && row.accept_personne2==0"><button class="btn btn-info" ><i class="glyphicon glyphicon-hourglass"></i></button></li>
+
+                      <li *ngIf="row.personne1_id_id == UserId && row.personne2_id_id == row.id && row.accept_personne1==1 && row.accept_personne2==0"><button class="btn btn-danger" (click)="retirer_ami(UserId,row.id,row.login)"><i class="glyphicon glyphicon-minus"></i></button></li>
+
+                      <li *ngIf="row.personne1_id_id == row.id && row.personne2_id_id == UserId && row.accept_personne1==1 && row.accept_personne2==0"><button class="btn btn-info goldblack1" (click)="accepter_invit(row.id,UserId,row.login)"><i class="glyphicon glyphicon-plus goldblack"></i></button></li>
+
+                      <li *ngIf="row.personne1_id_id == row.id && row.personne2_id_id == UserId && row.accept_personne1==1 && row.accept_personne2==0"><button class="btn btn-info goldblack1" (click)="retirer_ami(row.id,UserId,row.login)"><i class="glyphicon glyphicon-minus goldblack"></i></button></li>
+                    </ul>
+                    </div>
+                </mat-cell>
+            </ng-container>
+
+              <ng-container matColumnDef="login">
+                <mat-header-cell  *matHeaderCellDef mat-sort-header> Pseudo </mat-header-cell>
+                <mat-cell  class="pseudo" *matCellDef="let row" style="width: 125px;"> {{ row.login }}</mat-cell>
+            </ng-container>
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row  *matRowDef="let row; columns: displayedColumns;">
+              </mat-row>
+
+          </mat-table>
+          <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 15, 20]" [showFirstLastButtons]="true"></mat-paginator>
+</div>
+
