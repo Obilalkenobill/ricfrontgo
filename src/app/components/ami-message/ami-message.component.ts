@@ -88,7 +88,7 @@ export class AmiMessageComponent implements OnInit {
       this.UserId=this.jwt.decodeToken(token).id;
       this.UserLogin=this.jwt.decodeToken(token).login;
     }
-
+this.wss();
   }
 wss(){
   this.ws=new  WebSocket('wss://web-so.herokuapp.com');
