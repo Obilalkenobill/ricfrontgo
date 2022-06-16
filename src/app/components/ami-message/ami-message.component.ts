@@ -88,7 +88,6 @@ export class AmiMessageComponent implements OnInit {
       this.UserId=this.jwt.decodeToken(token).id;
       this.UserLogin=this.jwt.decodeToken(token).login;
     }
-    this.wss();
     this.ws.onerror=function(e:any){this.out.innerHTML=e;this.wss()}
   }
 wss(){
