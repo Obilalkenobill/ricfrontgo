@@ -83,7 +83,7 @@ export class AmiMessageComponent implements OnInit {
      }
 
   ngOnInit(): void {
-    this.ws=new  WebSocket('wss://web-so.herokuapp.com');
+    this.ws=new  WebSocket('wss://www.web-so.herokuapp.com');
     this.ws.onerror=function(e:any){this.out.innerHTML=e;}
     this.ws.onclose=function(e:any){ this.out.innerHTML='closed'+e;}
     this.ws.onopen=function(){
