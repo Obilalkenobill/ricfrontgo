@@ -83,39 +83,38 @@ export class AmiMessageComponent implements OnInit {
      }
 
   ngOnInit(): void {
-    this.ws=new  WebSocket('wss://www.web-so.herokuapp.com');
-    this.ws.onerror=function(e:any){this.out.innerHTML=e;}
-    this.ws.onclose=function(e:any){ this.out.innerHTML='closed'+e;}
-    this.ws.onopen=function(){
-    this.out.innerHTML='connected ';
-    }
-
     let token=localStorage.getItem('id_token');
     if (typeof token == 'string') {
       this.UserId=this.jwt.decodeToken(token).id;
       this.UserLogin=this.jwt.decodeToken(token).login;
-      this.bjoin(this.UserLogin);
-
     }
-    this.refresh();
-    let self=this;
-    this.ws.onmessage=function(ms:any){ console.log('ms', ms);
-    let reader = new FileReader();
-    reader.onload = () => {
-        let result=JSON.parse(reader.result as string);
-        console.log("Result.msg: " , result.msg);
-        console.log("result.group_id :"+result.msg.group_group_id.id.id,"this.group_id :"+self.group_actif);
-        if (result.msg.message_txt && result.msg.group_group_id.id.id==self.group_actif){
-          console.log("je push le message");
-        self.pushbis(result.msg);
-        }
-        self.refresh();
-      }
-      reader.readAsText(ms.data);
-    };
-
+    this.wss();
+    this.ws.onerror=function(e:any){this.out.innerHTML=e;this.wss()}
   }
-
+wss(){
+  this.ws=new  WebSocket('wss://web-so.herokuapp.com');
+  this.ws.onclose=function(e:any){ this.out.innerHTML='closed'+e;}
+  this.ws.onopen=function(){
+  this.out.innerHTML='connected ';
+  }
+  this.refresh();
+  this.bjoin(this.UserLogin);
+  let self=this;
+  this.ws.onmessage=function(ms:any){ console.log('ms', ms);
+  let reader = new FileReader();
+  reader.onload = () => {
+      let result=JSON.parse(reader.result as string);
+      console.log("Result.msg: " , result.msg);
+      console.log("result.group_id :"+result.msg.group_group_id.id.id,"this.group_id :"+self.group_actif);
+      if (result.msg.message_txt && result.msg.group_group_id.id.id==self.group_actif){
+        console.log("je push le message");
+      self.pushbis(result.msg);
+      }
+      self.refresh();
+    }
+    reader.readAsText(ms.data);
+  };
+}
 
   refresh()
   {
