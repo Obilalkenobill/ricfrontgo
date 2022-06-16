@@ -88,11 +88,12 @@ export class AmiMessageComponent implements OnInit {
       this.UserId=this.jwt.decodeToken(token).id;
       this.UserLogin=this.jwt.decodeToken(token).login;
     }
-    this.ws.onerror=function(e:any){this.out.innerHTML=e;this.wss()}
+
   }
 wss(){
   this.ws=new  WebSocket('wss://web-so.herokuapp.com');
   this.ws.onclose=function(e:any){ this.out.innerHTML='closed'+e;}
+  this.ws.onerror=function(e:any){this.out.innerHTML=e;}
   this.ws.onopen=function(){
   this.out.innerHTML='connected ';
   }
