@@ -124,6 +124,7 @@ this.ws=new  WebSocket('wss://web-so.herokuapp.com');
       if (result.msg.message_txt && result.msg.group_group_id.id.id==self.group_actif){
         console.log("je push le message");
       self.pushbis(result.msg);
+      this.goToAnchor(true);
       }
       self.refresh();
     }
@@ -418,10 +419,6 @@ openConvers(group_id:any,group_name:any,pers_init:any){
       element.push(this.listTpsUserGroup[index].login);
 
     }
-
-
-
-
     let formVal = this.messagesForm.value;
     console.log(formVal);
 const newMessage = new Message(formVal);
@@ -436,6 +433,7 @@ for (let index = 0; index < this.listTpsUserGroup.length; index++) {
   this.bjoin(this.listTpsUserGroup[index].login);
   this.broadcast(newMessage.group_group_id,this.listTpsUserGroup[index].login)
 }
+this.goToAnchor(true);}
   }
 
 
