@@ -433,8 +433,9 @@ for (let index = 0; index < this.listTpsUserGroup.length; index++) {
   this.bjoin(this.listTpsUserGroup[index].login);
   this.broadcast(newMessage.group_group_id,this.listTpsUserGroup[index].login)
 }
-this.goToAnchor(true);}
-  }
+this.goToAnchor(true);
+}
+
 
 
   send_websckt(newMessage:any){
