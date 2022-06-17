@@ -127,7 +127,10 @@ this.ws=new  WebSocket('wss://web-so.herokuapp.com');
       }
       self.refresh();
     }
-    reader.readAsText(ms.data);
+    if (ms.data instanceof Blob)
+    {
+      reader.readAsText(ms.data);
+    }
     }
   };
 }
