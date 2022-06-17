@@ -96,7 +96,7 @@ this.wss();
 wss(){
   if ( this.ws.readyState === 3 ) {
     this.ws.close();
-    this.ws = new WebSocket(`wss://...`); this.ws=new  WebSocket('wss://web-so.herokuapp.com');
+this.ws=new  WebSocket('wss://web-so.herokuapp.com');
     // wait until new connection is open
     while (this.ws.readyState !== 1) {
       this.timWss();
