@@ -94,13 +94,15 @@ this.wss();
     await new Promise(r => setTimeout(r, 250));
   }
 wss(){
-  if ( this.ws.readyState === 3 ) {
+  if (this.ws && this.ws.readyState === 3 ) {
     this.ws.close();
 this.ws=new  WebSocket('wss://web-so.herokuapp.com');
     // wait until new connection is open
     while (this.ws.readyState !== 1) {
       this.timWss();
     }
+} else {
+this.ws=new  WebSocket('wss://web-so.herokuapp.com');
 }
   this.ws.onclose=function(e:any){  console.log("wss closed");}
   this.ws.onerror=function(e:any){console.log("error",e)}
