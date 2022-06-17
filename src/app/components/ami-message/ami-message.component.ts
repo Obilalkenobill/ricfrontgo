@@ -109,18 +109,15 @@ this.ws=new  WebSocket('wss://web-so.herokuapp.com');
   this.ws.onclose=function(e:any){  console.log("wss closed");}
   this.ws.onerror=function(e:any){console.log("error",e)}
   this.ws.onopen=function(){
-  console.log('wws:connected');
   }
   this.refresh();
   this.bjoin(this.UserLogin);
   let self=this;
-  this.ws.onmessage=function(ms:any){ console.log('ms', ms);
+  this.ws.onmessage=function(ms:any){
   let reader = new FileReader();
   if (reader){
   reader.onload = () => {
       let result=JSON.parse(reader.result as string);
-      console.log("Result.msg: " , result.msg);
-      console.log("result.group_id :"+result.msg.group_group_id.id.id,"this.group_id :"+self.group_actif);
       if (result.msg.message_txt && result.msg.group_group_id.id.id==self.group_actif){
         console.log("je push le message");
       self.pushbis(result.msg);
@@ -368,6 +365,7 @@ async goToAnchor(oui?:any){
 if (element && appaer && ( oui ))
 {
   element.scrollTo(0, 99999999999);
+  console.log("je vais à l'ancre");
   return true
 }
   else {
@@ -421,9 +419,7 @@ openConvers(group_id:any,group_name:any,pers_init:any){
 
     }
     let formVal = this.messagesForm.value;
-    console.log(formVal);
 const newMessage = new Message(formVal);
-console.log(newMessage);
 this.userService.addMessage(newMessage).subscribe(m => {
         this.refresh();
         this.message='';
@@ -448,9 +444,7 @@ this.goToAnchor(true);
       newMessageBis.creation_date=formattedDate;
     }
     newMessageBis.is_on_line=1;
-    console.log(newMessageBis.creation_date);
     this.broadcast(newMessageBis,this.group);
-    console.log(newMessage);
   }
 
 
@@ -473,7 +467,7 @@ this.goToAnchor(true);
 
     }
     broadcast(msg:any,room:any){
-      setTimeout(() => {this.ws.send(JSON.stringify({room:room,msg:msg}));console.log(room) },1000)
+      setTimeout(() => {this.ws.send(JSON.stringify({room:room,msg:msg})); },1000)
     }
    join(room:any){
     setTimeout(() => {this.ws.send(JSON.stringify({"join":room})); },1000)
