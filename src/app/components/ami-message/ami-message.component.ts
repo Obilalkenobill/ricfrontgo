@@ -92,16 +92,17 @@ this.wss();
   }
 wss(){
   this.ws=new  WebSocket('wss://web-so.herokuapp.com');
-  this.ws.onclose=function(e:any){ this.out.innerHTML='closed'+e;}
-  this.ws.onerror=function(e:any){this.out.innerHTML=e;}
+  this.ws.onclose=function(e:any){  console.log("wss closed");}
+  this.ws.onerror=function(e:any){console.log("error",e)}
   this.ws.onopen=function(){
-  this.out.innerHTML='connected ';
+  console.log('wws:connected');
   }
   this.refresh();
   this.bjoin(this.UserLogin);
   let self=this;
   this.ws.onmessage=function(ms:any){ console.log('ms', ms);
   let reader = new FileReader();
+  if (reader){
   reader.onload = () => {
       let result=JSON.parse(reader.result as string);
       console.log("Result.msg: " , result.msg);
@@ -113,6 +114,7 @@ wss(){
       self.refresh();
     }
     reader.readAsText(ms.data);
+    }
   };
 }
 
