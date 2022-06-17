@@ -23,6 +23,9 @@ export class AppComponent {
     else {
       this.UserId= localStorage.getItem('user_id');}
       this.authService.logout(this.UserId,false);
+        if (this.messageCo.ws){
+          this.messageCo.ws.close();
+        }
       event.preventDefault();
       event.returnValue = "Si vous quittez votre session restera active sur ce pc.";
       return "Si vous quittez votre session restera active sur ce pc.";

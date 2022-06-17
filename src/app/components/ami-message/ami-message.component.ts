@@ -116,6 +116,7 @@ wss(){
     reader.readAsText(ms.data);
     }
   };
+  this.ws.close();
 }
 
   refresh()
