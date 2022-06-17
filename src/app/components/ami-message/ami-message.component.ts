@@ -128,7 +128,6 @@ this.ws=new  WebSocket('wss://web-so.herokuapp.com');
     reader.readAsText(ms.data);
     }
   };
-  this.ws.close();
 }
 
   refresh()
