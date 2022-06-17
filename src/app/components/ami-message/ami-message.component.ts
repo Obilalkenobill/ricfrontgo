@@ -377,6 +377,7 @@ if (element && appaer && ( oui ))
 
 pushbis(mess:any){
 this.messagesWOREF.push(mess);
+this.goToAnchor(true);
 }
 openConvers(group_id:any,group_name:any,pers_init:any){
   this.group_actif=group_id;
