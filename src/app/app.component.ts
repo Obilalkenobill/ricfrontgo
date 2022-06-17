@@ -7,7 +7,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { EncrDecrService } from './services/EncrDecrSevice';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AmiMessageComponent } from './components/ami-message/ami-message.component';
-
+import {Location} from '@angular/common'
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -43,10 +43,14 @@ delay(delay: number) {
       setTimeout(r, delay);
   })
 }
-  constructor(private messageCo: AmiMessageComponent, private EncrDecr: EncrDecrService,private userService: UsersService,private authService: AuthService, private jwt: JwtHelperService, private router: Router, private adminAuth: AdminGuard, private Is_verified: is_verifiedGuard,
+  constructor(private messageCo: AmiMessageComponent, private EncrDecr: EncrDecrService,private userService: UsersService,private authService: AuthService, private jwt: JwtHelperService, private router: Router,location: Location, private adminAuth: AdminGuard, private Is_verified: is_verifiedGuard,
     public snackBar: MatSnackBar)
   {
-
+    router.events.subscribe((val:any) => {
+      if (location.path() != "/ami-message" && this.messageCo.ws) {
+          this.messageCo.ws.close();
+      }
+    });
 this.doTimer();
 }
 ngOnInit(): void {
