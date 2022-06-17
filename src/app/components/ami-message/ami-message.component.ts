@@ -124,7 +124,7 @@ this.ws=new  WebSocket('wss://web-so.herokuapp.com');
       if (result.msg.message_txt && result.msg.group_group_id.id.id==self.group_actif){
         console.log("je push le message");
       self.pushbis(result.msg);
-      this.goToAnchor(true);
+      self.goToAnchor(true);
       }
       self.refresh();
     }
