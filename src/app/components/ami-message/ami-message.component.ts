@@ -364,7 +364,7 @@ async goToAnchor(oui?:any){
   const element = document.querySelector("#el");
 if (element && appaer && ( oui ))
 {
-  element.scrollTo(0, element.scrollHeight);
+  element.scrollTo(0, element.scrollHeight + 999999);
   console.log("je vais à l'ancre");
   return true
 }
