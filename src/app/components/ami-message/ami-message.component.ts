@@ -89,7 +89,7 @@ export class AmiMessageComponent implements OnInit {
       this.UserLogin=this.jwt.decodeToken(token).login;
     }
     if(!this.ws){
-this.ws();
+this.wss();
     }
   }
   async timWss(){
