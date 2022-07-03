@@ -12,7 +12,8 @@ export class Commentaire
     projet_id_id!:number;
     login!:string;
     commentaire_referent_id_id!:number;
-    
+    is_lock!:number;
+
     constructor(data: any)
     {
         this.id=data.id;
@@ -22,5 +23,6 @@ export class Commentaire
         this.projet_id_id=data.projet_id_id;
         this.login=data.login;
         this.commentaire_referent_id_id=data.commentaire_referent_id_id;
+        this.is_lock=data.is_lock;
     }
 }

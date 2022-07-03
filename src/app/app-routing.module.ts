@@ -20,6 +20,8 @@ import { ContactsComponent } from './components/contacts/contacts.component';
 import { InvitationsComponent } from './components/invitations/invitations.component';
 import { AmiMessageComponent } from './components/ami-message/ami-message.component';
 import { AuthGuard,AdminGuard } from './services/auth-guard.service';
+import { SignalComponent } from './components/signal/signal/signal.component';
+import { SignalCommentaireComponent } from './components/signal/signal-commentaire/signal-commentaire.component';
 
 
 const routes: Routes = [
@@ -27,6 +29,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent},
   { path: 'auth', component: AuthComponent },
   { path: 'register', component: CreateUserComponent},
+  { path: 'signal-com',canActivate: [AdminGuard], component: SignalCommentaireComponent},
   { path: 'users-view', canActivate: [AdminGuard], component: UsersViewComponent},
   { path: 'edit-user/:id', canActivate: [AdminGuard], component: EditUserComponent},
   { path: 'img-validate',canActivate: [AuthGuard], component: ImageValidateComponent},
@@ -43,6 +46,7 @@ const routes: Routes = [
   { path: 'ami-message',canActivate: [AuthGuard], component: AmiMessageComponent},
   { path: 'not-found', component: FourhofourComponent },
   { path: 'charte', component: CharteComponent},
+  { path: 'signal',canActivate: [AdminGuard], component: SignalComponent},
   { path: '**', redirectTo: 'not-found' }
 ]
 

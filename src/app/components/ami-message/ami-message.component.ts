@@ -78,7 +78,7 @@ export class AmiMessageComponent implements OnInit {
 //window.scrollTo(0, 999999999);
 
       this.initFormGroupe()
-      this.initForm();
+      this.initFormSearch();
       matpag.itemsPerPageLabel = 'Items par page';
      }
 
@@ -119,7 +119,6 @@ this.ws=new  WebSocket('wss://web-so.herokuapp.com');
   reader.onload = () => {
       let result=JSON.parse(reader.result as string);
       if (result.msg.message_txt && result.msg.group_group_id.id.id==self.group_actif){
-        console.log("je push le message");
       self.pushbis(result.msg);
       self.goToAnchor(true);
       }
@@ -194,7 +193,7 @@ initFormGroupe(): void
     this.dataSource.sort = this.sort;
   }
 
-  initForm(): void
+  initFormSearch(): void
   {
 
     this.searchCtl = this.formBuilder.control('',[Validators.required]);
@@ -209,11 +208,12 @@ initFormGroupe(): void
   {
     const formVal = this.searchForm.value;
 
-
-
-      // this.searchService.searchContact(formVal.search).subscribe(m => {
-      //   this.router.navigate(['/projets-view'])
-      // });
+console.log(encodeURIComponent(formVal.search.trim()));
+const search = encodeURIComponent(formVal.search.trim());
+      this.userService.getAmiSearch(search,this.UserId).subscribe(m => {
+        this.usersList=m;
+        this.updateDataSource();
+      });
   }
   retirer_ami(UserId1:any,UserId2:any,username:any){
     if (confirm("Êtes vous sûre de vouloir retirer '"+ username +"' de votre liste de contacts? ")){
@@ -365,7 +365,6 @@ async goToAnchor(oui?:any){
 if (element && appaer && ( oui ))
 {
   element.scrollTo(0, element.scrollHeight + 999999);
-  console.log("je vais à l'ancre");
   return true
 }
   else {

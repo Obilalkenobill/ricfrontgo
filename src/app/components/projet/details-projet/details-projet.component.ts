@@ -14,6 +14,7 @@ import { VoteService } from 'src/app/services/vote.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatCommentEditComponent } from '../comment-edit/comment-edit.component';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { SignalCommentaire } from 'src/app/Models/signal_commentaire.model';
 
 @Component({
   selector: 'app-details-projet',
@@ -142,7 +143,6 @@ reload(){
   if( this.route.snapshot.params["id"]){
     this.projetID=this.route.snapshot.params["id"];
     this.projetService.getOneByID(this.projetID).subscribe((m:any)=>{
-console.log(m);
       this.projet=m;
 
     });
@@ -185,6 +185,7 @@ console.log(m);
 
  this.comments=m;
  this.commentsWOREF=[];
+
  this.comments.forEach(element => {
    if(element.commentaire_referent_id_id === undefined){
     this.commentsWOREF.push(element);
@@ -249,4 +250,19 @@ vote (vote:any){
     });
   }
   }
+
+  signal(comment_id:any,comment_user_id:any,comment_com:any){
+    const newSignal = new SignalCommentaire({
+      personne_id_id:comment_user_id,
+      descriptif:comment_com,
+      commentaire_id_id:comment_id
+    });
+    this.projetService.addSignalComnt(newSignal).subscribe(
+      (m:any)=>{
+        this.reload();
+      }
+    )
+
+    }
+
 }

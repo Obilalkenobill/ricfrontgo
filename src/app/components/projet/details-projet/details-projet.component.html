@@ -41,9 +41,14 @@
           <div class="list-group">
             <div *ngFor="let comment of commentsWOREF" class="list-group-item border">
               <h4 class="list-group-item-heading" >{{comment.login}}</h4>
-              <p class="list-group-item-text"  >{{comment.commentaire}}</p>
-              <p>{{comment.creation_date}}</p><p *ngIf="is_Admin() || is_current_UserCom(comment.personne_id_id)" class="edit" (click)="editComment(comment)">Édit</p>
-              <div class="d-flex flex-row add-comment-section mt-4 mb-4">
+              <p class="list-group-item-text" *ngIf="comment.is_lock == null || comment.is_lock == 0" >{{comment.commentaire}}</p>
+              <p class="list-group-item-text italic" *ngIf="comment.is_lock == 1" >Ce commentaire à été supprimer suite à un signalement</p>
+              <p>{{comment.creation_date}}</p>
+              <div class="fle">
+                <p *ngIf="is_Admin() || is_current_UserCom(comment.personne_id_id)" class="edit" (click)="editComment(comment)">Édit</p>
+                <p class="edit" (click)="signal(comment.id,comment.personne_id_id,comment.commentaire)">Signaler</p>
+              </div>
+                <div class="d-flex flex-row add-comment-section mt-4 mb-4">
                 <form (ngSubmit)="onSubmit2(comment.id)" [formGroup]="commentsForm">
                 <div class="inptbtn">
                   <input [(ngModel)]="commentOFCom" [formControl]="commentCtl" name="comment" type="text" class="form-control mr-3" placeholder="Response">
@@ -55,9 +60,14 @@
                 <ng-container *ngFor="let commentt of comments" class="list-group-item border">
                   <ng-container *ngIf="commentt.commentaire_referent_id_id==comment.id">
                   <h4 class="list-group-item-heading" >{{commentt.login}}</h4>
-                  <p class="list-group-item-text"  >{{commentt.commentaire}}</p>
-                  <p>{{commentt.creation_date}}</p><p *ngIf="is_Admin() || is_current_UserCom(commentt.personne_id_id)" class="edit" (click)="editComment(commentt)">Édit</p>
-                  </ng-container>
+                  <p class="list-group-item-text"  *ngIf="commentt.is_lock == null || commentt.is_lock == 0" >{{commentt.commentaire}}</p>
+                  <p class="list-group-item-text italic" *ngIf="commentt.is_lock==1" >Ce commentaire à été supprimer suite à un signalement</p>
+                  <p>{{commentt.creation_date}}</p>
+                  <div class="fle">
+                    <p *ngIf="is_Admin() || is_current_UserCom(commentt.personne_id_id)" class="edit" (click)="editComment(commentt)">Édit</p>
+                    <p class="edit" (click)="signal(commentt.id,commentt.personne_id_id,commentt.commentaire)">Signaler</p>
+                  </div>
+                </ng-container>
                 </ng-container>
 
             </div>

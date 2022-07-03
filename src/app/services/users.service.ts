@@ -14,6 +14,23 @@ export class UsersService {
   constructor(private server: ServerService)
   {}
 
+
+  public getAmiSearch(search_txt:any,UserId:any): Observable<User[]>
+  {
+    return this.server.get<User[]>('personne/searchCont/'+search_txt+'/'+UserId).pipe(
+
+      map(res =>{
+        return res[0].map((m: any) => new User(m));
+      },
+      catchError(err =>
+        {
+
+          return [];
+        })
+    ));
+  }
+
+
   public getAll(): Observable<User[]>
   {
     return this.server.get<User[]>('personne').pipe(

@@ -71,7 +71,8 @@ import { InvitationsComponent } from './components/invitations/invitations.compo
 import { AmiMessageComponent } from './components/ami-message/ami-message.component';
 import { MatParticipantComponent } from './components/mat-participant/mat-participant.component';
 import { CustomDatePipe } from './services/custom.datepipe';
-
+import { SignalCommentaireComponent } from './components/signal/signal-commentaire/signal-commentaire.component';
+import { SignalComponent } from './components/signal/signal/signal.component';
 
 
 export function tokenGetter(){
@@ -102,7 +103,9 @@ export function tokenGetter(){
         ContactsComponent,
         InvitationsComponent,
         AmiMessageComponent,
-        MatParticipantComponent
+        MatParticipantComponent,
+        SignalCommentaireComponent,
+        SignalComponent
     ],
     imports: [
         BrowserModule,

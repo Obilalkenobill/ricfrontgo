@@ -1,0 +1,14 @@
+.grey{
+  background-image: linear-gradient(lightgray,white) !important;
+    border-bottom: 1px dashed  gold !important;
+    color:black;
+    font-family: 'Source Serif 4', sans-serif;
+}
+.btn{
+ width:50%;
+  margin-top:10%;
+}
+.flex{
+  display: flex;
+  flex-direction:column;
+}

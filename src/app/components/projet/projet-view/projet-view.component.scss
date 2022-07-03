@@ -82,7 +82,7 @@ table{
  mat-row, mat-header-row, mat-footer-row {
   display: block !important;
 }
- .mat-row{
+.mat-row{
 border:solid lightgray 2px !important;
     box-shadow: 5px 0 5px lightgray, 0 15px 15px -10px lightgrey;
  }
@@ -95,8 +95,7 @@ border:solid lightgray 2px !important;
 .border_green:hover{
   box-shadow: 10px 0 10px rgba(11, 104, 16,0.5) !important;
 }
-
- .btn-block {
+.btn-block {
   display: block;
   width: 100%;
   margin-right: 0%;

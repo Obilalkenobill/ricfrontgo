@@ -4,6 +4,7 @@ import { catchError, map } from 'rxjs/operators';
 import { Commentaire } from '../Models/commentaire.model';
 import { Follow } from '../Models/follow.model';
 import { Projet } from '../Models/projet.model';
+import { SignalCommentaire } from '../Models/signal_commentaire.model';
 import { ServerService } from './server.service';
 
 @Injectable({
@@ -37,6 +38,17 @@ export class ProjetService {
   public addCommentaire(comment: Commentaire):  Observable<Commentaire[]>
   {
     return this.server.post<Commentaire>('projet/create/comment', comment).pipe(
+      map(res => {;return res}),
+      catchError(err =>
+        {
+
+          return [];
+        })
+    );
+  }
+  public addSignalComnt(signal_comment:SignalCommentaire):  Observable<SignalCommentaire[]>
+  {
+    return this.server.post<SignalCommentaire>('projet/create/comment/signal', signal_comment).pipe(
       map(res => {;return res}),
       catchError(err =>
         {
