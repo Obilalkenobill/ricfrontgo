@@ -102,6 +102,10 @@ public userId()
   }
   public logout(): void
   {
+ const token = localStorage.getItem('id_token');
+ if (typeof token === 'string'){
+      this.UserId=this.jwt.decodeToken(token).id;
+    }
 this.userService.setOnline(this.UserId,0).subscribe((response:any)=>response);
     this.authService.logout(this.UserId);
   }
