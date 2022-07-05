@@ -16,7 +16,7 @@ export class AuthService {
   redirectUrl: string;
   UserId: any;
 
-  constructor(private location: Location, private httpC: HttpClient,private http: ServerService, private router: Router, private projetService: ProjetService, private jwt: JwtHelperService)
+  constructor(private location: Location,private http: ServerService, private router: Router, private projetService: ProjetService, private jwt: JwtHelperService)
   {
     this.isLoggedIn = localStorage.getItem('id_token') != null;
     this.redirectUrl = '/';
@@ -84,9 +84,6 @@ export class AuthService {
     if (status){
     this.isLoggedIn = false;}
     const token =  localStorage.getItem('token');
-  const headers2 = new HttpHeaders()
-   .set('content-type', 'application/json').set('Authorization', 'Bearer ' + token ).set('Access-Control-Allow-Origin','*');
-   this.httpC.put('https://gestion2vote.herokuapp.com/api/users/setOnline/'+ UserId +'/0',  {'headers':headers2}).subscribe(()=>{ this.router.navigate(['/']);;});
    if(status){
    this.http.logout();
     this.redirectUrl = '/';

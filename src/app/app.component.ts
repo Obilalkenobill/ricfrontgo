@@ -102,6 +102,7 @@ public userId()
   }
   public logout(): void
   {
+this.userService.setOnline(this.UserId,0).subscribe((response:any)=>response);
     this.authService.logout(this.UserId);
   }
 }
