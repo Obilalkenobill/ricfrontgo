@@ -22,7 +22,7 @@
       <li class="space" *ngIf="!checkAuth()">
       <a class="nav-link" routerLink="auth">Login</a></li>
     <li class="space"  *ngIf="checkAuth()" ><a class="nav-link" (click)="logout()">Logout</a></li>
-    <li class="space" *ngIf="checkAuth() && is_verified()"><a class="nav-link" routerLink="contacts" >Contacts</a></li>
+    <li class="space" *ngIf="checkAuth()"><a class="nav-link" routerLink="contacts" >Contacts</a></li>
     <li class="space" *ngIf="checkAuth()"><a class="nav-link" routerLink="projets-view" >Projets</a></li>
     <li class="space" *ngIf="checkAuth() && !is_verified()"><a class="nav-link" (click)="userId()"><i class="glyphicon glyphicon-upload"></i></a></li>
     <li class="space" *ngIf="isAdmin()"><a class="nav-link" routerLink="signal">Signal</a></li>
