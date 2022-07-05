@@ -27,6 +27,7 @@ export class AppComponent {
           this.messageCo.ws.close();
         }
 this.userService.setOnline(this.UserId,0).subscribe((response:any)=>response);
+ this.authService.logout(this.UserId);
       event.preventDefault();
       event.returnValue = "Si vous quittez votre session restera active sur ce pc.";
       return "Si vous quittez votre session restera active sur ce pc.";
