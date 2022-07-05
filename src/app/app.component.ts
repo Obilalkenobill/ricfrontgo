@@ -22,7 +22,6 @@ export class AppComponent {
     }
     else {
       this.UserId= localStorage.getItem('user_id');}
-      this.authService.logout();
         if (this.messageCo.ws){
           this.messageCo.ws.close();
         }
