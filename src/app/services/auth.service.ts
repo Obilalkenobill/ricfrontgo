@@ -79,7 +79,7 @@ export class AuthService {
     );
   }
 
-  public logout(UserId:any,status:any=true): void// le parametre status se trouve par est-ce l'utilisateur qui décide de se logout lui même, dans ce cas nous effacons sa session. Sinon nous le metton hors ligne et nous gardons sa session active.
+  public logout(status:any=true): void// le parametre status se trouve par est-ce l'utilisateur qui décide de se logout lui même, dans ce cas nous effacons sa session. Sinon nous le metton hors ligne et nous gardons sa session active.
   {
     if (status){
     this.isLoggedIn = false;}
