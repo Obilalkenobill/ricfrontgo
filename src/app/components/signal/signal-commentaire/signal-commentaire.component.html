@@ -1,6 +1,3 @@
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
-
 <mat-table class="lessons-table mat-elevation-z8" (window:resize)="onResize($event)" [dataSource]='dataSource' matSort matSortActive="id" matSortDirection="asc"
 matSortDisableClear>
 <ng-container  matColumnDef="descriptif">
@@ -8,7 +5,7 @@ matSortDisableClear>
     <mat-cell class="copte" *matCellDef="let row"> {{ row.descriptif }}</mat-cell>
 </ng-container>
 <ng-container matColumnDef="login">
-    <mat-header-cell *matHeaderCellDef mat-sort-header> date de création</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header> login</mat-header-cell>
     <mat-cell class="card-footer text-muted" *matCellDef="let row"> {{ row.login }}</mat-cell>
 </ng-container>
 <ng-container matColumnDef="prenom">
@@ -19,23 +16,23 @@ matSortDisableClear>
     <mat-header-cell *matHeaderCellDef mat-sort-header> nom</mat-header-cell>
     <mat-cell class="card-footer text-muted" *matCellDef="let row">  {{ row.nom }}</mat-cell>
 </ng-container>
-<ng-container matColumnDef="is_lock">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>is Lock</mat-header-cell>
-    <mat-cell class="card-footer text-muted" *matCellDef="let row"></mat-cell>
-</ng-container>
 <ng-container matColumnDef="creation_date">
     <mat-header-cell *matHeaderCellDef mat-sort-header>Création date</mat-header-cell>
     <mat-cell class="card-footer text-muted" *matCellDef="let row">Créé le  {{ row.creation_date }}</mat-cell>
 </ng-container>
 <ng-container matColumnDef="actions">
   <mat-header-cell *matHeaderCellDef  class="invisible" > </mat-header-cell>
-  <mat-cell  class="pseudo1" *matCellDef="let row">
+  <mat-cell   *matCellDef="let row">
       <ul class="flex_row">
         <li class="paddr" ><button class="btn btn-primary" (click)="comment_signal_act(row.commentaire_id_id,2)">Ne pas bloquer</button></li>
 
          <li class="paddr"><button class="btn btn-danger" (click)="comment_signal_act(row.commentaire_id_id,1)">Bloquer</button></li>
       </ul>
   </mat-cell>
+</ng-container>
+<ng-container matColumnDef="is_lock">
+  <mat-header-cell  class="invisible" *matHeaderCellDef mat-sort-header>is Lock</mat-header-cell>
+  <mat-cell class="card-footer text-muted" *matCellDef="let row"></mat-cell>
 </ng-container>
 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
 <mat-row [ngClass]="{'border_green' : row.is_lock == 1 || row.is_lock==2,'border_red' : row.is_lock == 0}"  *matRowDef="let row; columns: displayedColumns;">
@@ -44,7 +41,4 @@ matSortDisableClear>
 </mat-table>
 <mat-paginator  [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" [showFirstLastButtons]="true"></mat-paginator>
 
-<!-- jQuery library -->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<!-- Bootstrap JS -->
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+

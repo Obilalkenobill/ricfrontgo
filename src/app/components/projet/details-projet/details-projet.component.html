@@ -46,7 +46,7 @@
               <p>{{comment.creation_date}}</p>
               <div class="fle">
                 <p *ngIf="is_Admin() || is_current_UserCom(comment.personne_id_id)" class="edit" (click)="editComment(comment)">Édit</p>
-                <p class="edit" (click)="signal(comment.id,comment.personne_id_id,comment.commentaire)">Signaler</p>
+                <p class="edit" *ngIf="comment.is_lock !=1  && comment.is_lock != 2" (click)="signal(comment.id,comment.personne_id_id,comment.commentaire)">Signaler</p>
               </div>
                 <div class="d-flex flex-row add-comment-section mt-4 mb-4">
                 <form (ngSubmit)="onSubmit2(comment.id)" [formGroup]="commentsForm">
@@ -65,7 +65,7 @@
                   <p>{{commentt.creation_date}}</p>
                   <div class="fle">
                     <p *ngIf="is_Admin() || is_current_UserCom(commentt.personne_id_id)" class="edit" (click)="editComment(commentt)">Édit</p>
-                    <p class="edit" (click)="signal(commentt.id,commentt.personne_id_id,commentt.commentaire)">Signaler</p>
+                    <p class="edit" *ngIf="commentt.is_lock !=1  && commentt.is_lock != 2" (click)="signal(commentt.id,commentt.personne_id_id,commentt.commentaire)">Signaler</p>
                   </div>
                 </ng-container>
                 </ng-container>

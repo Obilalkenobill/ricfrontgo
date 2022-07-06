@@ -16,19 +16,19 @@ export class SignalCommentaireComponent implements OnInit {
 signal_comm_list!:any;
 displayedColumns: string[] = [
   'descriptif',
-  'creation_date',
   'login',
+  'prenom',
   'nom',
-  'prenom', 'is_lock',
-  'actions'
-
+  'creation_date',
+  'actions',
+  'is_lock'
   ];
   dataSource!: MatTableDataSource<SignalCommentaire>;
   pageSize!:any;
   pageSizeOptions!:any;
     itemsPerPageLabel = 'Item par page';
     @ViewChild(MatPaginator) paginator!: MatPaginator;
-    @ViewChild(MatSort) sort!: MatSort;
+    @ViewChild(MatSort, { static: true }) sort!: MatSort;
   constructor(private signal : SignalService ,   public dialog: MatDialog,
     public snackBar: MatSnackBar,private matpag :MatPaginatorIntl) { }
 
@@ -48,18 +48,14 @@ displayedColumns: string[] = [
   }
 
 
-  updateDataSource()
-  {
-    this.get_signalement_com()
-    this.dataSource = new MatTableDataSource(this.signal_comm_list);
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
+
 get_signalement_com() {
   this.signal.getAllSignComm().subscribe(SignComm =>
     {
       this.signal_comm_list = SignComm;
       this.dataSource = new MatTableDataSource(this.signal_comm_list);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     });
   }
   onResize(event:any) {
@@ -83,7 +79,7 @@ get_signalement_com() {
 
     this.signal.addSignalComm(id_signal_com,status).subscribe( (SignComm : any) =>
       {
-        this.updateDataSource();
+        this.get_signalement_com();
       });
 
   }
