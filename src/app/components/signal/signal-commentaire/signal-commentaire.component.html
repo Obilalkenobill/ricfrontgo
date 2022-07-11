@@ -31,11 +31,11 @@ matSortDisableClear>
   </mat-cell>
 </ng-container>
 <ng-container matColumnDef="is_lock">
-  <mat-header-cell *matHeaderCellDef mat-sort-header>is Lock</mat-header-cell>
+  <mat-header-cell  *matHeaderCellDef mat-sort-header>is Lock</mat-header-cell>
   <mat-cell class="card-footer text-muted" *matCellDef="let row"></mat-cell>
 </ng-container>
 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-<mat-row [ngClass]="{'border_green' : row.is_lock == 1 || row.is_lock==2,'border_red' : row.is_lock == 0}"  *matRowDef="let row; columns: displayedColumns;">
+<mat-row [ngClass]="{'border_green' : row.is_lock == 1 || row.is_lock==2,'border_red' : row.is_lock == 0 || row.is_lock == 3}"  *matRowDef="let row; columns: displayedColumns;">
 </mat-row>
 
 </mat-table>
