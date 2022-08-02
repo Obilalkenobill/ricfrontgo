@@ -40,7 +40,24 @@ constructor( public snackBar: MatSnackBar,private userService: UsersService,publ
 
   }
   retirer_part_group(userid:any,group_actif:any){
-    if(confirm("Êtes vous sûre de vouloir quitté le groupe '"+this.group_name+"'")) {
+
+    if ((this.curr_user == this.user_init) && this.ListUsers.length>1 ){
+      if(confirm("Êtes vous sûre de vouloir quitté le groupe '"+this.group_name+"', veuillez d'abord élire un autre administrateur !")){
+      }
+    }
+    else if(this.ListUsers.length>1  &&  confirm("Êtes vous sûre de vouloir quitté le groupe '"+this.group_name+"'")) {
+    this.userService.retirer_part_group(userid,group_actif).subscribe( (response:any) => {
+
+    },
+    (err:any) => {
+    },
+    () => {
+      this.refresh();
+    }
+    );
+  }
+  else if(!(this.ListUsers.length>1)  &&  confirm("Êtes vous sûre de vouloir quitté le groupe '"+this.group_name+"'") && (this.curr_user == this.user_init))
+  {
     this.userService.retirer_part_group(userid,group_actif).subscribe( (response:any) => {
 
     },
@@ -55,8 +72,17 @@ constructor( public snackBar: MatSnackBar,private userService: UsersService,publ
 
   elir_admin(user_id:any,group_id:any,curr_user:any,user_init:any,group_name_actif:any,user_login:any){
     if(confirm("Voulez vous vraiment élire gérant '"+user_login+"' du groupe '"+group_name_actif+"' ?")){
-    this.userService.elireAdminGroupe(user_id,group_id).subscribe((res:any)=>
-    this.snackBar.open("Vous avez élu'"+user_login+"' gérant du groupe '"+group_name_actif+"","Continuer",{duration:5000}),err=>err,
-    ()=>this.dialogRef.close({chgt:true}));}
+    this.userService.elireAdminGroupe(user_id,group_id).subscribe(
+      (res:any)=>
+    this.snackBar.open("Vous avez élu'"+user_login+"' gérant du groupe '"+group_name_actif+"",
+    "Continuer",
+    {duration:5000}),
+    err=>err,
+    ()=>this.dialogRef.close({chgt:true})
+
+
+    );
+
+  }
   }
 }

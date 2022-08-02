@@ -91,6 +91,7 @@ export class AmiMessageComponent implements OnInit {
     if(!this.ws){
 this.wss();
     }
+this.refresh();
   }
   async timWss(){
     await new Promise(r => setTimeout(r, 250));
