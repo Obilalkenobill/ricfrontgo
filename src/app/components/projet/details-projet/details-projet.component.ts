@@ -80,7 +80,7 @@ commentOFCom!:any;
 
       const newCommentaire = new Commentaire(formVal);
 
-      this.projetService.addCommentaire(newCommentaire).subscribe(m => {
+      this.projetService.addCommentaire(newCommentaire).subscribe((m:any) => {
         this.reload();
         this.comment='';
       });
@@ -94,7 +94,7 @@ commentOFCom!:any;
 
       const newCommentaire = new Commentaire(formVal);
 
-      this.projetService.addCommentaire(newCommentaire).subscribe(m => {
+      this.projetService.addCommentaire(newCommentaire).subscribe((m:any) => {
         this.reload();
         this.commentOFCom='';
       });
@@ -115,7 +115,7 @@ follow(projet_id:any,userID_Curr:any){
   const newFollow = new FormData();
   newFollow.append("projet_id",projet_id);
   newFollow.append("personne_id",userID_Curr);
-this.projetService.addFollow(newFollow).subscribe(m=>{
+this.projetService.addFollow(newFollow).subscribe((m:any)=>{
   this.reload();
   //window.location.reload();
 });
@@ -130,7 +130,7 @@ unfollow(projet_id:any,userID_Curr:any){
   });
   const follow:Follow=(newFollow);
 
-this.projetService.unFollow(newFollow).subscribe(m=>{
+this.projetService.unFollow(newFollow).subscribe((m:any)=>{
   this.reload();
  // window.location.reload();
 });
@@ -148,7 +148,7 @@ reload(){
       projet_id: this.projetID,
     });
     const vote:Vote=(newVote);
-    this.voteServ.getVoteUserByID(newVote).subscribe(m=>{
+    this.voteServ.getVoteUserByID(newVote).subscribe((m:any) =>{
       if(m){
 
       this.VoteBase=m;
@@ -167,7 +167,7 @@ reload(){
     });
     const follow:Follow=(newFollow);
 
-    this.projetService.isFollow(follow).subscribe(m=>{
+    this.projetService.isFollow(follow).subscribe((m:any)=>{
 console.log(m);
       if(m){
         this.user_follow=true;
@@ -197,7 +197,7 @@ editComment(comment:Commentaire)
 {
 
 const dlg = this.dialog.open(MatCommentEditComponent, {data:comment});
-dlg.beforeClosed().subscribe(res=>{
+dlg.beforeClosed().subscribe((res:any)=>{
   if(res){
     const newCommment=new Commentaire(res);
     this.projetService.updateComment(newCommment).subscribe(
@@ -228,7 +228,7 @@ vote (vote:any){
     }
     if(!this.a_vote && (confirm("Êtes vous sûre de vouloir vôter "+bull_vote+" au projet "+this.projet.titre+". ")) )
       {
-      this.voteServ.addVote(voteCurr).subscribe(m=>{
+      this.voteServ.addVote(voteCurr).subscribe((m:any)=>{
       this.a_vote=true;
       this.reload();
      // window.location.reload();
@@ -239,7 +239,7 @@ vote (vote:any){
 
   deleteProj(id:any){
     if (confirm("Êtes vous sûre de vouloir supprimer le projet "+this.projet.titre +" ? ")){
-    this.projetService.deleteProjet(id).subscribe(m=>{
+    this.projetService.deleteProjet(id).subscribe((m:any)=>{
       this.router.navigate(['/projets-view']).then(() => {
         this.reload();
         //window.location.reload();
