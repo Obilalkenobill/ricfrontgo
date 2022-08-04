@@ -24,9 +24,9 @@ export class ProjetService {
         })
     );
   }
-  public addFollow(follow: Follow):  Observable<Follow[]>
+  public addFollow(follow: any):  Observable<any[]>
   {
-    return this.server.post<Follow>('projet/create/follow', follow).pipe(
+    return this.server.postbis<any>('projet/create/follow', follow).pipe(
       map(res => {;return res}),
       catchError(err =>
         {

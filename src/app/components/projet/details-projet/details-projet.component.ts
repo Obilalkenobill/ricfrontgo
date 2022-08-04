@@ -111,13 +111,10 @@ is_Admin(){
   return this.adminAuth.canActivate();
 }
 follow(projet_id:any,userID_Curr:any){
-  const newFollow = new Follow({
-    personne_id: userID_Curr,
-    projet_id: projet_id,
-    personne_proj_id:this.projet?.personne_id_id
-  });
-  const follow:Follow=(newFollow);
 
+  const newFollow = new FormData();
+  newFollow.append("projet_id",projet_id);
+  newFollow.append("personne_id",userID_Curr);
 this.projetService.addFollow(newFollow).subscribe(m=>{
   this.reload();
   //window.location.reload();
