@@ -168,7 +168,7 @@ reload(){
     const follow:Follow=(newFollow);
 
     this.projetService.isFollow(follow).subscribe(m=>{
-
+console.log(m);
       if(m){
         this.user_follow=true;
 
