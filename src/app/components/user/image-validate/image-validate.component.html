@@ -1,7 +1,7 @@
 <form  >
     <div class="form-group">
         <div class="mb-3">
-            <label for="formFile" class="form-label">Photo de vérification, veuillez mettre une photo de vous avec une affiche en main contenant les 7 derniers termes de ce code :"{{user?.salt}}"</label>
+            <label for="formFile" class="form-label">Photo de vérification, veuillez mettre une photo de votre visage avec ce code :"{{(user?.salt)?.substr(-7)}}"</label>
             <input class="form-control" type="file" accept="image/*" id="formFile1" (change)="onFileSelected1($event)" >
         </div>
     </div>
