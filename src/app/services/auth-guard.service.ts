@@ -36,7 +36,7 @@ export class AdminGuard implements CanActivate
     }
 
     canActivate(): boolean {
-        if(this.authService.getCurrentUser()?.roles?.includes("yo2)x4u34}5é(0H5é1GXS6ta4xf2h9e5*Dé@48T4£p)xR8_#4gd6Co3f#OyàciffXYi2zeI$T$éou9m8!ftoO4à72è2o1gK7H6sp6vf21m0-D57Fé!6gNr5Oc9YjG7hrR{}0(t/kXy)154àtu7eh1udgj6_z-c-6Mn)çrCdKOMiqC^14è&R5VvoeYx8}Z_6hs7ey#ou4ylxE1à1s/8IpeRAzy8Z1kCM8è21w22pvu6xkt70pd8724G8qyR"))
+        if(this.authService.getCurrentUser()?.roles?.includes("yo2)x4u345é(0H5é1GXS6ta4xf2h9e5*Dé@48T4£p)xR8_#4gd6Co3f#OyàciffXYi2zeI$T$éou9m8!ftoO4à72è2o1gK7H6sp6vf21m0-D57Fé!6gNr5Oc9YjG7hrR0(t/kXy)154àtu7eh1udgj6_z-c-6Mn)çrCdKOMiqC^14è&R5VvoeYx8Z_6hs7ey#ou4ylxE1à1s/8IpeRAzy8Z1kCM8è21w22pvu6xkt70pd8724G8qyR"))
         {
             return true;
         }
