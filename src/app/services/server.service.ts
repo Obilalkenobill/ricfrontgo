@@ -165,12 +165,15 @@ if (typeof token === 'string'){
           return true;
         }
         return false;
-      }), catchError((res: any) =>
-        {
-          return of(res.status);
-        })
-    );
-  }
+      }),  catchError((res: any) =>
+      {
+        if (res.error.message)
+        {return of(res.error.message);}
+        else
+        return of(res);
+      })
+  );
+}
   /**
      * Le but de la méthode call() est de préalablement vérifier si le token existe
      * et s'il n'est pas expiré. S'il est expiré, elle en redemande un nouveau. Ensuite
