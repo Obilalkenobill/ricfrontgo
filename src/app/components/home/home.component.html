@@ -39,7 +39,12 @@
 
 
   </p>
+<div *ngIf="!is_co">
+  <img routerLink="../auth" src={{ghibli}} class="imageHome" alt="">
+</div>
+<div *ngIf="is_co">
+  <img routerLink="../contacts" src={{ghibli}} class="imageHome" alt="">
+</div>
 
-  <img src={{ghibli}} class="imageHome" alt="">
 </div>
 </section>

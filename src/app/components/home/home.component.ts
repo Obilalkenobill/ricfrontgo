@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
   ghibli:string="../../../assets/img/justice.jpg";
-  constructor() { }
+  constructor( private auth: AuthService ) {
 
+  }
+is_co!:any;
   ngOnInit(): void {
+ this.is_co=this.auth.isLoggedIn;
   }
 
 }
