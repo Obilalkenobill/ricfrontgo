@@ -33,7 +33,7 @@ export class UsersService {
 
   public getAll(): Observable<User[]>
   {
-    return this.server.get<User[]>('personne').pipe(
+    return this.server.get<User[]>('personne/all').pipe(
 
       map(res =>{
         return res.Personnes.map((m: any) => new User(m));
