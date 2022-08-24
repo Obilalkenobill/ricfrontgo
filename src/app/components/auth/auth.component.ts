@@ -49,8 +49,9 @@ export class AuthComponent implements OnInit {
 		if (m==="Invalid credentials.")
 		{alert("Mot de passe ou Email invalide.s");}
 		else if (m==="Too many failed login attempts, please try again in 19 minutes.")
-		{alert("Trop de tentative de connection à ce compte, veuillez reéssayer dans 19 minutes.");}
-	}
+		{alert("Trop de tentatives de connexions à ce compte, veuillez reéssayer dans 19 minutes.");}
+		else {alert(m);};	
+}
           },
           (error) =>{
         }
